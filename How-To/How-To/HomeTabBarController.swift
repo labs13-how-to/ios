@@ -10,6 +10,7 @@ import UIKit
 
 class HomeTabBarController: UITabBarController {
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,9 +22,9 @@ class HomeTabBarController: UITabBarController {
         redNavController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         redNavController.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -8)
         let searchController = UISearchController(searchResultsController: nil)
-        redViewController.navigationItem.searchController = searchController
-        searchController.searchBar.placeholder = "How To..."
         
+        redViewController.navigationItem.titleView = searchController.searchBar // sets searchbar as the titleView of navigation bar
+        searchController.searchBar.placeholder = "How To..."
         
         let blueViewController = UIViewController()
         blueViewController.view.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
@@ -53,5 +54,10 @@ class HomeTabBarController: UITabBarController {
     }
 }
 
+class searchView: UIView {
+    
+    
+    
+}
 
 
