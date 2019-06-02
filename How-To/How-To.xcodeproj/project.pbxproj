@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		72F240ECA82E0B1401FA66C1 /* Pods_How_To.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1EE0C4A60D2CDDC1F797657 /* Pods_How_To.framework */; };
 		A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227C79022A1D19200A4B25D /* HomeTabBarController.swift */; };
+		A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */; };
 		A2A1B9D622A083E500AAA0E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1B9D522A083E500AAA0E6 /* AppDelegate.swift */; };
 		A2A1B9D822A083E500AAA0E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1B9D722A083E500AAA0E6 /* ViewController.swift */; };
 		A2A1B9DB22A083E500AAA0E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A1B9D922A083E500AAA0E6 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 		3B4C4C868FE1544F8D346E2A /* Pods-How-To.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.release.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.release.xcconfig"; sourceTree = "<group>"; };
 		5295967EA50E3DF6D83F0A9E /* Pods-How-To.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.debug.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.debug.xcconfig"; sourceTree = "<group>"; };
 		A227C79022A1D19200A4B25D /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchCollectionViewController.swift; sourceTree = "<group>"; };
 		A2A1B9D222A083E500AAA0E6 /* How-To.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "How-To.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A1B9D522A083E500AAA0E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A1B9D722A083E500AAA0E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +53,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A287516122A48B5F00DC3C92 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A227C79022A1D19200A4B25D /* HomeTabBarController.swift */,
+				A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		A2A1B9C922A083E500AAA0E6 = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +85,7 @@
 			children = (
 				A2A1B9D522A083E500AAA0E6 /* AppDelegate.swift */,
 				A2A1B9D722A083E500AAA0E6 /* ViewController.swift */,
-				A227C79022A1D19200A4B25D /* HomeTabBarController.swift */,
+				A287516122A48B5F00DC3C92 /* Controllers */,
 				A2A1B9DC22A083E700AAA0E6 /* Assets.xcassets */,
 				A2A1B9D922A083E500AAA0E6 /* Main.storyboard */,
 				A2A1B9DE22A083E700AAA0E6 /* LaunchScreen.storyboard */,
@@ -207,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2A1B9D822A083E500AAA0E6 /* ViewController.swift in Sources */,
+				A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */,
 				A2A1B9D622A083E500AAA0E6 /* AppDelegate.swift in Sources */,
 				A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */,
 			);

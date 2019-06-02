@@ -20,7 +20,7 @@ class HomeTabBarController: UITabBarController {
     
     func setUpViewControllers() {
         viewControllers = [
-            createNavController(viewController: UIViewController(), imageName: "Home House", hasSearch: true),
+            createNavController(viewController: HomeSearchCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "Home House", hasSearch: true),
             createNavController(viewController: UIViewController(), imageName: "Bullet, List, Text", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "Bell, Notifications", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "User,Profile", hasSearch: false)
