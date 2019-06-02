@@ -14,43 +14,36 @@ class HomeTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        let redViewController = UIViewController()
-        redViewController.view.backgroundColor = #colorLiteral(red: 0.6098504066, green: 0.1598579288, blue: 0.167360574, alpha: 1)
-        let redNavController = UINavigationController(rootViewController: redViewController)
-        redNavController.tabBarItem.image = #imageLiteral(resourceName: "Home House")
-        redNavController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-        redNavController.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -8)
-        let searchController = UISearchController(searchResultsController: nil)
+        setUpViewControllers()
         
-        redViewController.navigationItem.titleView = searchController.searchBar // sets searchbar as the titleView of navigation bar
-        searchController.searchBar.placeholder = "How To..."
-        
-        let blueViewController = UIViewController()
-        blueViewController.view.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
-        let blueNavController = UINavigationController(rootViewController: blueViewController)
-        blueNavController.tabBarItem.image = #imageLiteral(resourceName: "Bullet, List, Text")
-        blueNavController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-        
-        let darkViewController = UIViewController()
-        darkViewController.view.backgroundColor = #colorLiteral(red: 0.3498458862, green: 0.3163031638, blue: 0.3288204372, alpha: 1)
-        let darkNavController = UINavigationController(rootViewController: darkViewController)
-        darkNavController.tabBarItem.image = #imageLiteral(resourceName: "Bell, Notifications")
-        darkNavController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-        
-        let orangeViewController = UIViewController()
-        orangeViewController.view.backgroundColor = #colorLiteral(red: 0.9993286729, green: 0.7073625326, blue: 0.4233144522, alpha: 1)
-        let orangeNavController = UINavigationController(rootViewController: orangeViewController)
-        orangeNavController.tabBarItem.image = #imageLiteral(resourceName: "User,Profile")
-        orangeNavController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-        
+    }
+    
+    func setUpViewControllers() {
         viewControllers = [
-            redNavController,
-            blueNavController,
-            darkNavController,
-            orangeNavController
-        
+            createNavController(viewController: UIViewController(), imageName: "Home House", hasSearch: true),
+            createNavController(viewController: UIViewController(), imageName: "Bullet, List, Text", hasSearch: false),
+            createNavController(viewController: UIViewController(), imageName: "Bell, Notifications", hasSearch: false),
+            createNavController(viewController: UIViewController(), imageName: "User,Profile", hasSearch: false)
         ]
+    }
+    
+    fileprivate func createNavController(viewController: UIViewController, imageName: String, hasSearch: Bool) -> UIViewController {
+        
+        let navController = UINavigationController(rootViewController: viewController)
+        
+        navController.tabBarItem.image = UIImage(named: imageName)
+        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        
+        if hasSearch {
+            let searchController = UISearchController(searchResultsController: nil)
+            viewController.navigationItem.titleView = searchController.searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
+            navController.navigationBar.barTintColor = .white
+            searchController.searchBar.placeholder = "How To..."
+            viewController.view.backgroundColor = .white
+        } else {
+            navController.isNavigationBarHidden = true
+        }
+        return navController
     }
 }
 
