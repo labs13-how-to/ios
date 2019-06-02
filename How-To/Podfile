@@ -1,0 +1,10 @@
+platform :ios, '10.0'
+
+target 'How-To' do
+  use_frameworks!
+
+pod 'lottie-ios'
+pod 'SDWebImage'
+
+
+end

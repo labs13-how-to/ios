@@ -75,8 +75,8 @@
 				A2A1B9D522A083E500AAA0E6 /* AppDelegate.swift */,
 				A2A1B9D722A083E500AAA0E6 /* ViewController.swift */,
 				A227C79022A1D19200A4B25D /* HomeTabBarController.swift */,
-				A2A1B9D922A083E500AAA0E6 /* Main.storyboard */,
 				A2A1B9DC22A083E700AAA0E6 /* Assets.xcassets */,
+				A2A1B9D922A083E500AAA0E6 /* Main.storyboard */,
 				A2A1B9DE22A083E700AAA0E6 /* LaunchScreen.storyboard */,
 				A2A1B9E122A083E700AAA0E6 /* Info.plist */,
 			);
@@ -129,7 +129,7 @@
 				};
 			};
 			buildConfigurationList = A2A1B9CD22A083E500AAA0E6 /* Build configuration list for PBXProject "How-To" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
