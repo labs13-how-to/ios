@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		72F240ECA82E0B1401FA66C1 /* Pods_How_To.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1EE0C4A60D2CDDC1F797657 /* Pods_How_To.framework */; };
 		A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227C79022A1D19200A4B25D /* HomeTabBarController.swift */; };
+		A269270322A57401006AAFD2 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270222A57401006AAFD2 /* Bearer.swift */; };
+		A269270522A5956A006AAFD2 /* PostSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270422A5956A006AAFD2 /* PostSteps.swift */; };
+		A269270722A5B069006AAFD2 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270622A5B069006AAFD2 /* Tag.swift */; };
+		A269270922A5B0C7006AAFD2 /* PostTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270822A5B0C7006AAFD2 /* PostTag.swift */; };
+		A269270B22A5B113006AAFD2 /* PostReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270A22A5B113006AAFD2 /* PostReview.swift */; };
+		A269270D22A5B1D9006AAFD2 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270C22A5B1D9006AAFD2 /* Follower.swift */; };
+		A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270E22A5B248006AAFD2 /* Favorite.swift */; };
+		A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269271022A5B2B2006AAFD2 /* PostComment.swift */; };
 		A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */; };
 		A287516522A49F7700DC3C92 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516422A49F7600DC3C92 /* User.swift */; };
 		A287516822A4E5E900DC3C92 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516722A4E5E900DC3C92 /* Post.swift */; };
@@ -22,6 +30,14 @@
 		3B4C4C868FE1544F8D346E2A /* Pods-How-To.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.release.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.release.xcconfig"; sourceTree = "<group>"; };
 		5295967EA50E3DF6D83F0A9E /* Pods-How-To.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.debug.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.debug.xcconfig"; sourceTree = "<group>"; };
 		A227C79022A1D19200A4B25D /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		A269270222A57401006AAFD2 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
+		A269270422A5956A006AAFD2 /* PostSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSteps.swift; sourceTree = "<group>"; };
+		A269270622A5B069006AAFD2 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		A269270822A5B0C7006AAFD2 /* PostTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTag.swift; sourceTree = "<group>"; };
+		A269270A22A5B113006AAFD2 /* PostReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReview.swift; sourceTree = "<group>"; };
+		A269270C22A5B1D9006AAFD2 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
+		A269270E22A5B248006AAFD2 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		A269271022A5B2B2006AAFD2 /* PostComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComment.swift; sourceTree = "<group>"; };
 		A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchCollectionViewController.swift; sourceTree = "<group>"; };
 		A287516422A49F7600DC3C92 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A287516722A4E5E900DC3C92 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -69,6 +85,14 @@
 			children = (
 				A287516422A49F7600DC3C92 /* User.swift */,
 				A287516722A4E5E900DC3C92 /* Post.swift */,
+				A269270422A5956A006AAFD2 /* PostSteps.swift */,
+				A269270622A5B069006AAFD2 /* Tag.swift */,
+				A269270822A5B0C7006AAFD2 /* PostTag.swift */,
+				A269270A22A5B113006AAFD2 /* PostReview.swift */,
+				A269270C22A5B1D9006AAFD2 /* Follower.swift */,
+				A269270E22A5B248006AAFD2 /* Favorite.swift */,
+				A269271022A5B2B2006AAFD2 /* PostComment.swift */,
+				A269270222A57401006AAFD2 /* Bearer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -228,9 +252,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */,
+				A269270722A5B069006AAFD2 /* Tag.swift in Sources */,
 				A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */,
 				A2A1B9D622A083E500AAA0E6 /* AppDelegate.swift in Sources */,
+				A269270322A57401006AAFD2 /* Bearer.swift in Sources */,
+				A269270B22A5B113006AAFD2 /* PostReview.swift in Sources */,
+				A269270922A5B0C7006AAFD2 /* PostTag.swift in Sources */,
+				A269270522A5956A006AAFD2 /* PostSteps.swift in Sources */,
 				A287516522A49F7700DC3C92 /* User.swift in Sources */,
+				A269270D22A5B1D9006AAFD2 /* Follower.swift in Sources */,
+				A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */,
 				A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */,
 				A287516822A4E5E900DC3C92 /* Post.swift in Sources */,
 			);
