@@ -97,9 +97,9 @@
 			children = (
 				A287516422A49F7600DC3C92 /* User.swift */,
 				A287516722A4E5E900DC3C92 /* Post.swift */,
+				A269270822A5B0C7006AAFD2 /* PostTag.swift */,
 				A269270422A5956A006AAFD2 /* PostSteps.swift */,
 				A269270622A5B069006AAFD2 /* Tag.swift */,
-				A269270822A5B0C7006AAFD2 /* PostTag.swift */,
 				A269270A22A5B113006AAFD2 /* PostReview.swift */,
 				A269270C22A5B1D9006AAFD2 /* Follower.swift */,
 				A269270E22A5B248006AAFD2 /* Favorite.swift */,

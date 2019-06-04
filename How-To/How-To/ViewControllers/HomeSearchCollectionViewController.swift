@@ -66,10 +66,10 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let postCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
-        if indexPath.row == 0 {
-            postCell.backgroundColor = #colorLiteral(red: 0.8484306931, green: 0.8455678821, blue: 0.8485279679, alpha: 1)
-            return postCell
-        }
+//        if indexPath.row == 0 {
+//            postCell.backgroundColor = #colorLiteral(red: 0.8484306931, green: 0.8455678821, blue: 0.8485279679, alpha: 1)
+//            return postCell
+//        }
         // Configure the cell
         postCell.layer.masksToBounds = true
         postCell.layer.cornerRadius = 12

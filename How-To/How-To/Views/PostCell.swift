@@ -25,7 +25,7 @@ class PostCell: UICollectionViewCell {
         return view
     }()
     
-    let nameLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Title"
         return label
@@ -34,12 +34,14 @@ class PostCell: UICollectionViewCell {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "7/23/2019"
+        label.textColor = #colorLiteral(red: 0.6323309541, green: 0.6328232288, blue: 0.632407248, alpha: 1)
         return label
     }()
     
     let ratingLabel: UILabel = {
         let label = UILabel()
         label.text = "✪✪✪✪✪ 𐄁133"
+        label.textColor = #colorLiteral(red: 0.6323309541, green: 0.6328232288, blue: 0.632407248, alpha: 1)
         return label
     }()
     
@@ -48,8 +50,11 @@ class PostCell: UICollectionViewCell {
         
 //        backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
         backgroundView = imageView
+        let infoStackView = UIStackView(arrangedSubviews: [ dateLabel, ratingLabel ])
+        infoStackView.axis = .vertical
+        infoStackView.distribution = .fillEqually
         let stackView = UIStackView(arrangedSubviews: [
-            nameLabel, dateLabel, ratingLabel
+            titleLabel, infoStackView
             ])
         stackView.spacing = 12
         stackView.axis = .vertical
