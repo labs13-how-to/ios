@@ -30,6 +30,7 @@ class HomeTabBarController: UITabBarController {
     fileprivate func createNavController(viewController: UIViewController, imageName: String, hasSearch: Bool) -> UIViewController {
         
         let navController = UINavigationController(rootViewController: viewController)
+        viewController.view.backgroundColor = .white
         
         navController.tabBarItem.image = UIImage(named: imageName)
         navController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -39,7 +40,6 @@ class HomeTabBarController: UITabBarController {
             viewController.navigationItem.titleView = searchController.searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
             navController.navigationBar.barTintColor = .white
             searchController.searchBar.placeholder = "How To..."
-            viewController.view.backgroundColor = .white
         } else {
             navController.isNavigationBarHidden = true
         }
