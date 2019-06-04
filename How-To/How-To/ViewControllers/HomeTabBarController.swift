@@ -30,7 +30,6 @@ class HomeTabBarController: UITabBarController {
     fileprivate func createNavController(viewController: UIViewController, imageName: String, hasSearch: Bool) -> UIViewController {
         
         let navController = UINavigationController(rootViewController: viewController)
-        
         viewController.view.backgroundColor = .white
         
         navController.tabBarItem.image = UIImage(named: imageName)

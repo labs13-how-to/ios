@@ -10,20 +10,34 @@ import UIKit
 
 private let reuseIdentifier = "PostCell"
 
-class HomeSearchCollectionViewController: UICollectionViewController {
+class HomeSearchCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.backgroundColor = .white
+//        let topView = UIView()
+//        topView.frame = CGRect(x:8, y:8, width:(view.frame.width)-16, height:200)
+//        topView.backgroundColor = .red
+//        collectionView.addSubview(topView)
+        collectionView.backgroundColor = #colorLiteral(red: 0.6323309541, green: 0.6328232288, blue: 0.632407248, alpha: 1)
+        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(PostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        if indexPath.row == 0
+//        {
+//
+//            return CGSize(width: view.frame.width, height: 200)
+//        }
+        return .init(width: (view.frame.width / 2) - 6, height: 250)
     }
 
     /*
@@ -38,23 +52,28 @@ class HomeSearchCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return 7
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+        let postCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
+        if indexPath.row == 0 {
+            postCell.backgroundColor = #colorLiteral(red: 0.8484306931, green: 0.8455678821, blue: 0.8485279679, alpha: 1)
+            return postCell
+        }
         // Configure the cell
-    
-        return cell
+        postCell.layer.masksToBounds = true
+        postCell.layer.cornerRadius = 12
+        return postCell
     }
 
     // MARK: UICollectionViewDelegate
