@@ -55,7 +55,7 @@ class PostCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "✪✪✪✪✪ 𐄁133"
         label.font = .systemFont(ofSize: 22)
-        label.textColor = #colorLiteral(red: 0.5182585716, green: 0.7210000753, blue: 0.5531420112, alpha: 1)
+        label.textColor = UIColor(red:0.52, green:0.72, blue:0.55, alpha:1)
         return label
     }()
     

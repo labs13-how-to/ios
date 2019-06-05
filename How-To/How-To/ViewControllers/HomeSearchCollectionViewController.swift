@@ -39,14 +39,14 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         let topView = UIView()
 
         topView.frame = CGRect(x:0, y:0, width:(view.frame.width + 40), height:200)
-        topView.backgroundColor = #colorLiteral(red: 0.9993358254, green: 0.6708709002, blue: 0.3783961833, alpha: 1)
+        topView.backgroundColor = UIColor(red:1, green:0.67, blue:0.38, alpha:1)
 //        topView.layer.cornerRadius = 12
         let button = UIButton()
         button.frame = CGRect(x: 30, y: 150, width: 110, height: 28)
         button.layer.cornerRadius = 6
         button.backgroundColor = .white
         button.setTitle("Learn How", for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.9993358254, green: 0.6708709002, blue: 0.3783961833, alpha: 1), for: .normal)
+        button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         
@@ -117,15 +117,16 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
     
   
+    // MARK: HEADER
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
-            return CGSize(width: view.frame.width, height: 170)
+//            return CGSize(width: view.frame.width, height: 170)
+            return CGSize.zero
         } else {
             return CGSize(width: 200, height: 100)
         }
     }
     
-    // MARK: HEADER
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var v : UICollectionReusableView! = nil
         if kind == UICollectionView.elementKindSectionHeader {
@@ -137,7 +138,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             let lab = v.subviews[0] as! UILabel
             lab.text = "Trending"
             lab.font = .boldSystemFont(ofSize: 23)
-            lab.textColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
+            lab.textColor = UIColor(red:1, green:0.52, blue:0.1, alpha:1)
             lab.textAlignment = .left
         }
         return v
@@ -158,7 +159,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         if section > 0 {
             return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
         }
-        return UIEdgeInsets(top: 0, left: 0 , bottom: 0, right: 0)
+        return UIEdgeInsets(top: 170, left: 0 , bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
