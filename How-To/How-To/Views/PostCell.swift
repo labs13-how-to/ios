@@ -35,13 +35,18 @@ class PostCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Title"
+        label.sizeToFit()
+        label.numberOfLines = 2
+        label.font = .boldSystemFont(ofSize: 17)
+        label.text = "How to Care for Succulents"
+        
         return label
     }()
     
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "7/23/2019"
+        label.font = .systemFont(ofSize: 14)
         label.textColor = #colorLiteral(red: 0.6323309541, green: 0.6328232288, blue: 0.632407248, alpha: 1)
         return label
     }()
@@ -49,7 +54,8 @@ class PostCell: UICollectionViewCell {
     let ratingLabel: UILabel = {
         let label = UILabel()
         label.text = "✪✪✪✪✪ 𐄁133"
-        label.textColor = #colorLiteral(red: 0.6323309541, green: 0.6328232288, blue: 0.632407248, alpha: 1)
+        label.font = .systemFont(ofSize: 22)
+        label.textColor = #colorLiteral(red: 0.5182585716, green: 0.7210000753, blue: 0.5531420112, alpha: 1)
         return label
     }()
     
@@ -67,9 +73,9 @@ class PostCell: UICollectionViewCell {
         let stackView = UIStackView(arrangedSubviews: [
             titleLabel, infoStackView
             ])
-        stackView.spacing = 12
+        stackView.spacing = 0
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 30).isActive = true
@@ -78,7 +84,7 @@ class PostCell: UICollectionViewCell {
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         //#colorLiteral(red: 0.5493490696, green: 0.5497819781, blue: 0.5494160652, alpha: 1)
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 4, left: 6, bottom: 6, right: 6)
+        stackView.layoutMargins = UIEdgeInsets(top: 2, left: 6, bottom: 6, right: 6)
         pinBackground(textBGView, to: stackView)
         
         stackView.layer.cornerRadius = radius
@@ -87,8 +93,8 @@ class PostCell: UICollectionViewCell {
         
         //MARK: SHADOW SETUP
         layer.shadowColor = #colorLiteral(red: 0.3498458862, green: 0.3163031638, blue: 0.3288204372, alpha: 1)
-        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-        layer.shadowRadius = 3
+        layer.shadowOffset = CGSize(width: 0.25, height: 0.25)
+        layer.shadowRadius = 4
         layer.shadowOpacity = 1
         layer.masksToBounds = false
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath

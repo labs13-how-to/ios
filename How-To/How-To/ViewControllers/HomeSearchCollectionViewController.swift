@@ -28,6 +28,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     let headerID = "Header"
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,11 +42,19 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         topView.backgroundColor = #colorLiteral(red: 0.9993358254, green: 0.6708709002, blue: 0.3783961833, alpha: 1)
 //        topView.layer.cornerRadius = 12
         let button = UIButton()
-        button.frame = CGRect(x: 40, y: 140, width: 90, height: 24)
-        button.layer.cornerRadius = 8
+        button.frame = CGRect(x: 30, y: 150, width: 110, height: 28)
+        button.layer.cornerRadius = 6
         button.backgroundColor = .white
         button.setTitle("Learn How", for: .normal)
         button.setTitleColor(#colorLiteral(red: 0.9993358254, green: 0.6708709002, blue: 0.3783961833, alpha: 1), for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        
+        button.layer.shadowColor = #colorLiteral(red: 0.6212611794, green: 0.3437288105, blue: 0.04521131143, alpha: 1)
+        button.layer.shadowOffset = CGSize(width: 0, height: 3)
+        button.layer.shadowOpacity = 1
+        button.layer.shadowRadius = 3
+        button.layer.masksToBounds = false
 //        view.insertSubview(topView, aboveSubview: collectionView)
         collectionView.insertSubview(topView, at: 0)
         collectionView.insertSubview(button, at: 1)
@@ -122,11 +131,13 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         if kind == UICollectionView.elementKindSectionHeader {
             v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
             if v.subviews.count == 0 {
-                v.addSubview(UILabel(frame:CGRect(x: 12,y: 45,width: view.frame.width,height: 50)))
+                v.addSubview(UILabel(frame:CGRect(x: 12,y: 43,width: view.frame.width,height: 50)))
             }
             
             let lab = v.subviews[0] as! UILabel
             lab.text = "Trending"
+            lab.font = .boldSystemFont(ofSize: 23)
+            lab.textColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
             lab.textAlignment = .left
         }
         return v
