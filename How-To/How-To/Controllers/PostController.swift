@@ -7,3 +7,25 @@
 //
 
 import Foundation
+
+class PostController: Codable {
+    
+    let baseURL = URL(string: "https://lambda-how-to.herokuapp.com/")!
+    
+    var posts: [Post] = []
+    
+    // MARK: TODO
+    
+    // create post
+    // update post by id
+    // delete post
+    
+    // get all posts
+    
+    // get specific post by id
+   
+    
+    
+    
+    
+}
