@@ -26,7 +26,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 //    }()
 //
     let headerID = "Header"
-    
+    let footerID = "Footer"
     
     
     override func viewDidLoad() {
@@ -62,6 +62,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         collectionView.backgroundColor = bgColorView.backgroundColor
         
         self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
+        
 //        let flow = self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
 //        flow.headerReferenceSize = CGSize(width: 30,height: 30)
         
@@ -90,14 +91,14 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
     
     // Hides TabBar when user scrolls down
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0{
-            changeTabBar(hidden: true, animated: true)
-        }
-        else{
-            changeTabBar(hidden: false, animated: true)
-        }
-    }
+//    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0{
+//            changeTabBar(hidden: true, animated: true)
+//        }
+//        else{
+//            changeTabBar(hidden: false, animated: true)
+//        }
+//    }
     
     
     
