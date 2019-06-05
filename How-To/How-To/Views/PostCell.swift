@@ -72,7 +72,7 @@ class PostCell: UICollectionViewCell {
         stackView.distribution = .fillEqually
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 35).isActive = true
+        stackView.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 30).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
@@ -86,10 +86,10 @@ class PostCell: UICollectionViewCell {
         stackView.clipsToBounds = true
         
         //MARK: SHADOW SETUP
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOffset = CGSize(width: 1, height: 1.0)
-        layer.shadowRadius = radius
-        layer.shadowOpacity = 1.0
+        layer.shadowColor = #colorLiteral(red: 0.3498458862, green: 0.3163031638, blue: 0.3288204372, alpha: 1)
+        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 1
         layer.masksToBounds = false
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
         layer.backgroundColor = UIColor.clear.cgColor

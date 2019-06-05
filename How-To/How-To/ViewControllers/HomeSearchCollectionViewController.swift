@@ -25,7 +25,9 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 //        return view
 //    }()
 //
-
+    let headerID = "Header"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,12 +40,21 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         topView.frame = CGRect(x:0, y:0, width:(view.frame.width + 40), height:200)
         topView.backgroundColor = #colorLiteral(red: 0.9993358254, green: 0.6708709002, blue: 0.3783961833, alpha: 1)
 //        topView.layer.cornerRadius = 12
-        
+        let button = UIButton()
+        button.frame = CGRect(x: 40, y: 140, width: 90, height: 24)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .white
+        button.setTitle("Learn How", for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.9993358254, green: 0.6708709002, blue: 0.3783961833, alpha: 1), for: .normal)
 //        view.insertSubview(topView, aboveSubview: collectionView)
         collectionView.insertSubview(topView, at: 0)
+        collectionView.insertSubview(button, at: 1)
         pinBackground(bgColorView, to: view)
         collectionView.backgroundColor = bgColorView.backgroundColor
         
+        self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
+//        let flow = self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
+//        flow.headerReferenceSize = CGSize(width: 30,height: 30)
         
         // Hides navigationbar when user scrolls down
 //        navigationController?.hidesBarsOnSwipe = true
@@ -99,14 +110,30 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
   
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
-            return CGSize(width: view.frame.width, height: 180)
+            return CGSize(width: view.frame.width, height: 170)
         } else {
             return CGSize(width: 200, height: 100)
         }
     }
     
+    // MARK: HEADER
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var v : UICollectionReusableView! = nil
+        if kind == UICollectionView.elementKindSectionHeader {
+            v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
+            if v.subviews.count == 0 {
+                v.addSubview(UILabel(frame:CGRect(x: 12,y: 45,width: view.frame.width,height: 50)))
+            }
+            
+            let lab = v.subviews[0] as! UILabel
+            lab.text = "Trending"
+            lab.textAlignment = .left
+        }
+        return v
+    }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        4
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -118,7 +145,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section > 0 {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
         }
         return UIEdgeInsets(top: 0, left: 0 , bottom: 0, right: 0)
     }
@@ -129,8 +156,10 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 //
 //            return CGSize(width: view.frame.width, height: 200)
 //        }
-        return (CGSize(width: (collectionView.frame.width/2) - 30, height: 280))
+        return (CGSize(width: (collectionView.frame.width/2) - 36, height: 250))
     }
+    
+
 
     /*
     // MARK: - Navigation
