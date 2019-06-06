@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window?.rootViewController = HomeTabBarController()
-        UIApplication.shared.isStatusBarHidden = true
         
         return true
     }

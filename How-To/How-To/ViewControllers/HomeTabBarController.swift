@@ -31,7 +31,6 @@ class HomeTabBarController: UITabBarController {
         
         let navController = UINavigationController(rootViewController: viewController)
         viewController.view.backgroundColor = .white
-        let screenWidth = viewController.view.frame.width
         
         navController.tabBarItem.image = UIImage(named: imageName)
         navController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)

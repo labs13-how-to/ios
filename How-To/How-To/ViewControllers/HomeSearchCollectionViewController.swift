@@ -12,6 +12,12 @@ private let reuseIdentifier = "PostCell"
 
 class HomeSearchCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var postController = PostController()
+    
+    let headerID = "Header"
+    let footerID = "Footer"
+
+
     let bgColorView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -24,24 +30,71 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 //        view.backgroundColor = #colorLiteral(red: 0.9993358254, green: 0.6708709002, blue: 0.3783961833, alpha: 1)
 //        return view
 //    }()
-//
-    let headerID = "Header"
-    let footerID = "Footer"
     
+    struct Howto: Decodable {
+        var id: Int?
+        var title: String
+        var img_url: String
+        var description: String
+        var difficulty: String
+        var duration: String
+        var skills: String?
+        var supplies: String?
+        let created_by: Int
+        let created_at: String
+        var tags: [PostTag]?
+        var steps:[PostSteps]?
+    }
+    
+    fileprivate func fetchPosts(){
+        let urlString = "https://lambda-how-to.herokuapp.com/posts"
+        let url = URL(string: urlString)
+        // fetch data
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            //error handling
+            if let error = error {
+                print("Failed to fetch posts")
+            }
+            // success
+            print(data)
+            print(String(data: data!, encoding: .utf8))
+            // Try decoding of data
+            let decoder = JSONDecoder()
+            do {
+                guard let data = data else { return }
+                let howtos = try decoder.decode([Howto].self, from: data)
+                print(howtos.count)
+            } catch {
+                
+            }
+            
+        }.resume() // makes request
+    }
+//
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.postController.getPosts()
+            self.collectionView.reloadData()
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-//        let frameX = (((view.frame.width) - ((view.frame.width)*0.95))/2)
-//        collectionView.frame = CGRect(x: frameX,y: 0, width: view.frame.width*0.95, height: view.frame.height)
+        collectionView?.prefetchDataSource = self
+//        fetchPosts()
+//        DispatchQueue.main.async {
+//            self.postController.getPosts()
+//            self.collectionView.reloadData()
+//        }
         
         let topView = UIView()
 
         topView.frame = CGRect(x:0, y:0, width:(view.frame.width + 40), height:200)
         topView.backgroundColor = UIColor(red:1, green:0.67, blue:0.38, alpha:1)
 //        topView.layer.cornerRadius = 12
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.frame = CGRect(x: 30, y: 150, width: 110, height: 28)
         button.layer.cornerRadius = 6
         button.backgroundColor = .white
@@ -60,8 +113,6 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         collectionView.insertSubview(button, at: 1)
         pinBackground(bgColorView, to: view)
         collectionView.backgroundColor = bgColorView.backgroundColor
-        
-        self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
         
 //        let flow = self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
 //        flow.headerReferenceSize = CGSize(width: 30,height: 30)
@@ -86,63 +137,69 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 
         // Register cell classes
         self.collectionView!.register(PostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
+//        self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.footerID)
+        self.collectionView.register(footer.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerID)
+        
 
         // Do any additional setup after loading the view.
     }
     
-    // Hides TabBar when user scrolls down
-//    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0{
-//            changeTabBar(hidden: true, animated: true)
-//        }
-//        else{
-//            changeTabBar(hidden: false, animated: true)
-//        }
-//    }
-    
-    
-    
-    func changeTabBar(hidden:Bool, animated: Bool){
-        guard let tabBar = self.tabBarController?.tabBar else { return; }
-        if tabBar.isHidden == hidden{ return }
-        let frame = tabBar.frame
-        let offset = hidden ? frame.size.height : -frame.size.height
-        let duration:TimeInterval = (animated ? 0.5 : 0.0)
-        tabBar.isHidden = false
-        
-        UIView.animate(withDuration: duration, animations: {
-            tabBar.frame = frame.offsetBy(dx: 0, dy: offset)
-        }, completion: { (true) in
-            tabBar.isHidden = hidden
-        })
-    }
-    
+
   
     // MARK: HEADER
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
 //            return CGSize(width: view.frame.width, height: 170)
-            return CGSize.zero
+            return CGSize(width: 200, height: 30)
         } else {
-            return CGSize(width: 200, height: 100)
+            return CGSize(width: 200, height: 70)
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var v : UICollectionReusableView! = nil
+        var header : UICollectionReusableView! = nil
+        var footer : UICollectionReusableView! = nil
+        var nilV : UICollectionReusableView! = nil
         if kind == UICollectionView.elementKindSectionHeader {
-            v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
-            if v.subviews.count == 0 {
-                v.addSubview(UILabel(frame:CGRect(x: 12,y: 43,width: view.frame.width,height: 50)))
+            header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
+            if header.subviews.count == 0 {
+                header.addSubview(UILabel(frame:CGRect(x: 12,y: 0,width: view.frame.width,height: 70)))
             }
             
-            let lab = v.subviews[0] as! UILabel
+            let lab = header.subviews[0] as! UILabel
             lab.text = "Trending"
             lab.font = .boldSystemFont(ofSize: 23)
             lab.textColor = UIColor(red:1, green:0.52, blue:0.1, alpha:1)
             lab.textAlignment = .left
+            
+            return header
         }
-        return v
+        if kind == UICollectionView.elementKindSectionFooter {
+            footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.footerID, for: indexPath)
+//            let footerLabel = footer.subviews[0] as! UILabel
+//            footerLabel.text = "Footer"
+            
+            let button = UIButton()
+            button.frame = CGRect(x: view.frame.width - 120, y: 16, width: 110, height: 28)
+            button.layer.cornerRadius = 6
+            button.backgroundColor = .white
+            button.setTitle("See More", for: .normal)
+            button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
+            button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
+            button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+            
+            footer.insertSubview(button, at: 0)
+            
+            return footer
+        }
+        return nilV
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize.zero
+        }
+        return CGSize(width: view.frame.width, height: 50)
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -155,6 +212,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         }
         return 20
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section > 0 {
@@ -201,8 +259,11 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let postCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PostCell
+        if postController.posts.count > 0 {
+            let fetchedPost = self.postController.posts[indexPath.item]
+            cell.titleLabel.text = fetchedPost.title
+        }
 //        if indexPath.row == 0 {
 //            postCell.backgroundColor = #colorLiteral(red: 0.8484306931, green: 0.8455678821, blue: 0.8485279679, alpha: 1)
 //            return postCell
@@ -222,8 +283,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 //        postCell.layer.masksToBounds = false
 //        postCell.layer.shadowPath = UIBezierPath(roundedRect: postCell.bounds, cornerRadius: postCell.contentView.layer.cornerRadius).cgPath
         
-        
-        return postCell
+        return cell
     }
 
     // MARK: UICollectionViewDelegate
@@ -258,6 +318,33 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     */
     
     
+    // Hides TabBar when user scrolls down
+    //    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    //        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0{
+    //            changeTabBar(hidden: true, animated: true)
+    //        }
+    //        else{
+    //            changeTabBar(hidden: false, animated: true)
+    //        }
+    //    }
+    
+    
+    
+    func changeTabBar(hidden:Bool, animated: Bool){
+        guard let tabBar = self.tabBarController?.tabBar else { return; }
+        if tabBar.isHidden == hidden{ return }
+        let frame = tabBar.frame
+        let offset = hidden ? frame.size.height : -frame.size.height
+        let duration:TimeInterval = (animated ? 0.5 : 0.0)
+        tabBar.isHidden = false
+        
+        UIView.animate(withDuration: duration, animations: {
+            tabBar.frame = frame.offsetBy(dx: 0, dy: offset)
+        }, completion: { (true) in
+            tabBar.isHidden = hidden
+        })
+    }
+    
     // Helper method which pins a bgColor to the very back of our screen
     private func pinBackground(_ view: UIView, to bigView: UIView){
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -265,5 +352,35 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         view.pin(to: bigView)
     }
 
+}
+
+
+extension HomeSearchCollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            
+        }
+    }
+}
+
+class footer: UICollectionReusableView {
+    
+//    var footerLabel: UILabel{
+//        let label = UILabel()
+//        label.sizeToFit()
+//        label.font = .boldSystemFont(ofSize: 12)
+//        label.text = "View More"
+//
+//        return label
+//    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+//        self.addSubview(footerLabel)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
