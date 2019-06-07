@@ -52,10 +52,3 @@ class HomeTabBarController: UITabBarController {
     }
 }
 
-class searchView: UIView {
-    
-    
-    
-}
-
-

@@ -24,12 +24,6 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         return view
     }()
     
-//    var headerView: UIView = {
-//        let view = UIView()
-//        view.frame = CGRect(x:0, y:0, width:(view.frame.width), height:180)
-//        view.backgroundColor = #colorLiteral(red: 0.9993358254, green: 0.6708709002, blue: 0.3783961833, alpha: 1)
-//        return view
-//    }()
     
     struct Howto: Decodable {
         var id: Int?
@@ -72,16 +66,11 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
 //
     override func viewWillAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            self.postController.getPosts()
-            self.collectionView.reloadData()
-            
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.contentInset = UIEdgeInsets(top:200, left: 0, bottom: 0, right: 0)
         collectionView?.prefetchDataSource = self
 //        fetchPosts()
 //        DispatchQueue.main.async {
@@ -89,13 +78,33 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 //            self.collectionView.reloadData()
 //        }
         
-        let topView = UIView()
+        self.postController.getPosts(){_ in
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+        
+        // Register cell classes
+        self.collectionView!.register(PostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
+        self.collectionView.register(Footer.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerID)
+        
 
-        topView.frame = CGRect(x:0, y:0, width:(view.frame.width + 40), height:200)
+        // Do any additional setup after loading the view.
+        setUpViews()
+    }
+    
+
+    func setUpViews(){
+        
+        // Makes Top Banner
+        let topView = UIView()
+        topView.frame = CGRect(x:0, y:-200, width:(view.frame.width + 40), height:200)
         topView.backgroundColor = UIColor(red:1, green:0.67, blue:0.38, alpha:1)
-//        topView.layer.cornerRadius = 12
+        
+        // Makes Banner Button
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 30, y: 150, width: 110, height: 28)
+        button.frame = CGRect(x: 30, y: -60, width: 110, height: 28)
         button.layer.cornerRadius = 6
         button.backgroundColor = .white
         button.setTitle("Learn How", for: .normal)
@@ -108,77 +117,39 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         button.layer.shadowOpacity = 1
         button.layer.shadowRadius = 3
         button.layer.masksToBounds = false
-//        view.insertSubview(topView, aboveSubview: collectionView)
+        
+        // Adds views to Collection Super View
         collectionView.insertSubview(topView, at: 0)
         collectionView.insertSubview(button, at: 1)
         pinBackground(bgColorView, to: view)
         collectionView.backgroundColor = bgColorView.backgroundColor
         
-//        let flow = self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
-//        flow.headerReferenceSize = CGSize(width: 30,height: 30)
-        
-        // Hides navigationbar when user scrolls down
-//        navigationController?.hidesBarsOnSwipe = true
-        
-//        collectionView.contentInset = UIEdgeInsets
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        
-//        guard let collectionView = collectionView else { return }
-//
-//        let availableWidth = collectionView.bounds.inset(by: collectionView.layoutMargins).width
-//        let maxNumColumns = 2
-//        let cellWidth = (availableWidth / CGFloat(maxNumColumns)).rounded(.down)
-//
-//        let itemSize = CGSize(width: cellWidth, height: 250)
-//        self.sectionInset = UIEdgeInsets(top: self.minimumInteritemSpacing, left: 0.0, bottom: 0.0, right: 0.0)
-//        self.sectionInsetReference = .fromSafeArea
-
-        // Register cell classes
-        self.collectionView!.register(PostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
-//        self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.footerID)
-        self.collectionView.register(footer.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerID)
-        
-
-        // Do any additional setup after loading the view.
     }
-    
-
   
     // MARK: HEADER
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section == 0 {
-//            return CGSize(width: view.frame.width, height: 170)
-            return CGSize(width: 200, height: 30)
-        } else {
-            return CGSize(width: 200, height: 70)
-        }
+        return CGSize(width: 200, height: 70)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var header : UICollectionReusableView! = nil
         var footer : UICollectionReusableView! = nil
-        var nilV : UICollectionReusableView! = nil
+        
         if kind == UICollectionView.elementKindSectionHeader {
             header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
-            if header.subviews.count == 0 {
-                header.addSubview(UILabel(frame:CGRect(x: 12,y: 0,width: view.frame.width,height: 70)))
-            }
             
-            let lab = header.subviews[0] as! UILabel
-            lab.text = "Trending"
-            lab.font = .boldSystemFont(ofSize: 23)
-            lab.textColor = UIColor(red:1, green:0.52, blue:0.1, alpha:1)
-            lab.textAlignment = .left
+                header.addSubview(UILabel(frame:CGRect(x: 12,y: 0,width: view.frame.width,height: 70)))
+            
+                let lab = header.subviews[0] as! UILabel
+                lab.text = "Trending"
+                lab.font = .boldSystemFont(ofSize: 23)
+                lab.textColor = UIColor(red:1, green:0.52, blue:0.1, alpha:1)
+                lab.textAlignment = .left
             
             return header
         }
         if kind == UICollectionView.elementKindSectionFooter {
             footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.footerID, for: indexPath)
-//            let footerLabel = footer.subviews[0] as! UILabel
-//            footerLabel.text = "Footer"
             
             let button = UIButton()
             button.frame = CGRect(x: view.frame.width - 120, y: 16, width: 110, height: 28)
@@ -193,40 +164,23 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             
             return footer
         }
-        return nilV
+        return header
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if section == 0 {
-            return CGSize.zero
-        }
         return CGSize(width: view.frame.width, height: 50)
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        4
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if section == 0 {
-            return 0
-        }
+
         return 20
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section > 0 {
-            return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-        }
-        return UIEdgeInsets(top: 170, left: 0 , bottom: 0, right: 0)
+        return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if indexPath.row == 0
-//        {
-//
-//            return CGSize(width: view.frame.width, height: 200)
-//        }
         return (CGSize(width: (collectionView.frame.width/2) - 36, height: 250))
     }
     
@@ -244,17 +198,14 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 
     // MARK: UICollectionViewDataSource
 
-//    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 3
+    }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        if section == 0 {
-            return 0
-        }
         return 4
     }
 
@@ -263,26 +214,19 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         if postController.posts.count > 0 {
             let fetchedPost = self.postController.posts[indexPath.item]
             cell.titleLabel.text = fetchedPost.title
+            // MARK: TODO FIX IMG URL HTTP BUG
+//            let imgURL = URL(string: fetchedPost.img_url)
+//            cell.imageView.load(url: imgURL!)
+            let imgURL = URL(string:"https://picsum.photos/200/300")
+            cell.imageView.load(url: imgURL!)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+            let updatedAtStr = fetchedPost.created_at
+            let updatedAt = dateFormatter.date(from: updatedAtStr) // "Jun 5, 2016, 4:56 PM"
+            cell.dateLabel.text = updatedAt?.asString(style: .medium)
+            
         }
-//        if indexPath.row == 0 {
-//            postCell.backgroundColor = #colorLiteral(red: 0.8484306931, green: 0.8455678821, blue: 0.8485279679, alpha: 1)
-//            return postCell
-//        }
-        // Configure the cell
-//        postCell.layer.masksToBounds = true
-//        postCell.layer.cornerRadius = 12
-        
-//        postCell.contentView.layer.cornerRadius = 2.0
-//        postCell.contentView.layer.borderWidth = 1.0
-//        postCell.contentView.layer.borderColor = UIColor.clear.cgColor
-//        postCell.contentView.layer.masksToBounds = true
-//        postCell.layer.shadowColor = UIColor.lightGray.cgColor
-//        postCell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-//        postCell.layer.shadowRadius = 2.0
-//        postCell.layer.shadowOpacity = 1.0
-//        postCell.layer.masksToBounds = false
-//        postCell.layer.shadowPath = UIBezierPath(roundedRect: postCell.bounds, cornerRadius: postCell.contentView.layer.cornerRadius).cgPath
-        
         return cell
     }
 
@@ -327,7 +271,9 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     //            changeTabBar(hidden: false, animated: true)
     //        }
     //    }
-    
+    func loadHowTo(cell: PostCell){
+        
+    }
     
     
     func changeTabBar(hidden:Bool, animated: Bool){
@@ -346,10 +292,10 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
     
     // Helper method which pins a bgColor to the very back of our screen
-    private func pinBackground(_ view: UIView, to bigView: UIView){
+    func pinBackground(_ view: UIView, to superView: UIView){
         view.translatesAutoresizingMaskIntoConstraints = false
-        bigView.insertSubview(view, at: 0)
-        view.pin(to: bigView)
+        superView.insertSubview(view, at: 0)
+        view.pin(to: superView)
     }
 
 }
@@ -363,24 +309,4 @@ extension HomeSearchCollectionViewController: UICollectionViewDataSourcePrefetch
     }
 }
 
-class footer: UICollectionReusableView {
-    
-//    var footerLabel: UILabel{
-//        let label = UILabel()
-//        label.sizeToFit()
-//        label.font = .boldSystemFont(ofSize: 12)
-//        label.text = "View More"
-//
-//        return label
-//    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-//        self.addSubview(footerLabel)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
 

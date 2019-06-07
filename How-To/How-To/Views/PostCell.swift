@@ -18,18 +18,21 @@ class PostCell: UICollectionViewCell {
         imageView.image = UIImage(named: "Succulents")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        
         return imageView
     }()
     
     let textBGView: UIView = {
         
         let view = UIView()
-        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.95)
+        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
         
         // Next 3 lines allow you to choose which corners are rounded on a UIView
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
         view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        
         return view
     }()
     
@@ -66,6 +69,18 @@ class PostCell: UICollectionViewCell {
         
 //        backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
         backgroundView = imageView
+        var blurEffect = UIBlurEffect(style: .extraLight)
+        if #available(iOS 13.0, *) {
+//            blurEffect = UIBlurEffect(style: .systemThickMaterial)
+        }
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = CGRect(x: 0, y: imageView.bounds.maxY/2+30, width: imageView.bounds.width, height: imageView.bounds.height/2 - 29)
+        
+        
+        backgroundView?.addSubview(blurredEffectView)
+    
+        
+        
         backgroundView!.layer.cornerRadius = radius
         let infoStackView = UIStackView(arrangedSubviews: [ dateLabel, ratingLabel ])
         infoStackView.axis = .vertical
@@ -115,28 +130,11 @@ class PostCell: UICollectionViewCell {
         view.pin(to: stackView)
     }
     
-    
-    
-}
-
-public extension UIView {
-    func pin(to view: UIView) {
-        NSLayoutConstraint.activate([
-            leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topAnchor.constraint(equalTo: view.topAnchor),
-            bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
     }
+    
 }
 
-//extension UIView {
-//
-//    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-//        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-//        let mask = CAShapeLayer()
-//        mask.path = path.cgPath
-//        self.layer.mask = mask
-//    }
-//
-//}
+
