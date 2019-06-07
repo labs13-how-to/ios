@@ -14,7 +14,7 @@ class PostController: Codable {
     
     var posts: [Post] = []
     var post: Post?
-    
+    var favorites: [Favorite]?
     // MARK: TODO
     
     // create post
@@ -88,8 +88,72 @@ class PostController: Codable {
             }.resume()
     }
     
+    func getUserFavorites(id: Int, completion: @escaping(Error?) -> Void = { _ in}) {
+        let idString = String(id)
+        let urlPlus = baseURL.appendingPathComponent("favorites").appendingPathComponent("users").appendingPathComponent(idString)
+        
+        URLSession.shared.dataTask(with: urlPlus) { (data, _, error) in
+            if let error = error {
+                NSLog("Error retrieving user favorites: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No user favorites data returned from server")
+                completion(NSError())
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                var favoriteArray: [Favorite] = []
+                favoriteArray = try decoder.decode([Favorite].self, from: data)
+                self.favorites = favoriteArray
+                completion(nil)
+            } catch {
+                NSLog("Error decoding favoriteArray from server: \(error.localizedDescription)")
+                return
+            }
+            
+            }.resume()
+    }
     
+    func deletePost(id: Int, completion: @escaping((Error?) -> Void) = { _ in }) {
+        let idString = String(id)
+        let urlPlus = baseURL.appendingPathComponent("posts").appendingPathComponent(idString)
+        
+        var request = URLRequest(url: urlPlus)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error deleting post from server: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            completion(nil)
+            }.resume()
+    }
     
+    func deleteFavorite(id: Int, completion: @escaping((Error?) -> Void) = { _ in }) {
+        let idString = String(id)
+        let urlPlus = baseURL.appendingPathComponent("favorites").appendingPathComponent(idString)
+        
+        var request = URLRequest(url: urlPlus)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error deleting favorite from server: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            completion(nil)
+            }.resume()
+    }
     
     
     
