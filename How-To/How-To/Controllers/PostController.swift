@@ -170,6 +170,24 @@ class PostController: Codable {
             }.resume()
     }
     
+    func deleteUser(id: Int, completion: @escaping(Error?) -> Void = { _ in }) {
+        let idString = String(id)
+        let urlPlus = baseURL.appendingPathComponent("users").appendingPathComponent(idString)
+        
+        var request = URLRequest(url: urlPlus)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error deleting user from server: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            completion(nil)
+            }.resume()
+    }
+    
     func deleteFavorite(id: Int, completion: @escaping((Error?) -> Void) = { _ in }) {
         let idString = String(id)
         let urlPlus = baseURL.appendingPathComponent("favorites").appendingPathComponent(idString)
