@@ -14,7 +14,10 @@ class PostController: Codable {
     
     var posts: [Post] = []
     var post: Post?
+    var users: [User] = []
+    var user: User?
     var favorites: [Favorite]?
+    var favorite: Favorite?
     // MARK: TODO
     
     // create post
@@ -82,6 +85,36 @@ class PostController: Codable {
                 completion(nil)
             } catch {
                 NSLog("Error decoding single post from server: \(error.localizedDescription)")
+                return
+            }
+            
+            }.resume()
+    }
+    
+    func getUser(id: Int, completion: @escaping(Error?) -> Void = { _ in }) {
+        let idString = String(id)
+        let urlPlus = baseURL.appendingPathComponent("users").appendingPathComponent(idString)
+        
+        URLSession.shared.dataTask(with: urlPlus) { (data, _, error) in
+            if let error = error {
+                NSLog("Error retrieving user: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No user data returned from server")
+                completion(NSError())
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let singleUser = try decoder.decode(User.self, from: data)
+                self.user = singleUser
+                completion(nil)
+            } catch {
+                NSLog("Error decoding single user from server: \(error.localizedDescription)")
                 return
             }
             
