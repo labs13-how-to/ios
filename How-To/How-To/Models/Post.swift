@@ -26,9 +26,11 @@ struct Post: Codable {
     var supplies: String?
     let created_by: Int
     let created_at: String
+    var tags: [PostTag]?
+    var steps:[PostSteps]?
     
     
-    init(id: Int?, title: String, img_url: String, description: String, difficulty: String, duration: String, skills: String?, supplies: String?, created_by: Int, created_at: String ){
+    init(id: Int?, title: String, img_url: String, description: String, difficulty: String, duration: String, skills: String?, supplies: String?, created_by: Int, created_at: String , tags: [PostTag]?, steps: [PostSteps]?){
         
         self.id = id
         self.title = title
@@ -40,6 +42,8 @@ struct Post: Codable {
         self.supplies = supplies
         self.created_by = created_by
         self.created_at = created_at
+        self.tags = tags ?? []
+        self.steps = steps ?? []
         
     }
 }
