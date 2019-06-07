@@ -58,7 +58,7 @@ class PostController: Codable {
     // get specific post by id
    
     func getPostByID(id: Int, completion: @escaping(Error?)-> Void = { _ in }) {
-        var idString = String(id)
+        let idString = String(id)
         let urlPlus = baseURL.appendingPathComponent("posts").appendingPathComponent(idString)
         
         print("\(urlPlus)")
@@ -87,6 +87,8 @@ class PostController: Codable {
             
             }.resume()
     }
+    
+    
     
     
     

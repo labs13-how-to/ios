@@ -5,11 +5,9 @@
 //  Created by Angel Buenrostro on 5/31/19.
 //  Copyright © 2019 Angel Buenrostro. All rights reserved.
 //
-
 import UIKit
 
 class HomeTabBarController: UITabBarController {
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +22,17 @@ class HomeTabBarController: UITabBarController {
             createNavController(viewController: UIViewController(), imageName: "Bullet, List, Text", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "Bell, Notifications", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "User,Profile", hasSearch: false)
+//            createLoginNavController(viewController: LoginViewController())
+            
         ]
+    }
+    
+    fileprivate func createLoginNavController(viewController: LoginViewController) -> UIViewController {
+        let navController = UINavigationController(rootViewController: viewController)
+        viewController.view.backgroundColor = .white
+        
+        navController.navigationItem.title = "Login"
+        return navController
     }
     
     fileprivate func createNavController(viewController: UIViewController, imageName: String, hasSearch: Bool) -> UIViewController {
@@ -45,6 +53,7 @@ class HomeTabBarController: UITabBarController {
             
             navController.navigationBar.barTintColor = .white
             searchController.searchBar.placeholder = "How To..."
+            
         } else {
             navController.isNavigationBarHidden = true
         }

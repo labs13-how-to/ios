@@ -47,12 +47,9 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             //error handling
             if let error = error {
-                print("Failed to fetch posts")
+                print("Failed to fetch posts: \(error.localizedDescription)")
             }
             // success
-            print(data)
-            print(String(data: data!, encoding: .utf8))
-            // Try decoding of data
             let decoder = JSONDecoder()
             do {
                 guard let data = data else { return }
@@ -65,13 +62,16 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         }.resume() // makes request
     }
 //
-    override func viewWillAppear(_ animated: Bool) {
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let loginVC = LoginViewController()
+        
+        self.navigationController?.pushViewController(loginVC, animated: false)
+        print("hey")
         collectionView.contentInset = UIEdgeInsets(top:200, left: 0, bottom: 0, right: 0)
-        collectionView?.prefetchDataSource = self
+//        collectionView?.prefetchDataSource = self
 //        fetchPosts()
 //        DispatchQueue.main.async {
 //            self.postController.getPosts()
@@ -301,12 +301,12 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 }
 
 
-extension HomeSearchCollectionViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            
-        }
-    }
-}
+//extension HomeSearchCollectionViewController: UICollectionViewDataSourcePrefetching {
+//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+//        for indexPath in indexPaths {
+//
+//        }
+//    }
+//}
 
 

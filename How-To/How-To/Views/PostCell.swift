@@ -69,10 +69,7 @@ class PostCell: UICollectionViewCell {
         
 //        backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
         backgroundView = imageView
-        var blurEffect = UIBlurEffect(style: .extraLight)
-        if #available(iOS 13.0, *) {
-//            blurEffect = UIBlurEffect(style: .systemThickMaterial)
-        }
+        let blurEffect = UIBlurEffect(style: .extraLight)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
         blurredEffectView.frame = CGRect(x: 0, y: imageView.bounds.maxY/2+30, width: imageView.bounds.width, height: imageView.bounds.height/2 - 29)
         
@@ -110,7 +107,7 @@ class PostCell: UICollectionViewCell {
         layer.shadowColor = #colorLiteral(red: 0.3498458862, green: 0.3163031638, blue: 0.3288204372, alpha: 1)
         layer.shadowOffset = CGSize(width: 0.25, height: 0.25)
         layer.shadowRadius = 4
-        layer.shadowOpacity = 1
+        layer.shadowOpacity = 0.5
         layer.masksToBounds = false
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
         layer.backgroundColor = UIColor.clear.cgColor
