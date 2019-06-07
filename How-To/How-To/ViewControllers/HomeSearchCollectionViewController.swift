@@ -217,7 +217,9 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             // MARK: TODO FIX IMG URL HTTP BUG
 //            let imgURL = URL(string: fetchedPost.img_url)
 //            cell.imageView.load(url: imgURL!)
-            let imgURL = URL(string:"https://picsum.photos/200/300")
+//            let imgURL = URL(string:"https://picsum.photos/200/300")
+            let imgURL = URL(string: fetchedPost.img_url)
+            print(fetchedPost.img_url)
             cell.imageView.load(url: imgURL!)
             
             let dateFormatter = DateFormatter()
