@@ -22,7 +22,6 @@ class HomeTabBarController: UITabBarController {
             createNavController(viewController: UIViewController(), imageName: "Bullet, List, Text", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "Bell, Notifications", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "User,Profile", hasSearch: false)
-//            createLoginNavController(viewController: LoginViewController())
             
         ]
     }

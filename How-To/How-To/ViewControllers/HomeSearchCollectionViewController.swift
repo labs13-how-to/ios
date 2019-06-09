@@ -23,53 +23,19 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         view.backgroundColor = .white
         return view
     }()
-    
-    
-    struct Howto: Decodable {
-        var id: Int?
-        var title: String
-        var img_url: String
-        var description: String
-        var difficulty: String
-        var duration: String
-        var skills: String?
-        var supplies: String?
-        let created_by: Int
-        let created_at: String
-        var tags: [PostTag]?
-        var steps:[PostSteps]?
+
+    override func viewWillAppear(_ animated: Bool) {
+        guard self.navigationController != nil else { fatalError("Navigation Controller not found")}
+        setupTabBar(parentViewController: self, height: view.frame.height / 15, color: .white)
+        setupSearchBar(parentViewController: self, color: .white, placeHolderText: "How To...")
     }
-    
-    fileprivate func fetchPosts(){
-        let urlString = "https://lambda-how-to.herokuapp.com/posts"
-        let url = URL(string: urlString)
-        // fetch data
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            //error handling
-            if let error = error {
-                print("Failed to fetch posts: \(error.localizedDescription)")
-            }
-            // success
-            let decoder = JSONDecoder()
-            do {
-                guard let data = data else { return }
-                let howtos = try decoder.decode([Howto].self, from: data)
-                print(howtos.count)
-            } catch {
-                
-            }
-            
-        }.resume() // makes request
-    }
-//
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let loginVC = LoginViewController()
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Settings, Filter"), style: .plain, target: self, action: #selector(openSettings))
+        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.5493490696, green: 0.5497819781, blue: 0.5494160652, alpha: 1)
         
-        self.navigationController?.pushViewController(loginVC, animated: false)
-        print("hey")
         collectionView.contentInset = UIEdgeInsets(top:200, left: 0, bottom: 0, right: 0)
 //        collectionView?.prefetchDataSource = self
 //        fetchPosts()
@@ -181,7 +147,10 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return (CGSize(width: (collectionView.frame.width/2) - 36, height: 250))
+        if collectionView.frame.width >= 375 {
+            return (CGSize(width: (collectionView.frame.width/2) - 36, height: (collectionView.frame.height/3)))
+        }
+        return CGSize(width: (collectionView.frame.width) - 36, height: (collectionView.frame.height/3))
     }
     
 
@@ -217,8 +186,8 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             // MARK: TODO FIX IMG URL HTTP BUG
 //            let imgURL = URL(string: fetchedPost.img_url)
 //            cell.imageView.load(url: imgURL!)
-//            let imgURL = URL(string:"https://picsum.photos/200/300")
-            let imgURL = URL(string: fetchedPost.img_url)
+            let imgURL = URL(string:"https://picsum.photos/200/300")
+//            let imgURL = URL(string: fetchedPost.img_url)
             print(fetchedPost.img_url)
             cell.imageView.load(url: imgURL!)
             
@@ -226,7 +195,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
             let updatedAtStr = fetchedPost.created_at
             let updatedAt = dateFormatter.date(from: updatedAtStr) // "Jun 5, 2016, 4:56 PM"
-            cell.dateLabel.text = updatedAt?.asString(style: .medium)
+            cell.dateLabel.text = updatedAt?.asString(style: .long)
             
         }
         return cell
@@ -276,6 +245,13 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     func loadHowTo(cell: PostCell){
         
     }
+    @objc func openSettings() {
+        let settingsVC = SettingsViewController()
+        settingsVC.view.backgroundColor = .white
+        settingsVC.navigationController?.navigationBar.isHidden = true
+        
+        self.navigationController?.pushViewController(settingsVC, animated: true)
+    }
     
     
     func changeTabBar(hidden:Bool, animated: Bool){
@@ -299,6 +275,21 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         superView.insertSubview(view, at: 0)
         view.pin(to: superView)
     }
+    
+    // Helper which setsUp initial TabBar frame
+    func setupTabBar(parentViewController: UICollectionViewController, height: CGFloat, color: UIColor ){
+        let tabBar = UITabBar(frame: CGRect(x: 0, y: view.frame.maxY - height, width: view.frame.width, height: height))
+        tabBar.backgroundColor = color
+        parentViewController.view.addSubview(tabBar)
+    }
+    
+    func setupSearchBar(parentViewController: UICollectionViewController, color: UIColor, placeHolderText: String){
+        let searchController = UISearchController(searchResultsController: nil)
+        parentViewController.navigationItem.titleView = searchController.searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
+        guard let navController = parentViewController.navigationController else { fatalError() }
+        navController.navigationBar.barTintColor = color
+        searchController.searchBar.placeholder = placeHolderText
+    }
 
 }
 
@@ -311,4 +302,9 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 //    }
 //}
 
-
+extension HomeSearchCollectionViewController: UITabBarDelegate {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        let tagCollectionView = TagCollectionViewController()
+        self.navigationController?.pushViewController(tagCollectionView, animated: true)
+    }
+}

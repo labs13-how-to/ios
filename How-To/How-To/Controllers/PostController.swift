@@ -186,7 +186,7 @@ class PostController: Codable {
             
             completion(nil)
             }.resume()
-    }
+    } 
     
     func deleteFavorite(id: Int, completion: @escaping((Error?) -> Void) = { _ in }) {
         let idString = String(id)
