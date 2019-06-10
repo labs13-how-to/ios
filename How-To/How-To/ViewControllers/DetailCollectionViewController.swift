@@ -38,8 +38,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         super.viewDidLoad()
         
         
-        self.navigationItem.leftBarButtonItem = nil
-        self.navigationItem.hidesBackButton = true
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

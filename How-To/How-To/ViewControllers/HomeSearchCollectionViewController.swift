@@ -208,7 +208,6 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         let detailVC = DetailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         detailVC.collectionView.backgroundColor = .white
         detailVC.howtoID = postID
-        print("\(detailVC.howtoID)")
         navigationController?.pushViewController(detailVC, animated: true)
         
     }

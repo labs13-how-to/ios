@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5BA9EF18FA9FC2E51858509C /* Pods_How_To.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28592FB9DDF8371B5E751124 /* Pods_How_To.framework */; };
 		A200EA3822AC4B460053C7BF /* ProgressNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */; };
-		A200EA3D22AC6F440053C7BF /* MasterNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA3C22AC6F440053C7BF /* MasterNavigationController.swift */; };
 		A200EA4322AC85B90053C7BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA4222AC85B90053C7BF /* SettingsViewController.swift */; };
 		A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227C79022A1D19200A4B25D /* HomeTabBarController.swift */; };
 		A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */; };
@@ -44,7 +43,6 @@
 		6D575BD51C854255FAA88C5D /* Pods-How-To.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.debug.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.debug.xcconfig"; sourceTree = "<group>"; };
 		A0FE802FFBA871D66F06E382 /* Pods-How-To.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.release.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.release.xcconfig"; sourceTree = "<group>"; };
 		A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressNavigationViewController.swift; sourceTree = "<group>"; };
-		A200EA3C22AC6F440053C7BF /* MasterNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNavigationController.swift; sourceTree = "<group>"; };
 		A200EA4222AC85B90053C7BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A227C79022A1D19200A4B25D /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
@@ -125,13 +123,12 @@
 			isa = PBXGroup;
 			children = (
 				A2E3360822AA024000E7AD7F /* LoginViewController.swift */,
+				A227C79022A1D19200A4B25D /* HomeTabBarController.swift */,
 				A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */,
 				A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */,
 				A200EA4222AC85B90053C7BF /* SettingsViewController.swift */,
 				A247CB1A22ADA9BC0099F69C /* TagViewController.swift */,
-				A200EA3C22AC6F440053C7BF /* MasterNavigationController.swift */,
 				A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */,
-				A227C79022A1D19200A4B25D /* HomeTabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -354,7 +351,6 @@
 				A247CB4422ADDBD60099F69C /* UserController.swift in Sources */,
 				A269270522A5956A006AAFD2 /* PostSteps.swift in Sources */,
 				A247CB1B22ADA9BC0099F69C /* TagViewController.swift in Sources */,
-				A200EA3D22AC6F440053C7BF /* MasterNavigationController.swift in Sources */,
 				A287516522A49F7700DC3C92 /* User.swift in Sources */,
 				A269270D22A5B1D9006AAFD2 /* Follower.swift in Sources */,
 				A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */,
@@ -508,17 +504,17 @@
 				CODE_SIGN_ENTITLEMENTS = "How-To/How-To.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HEVSJ2C5DD;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				INFOPLIST_FILE = "How-To/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lambda.How-To";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lambda.ReviewItYourself;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -530,17 +526,17 @@
 				CODE_SIGN_ENTITLEMENTS = "How-To/How-To.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HEVSJ2C5DD;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				INFOPLIST_FILE = "How-To/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lambda.How-To";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lambda.ReviewItYourself;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
