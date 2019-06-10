@@ -13,19 +13,23 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+//    private var appCoordinator: AppCoordinator?
+//    var userController: UserController?
     var navigationController: UINavigationController?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         GIDSignIn.sharedInstance()?.clientID = "724061696700-r7ulg2vikuasablc3c3tdfe313g5dd8p.apps.googleusercontent.com"
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        
         if let window = window {
             let loginVC = LoginViewController()
             navigationController = UINavigationController(rootViewController: loginVC)
+//            navigationController!.navigationBar.isHidden = true
+//            navigationController!.navigationItem.leftBarButtonItem = nil
+//            navigationController!.navigationItem.hidesBackButton = true
             window.rootViewController = navigationController
+
             window.backgroundColor = .white
             window.makeKeyAndVisible()
         }

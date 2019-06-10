@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		5BA9EF18FA9FC2E51858509C /* Pods_How_To.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28592FB9DDF8371B5E751124 /* Pods_How_To.framework */; };
 		A200EA3822AC4B460053C7BF /* ProgressNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */; };
-		A200EA3B22AC4FF70053C7BF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA3A22AC4FF70053C7BF /* Theme.swift */; };
 		A200EA3D22AC6F440053C7BF /* MasterNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA3C22AC6F440053C7BF /* MasterNavigationController.swift */; };
-		A200EA4122AC79FD0053C7BF /* TagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA4022AC79FD0053C7BF /* TagCollectionViewController.swift */; };
 		A200EA4322AC85B90053C7BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA4222AC85B90053C7BF /* SettingsViewController.swift */; };
 		A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227C79022A1D19200A4B25D /* HomeTabBarController.swift */; };
+		A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */; };
+		A247CB1B22ADA9BC0099F69C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1A22ADA9BC0099F69C /* TagViewController.swift */; };
+		A247CB4422ADDBD60099F69C /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB4322ADDBD60099F69C /* UserController.swift */; };
+		A247CB4A22ADF7580099F69C /* HowtoDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB4922ADF7580099F69C /* HowtoDetailCollectionViewCell.swift */; };
+		A247CB4C22ADF7C60099F69C /* Howto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB4B22ADF7C60099F69C /* Howto.swift */; };
 		A269270322A57401006AAFD2 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270222A57401006AAFD2 /* Bearer.swift */; };
 		A269270522A5956A006AAFD2 /* PostSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270422A5956A006AAFD2 /* PostSteps.swift */; };
 		A269270722A5B069006AAFD2 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270622A5B069006AAFD2 /* Tag.swift */; };
@@ -22,7 +25,7 @@
 		A269270D22A5B1D9006AAFD2 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270C22A5B1D9006AAFD2 /* Follower.swift */; };
 		A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270E22A5B248006AAFD2 /* Favorite.swift */; };
 		A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269271022A5B2B2006AAFD2 /* PostComment.swift */; };
-		A269271422A5B97E006AAFD2 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269271322A5B97E006AAFD2 /* PostController.swift */; };
+		A269271422A5B97E006AAFD2 /* HowtoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269271322A5B97E006AAFD2 /* HowtoController.swift */; };
 		A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */; };
 		A287516522A49F7700DC3C92 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516422A49F7600DC3C92 /* User.swift */; };
 		A287516822A4E5E900DC3C92 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516722A4E5E900DC3C92 /* Post.swift */; };
@@ -41,11 +44,14 @@
 		6D575BD51C854255FAA88C5D /* Pods-How-To.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.debug.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.debug.xcconfig"; sourceTree = "<group>"; };
 		A0FE802FFBA871D66F06E382 /* Pods-How-To.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.release.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.release.xcconfig"; sourceTree = "<group>"; };
 		A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressNavigationViewController.swift; sourceTree = "<group>"; };
-		A200EA3A22AC4FF70053C7BF /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		A200EA3C22AC6F440053C7BF /* MasterNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNavigationController.swift; sourceTree = "<group>"; };
-		A200EA4022AC79FD0053C7BF /* TagCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewController.swift; sourceTree = "<group>"; };
 		A200EA4222AC85B90053C7BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A227C79022A1D19200A4B25D /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
+		A247CB1A22ADA9BC0099F69C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
+		A247CB4322ADDBD60099F69C /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		A247CB4922ADF7580099F69C /* HowtoDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowtoDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		A247CB4B22ADF7C60099F69C /* Howto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Howto.swift; sourceTree = "<group>"; };
 		A269270222A57401006AAFD2 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 		A269270422A5956A006AAFD2 /* PostSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSteps.swift; sourceTree = "<group>"; };
 		A269270622A5B069006AAFD2 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -54,7 +60,7 @@
 		A269270C22A5B1D9006AAFD2 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		A269270E22A5B248006AAFD2 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A269271022A5B2B2006AAFD2 /* PostComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComment.swift; sourceTree = "<group>"; };
-		A269271322A5B97E006AAFD2 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		A269271322A5B97E006AAFD2 /* HowtoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowtoController.swift; sourceTree = "<group>"; };
 		A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchCollectionViewController.swift; sourceTree = "<group>"; };
 		A287516422A49F7600DC3C92 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A287516722A4E5E900DC3C92 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -99,10 +105,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A247CB4D22ADF7CE0099F69C /* New Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Models";
+			sourceTree = "<group>";
+		};
 		A269271222A5B915006AAFD2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A269271322A5B97E006AAFD2 /* PostController.swift */,
+				A269271322A5B97E006AAFD2 /* HowtoController.swift */,
+				A247CB4322ADDBD60099F69C /* UserController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -112,8 +126,9 @@
 			children = (
 				A2E3360822AA024000E7AD7F /* LoginViewController.swift */,
 				A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */,
+				A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */,
 				A200EA4222AC85B90053C7BF /* SettingsViewController.swift */,
-				A200EA4022AC79FD0053C7BF /* TagCollectionViewController.swift */,
+				A247CB1A22ADA9BC0099F69C /* TagViewController.swift */,
 				A200EA3C22AC6F440053C7BF /* MasterNavigationController.swift */,
 				A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */,
 				A227C79022A1D19200A4B25D /* HomeTabBarController.swift */,
@@ -125,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				A287516422A49F7600DC3C92 /* User.swift */,
+				A247CB4B22ADF7C60099F69C /* Howto.swift */,
 				A287516722A4E5E900DC3C92 /* Post.swift */,
 				A269270822A5B0C7006AAFD2 /* PostTag.swift */,
 				A269270422A5956A006AAFD2 /* PostSteps.swift */,
@@ -162,11 +178,12 @@
 				A2A1B9D522A083E500AAA0E6 /* AppDelegate.swift */,
 				A2A1B9DE22A083E700AAA0E6 /* LaunchScreen.storyboard */,
 				A2A1B9E122A083E700AAA0E6 /* Info.plist */,
+				A247CB4D22ADF7CE0099F69C /* New Models */,
+				A287516122A48B5F00DC3C92 /* ViewControllers */,
 				A2A1B9DC22A083E700AAA0E6 /* Assets.xcassets */,
 				A2E3360122A9758800E7AD7F /* Helpers */,
 				A2B01B5B22A63504006052FA /* Views */,
 				A287516622A49F7B00DC3C92 /* Models */,
-				A287516122A48B5F00DC3C92 /* ViewControllers */,
 				A269271222A5B915006AAFD2 /* Controllers */,
 			);
 			path = "How-To";
@@ -176,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B01B5E22A63582006052FA /* PostCell.swift */,
+				A247CB4922ADF7580099F69C /* HowtoDetailCollectionViewCell.swift */,
 				A2E3360622A9773F00E7AD7F /* Footer.swift */,
 			);
 			path = Views;
@@ -185,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				A2E3360422A976E700E7AD7F /* UIImageView.swift */,
-				A200EA3A22AC4FF70053C7BF /* Theme.swift */,
 				A2E3360222A975FA00E7AD7F /* UIView+Layout.swift */,
 			);
 			path = Helpers;
@@ -329,21 +346,24 @@
 				A269270722A5B069006AAFD2 /* Tag.swift in Sources */,
 				A2E3360922AA024000E7AD7F /* LoginViewController.swift in Sources */,
 				A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */,
-				A200EA3B22AC4FF70053C7BF /* Theme.swift in Sources */,
 				A2A1B9D622A083E500AAA0E6 /* AppDelegate.swift in Sources */,
 				A269270322A57401006AAFD2 /* Bearer.swift in Sources */,
+				A247CB4C22ADF7C60099F69C /* Howto.swift in Sources */,
 				A269270B22A5B113006AAFD2 /* PostReview.swift in Sources */,
 				A269270922A5B0C7006AAFD2 /* PostTag.swift in Sources */,
+				A247CB4422ADDBD60099F69C /* UserController.swift in Sources */,
 				A269270522A5956A006AAFD2 /* PostSteps.swift in Sources */,
+				A247CB1B22ADA9BC0099F69C /* TagViewController.swift in Sources */,
 				A200EA3D22AC6F440053C7BF /* MasterNavigationController.swift in Sources */,
 				A287516522A49F7700DC3C92 /* User.swift in Sources */,
 				A269270D22A5B1D9006AAFD2 /* Follower.swift in Sources */,
-				A200EA4122AC79FD0053C7BF /* TagCollectionViewController.swift in Sources */,
 				A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */,
-				A269271422A5B97E006AAFD2 /* PostController.swift in Sources */,
+				A269271422A5B97E006AAFD2 /* HowtoController.swift in Sources */,
+				A247CB4A22ADF7580099F69C /* HowtoDetailCollectionViewCell.swift in Sources */,
 				A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */,
 				A287516822A4E5E900DC3C92 /* Post.swift in Sources */,
 				A200EA3822AC4B460053C7BF /* ProgressNavigationViewController.swift in Sources */,
+				A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */,
 				A2E3360522A976E700E7AD7F /* UIImageView.swift in Sources */,
 				A2B01B5F22A63582006052FA /* PostCell.swift in Sources */,
 				A200EA4322AC85B90053C7BF /* SettingsViewController.swift in Sources */,

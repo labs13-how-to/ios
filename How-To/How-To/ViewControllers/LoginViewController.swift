@@ -170,9 +170,9 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     
     func switchView() {
         if self.loginStatus == true {
-            self.navigationController?.navigationBar.isHidden = false
-            let homeCollectionView = HomeSearchCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-            navigationController?.pushViewController(homeCollectionView, animated: true)
+            self.navigationController?.navigationBar.isHidden = true
+            let homeTabBar = HomeTabBarController()
+            navigationController?.pushViewController(homeTabBar, animated: true)
         }
     }
     

@@ -8,7 +8,13 @@
 
 import UIKit
 
+
+
 class PostCell: UICollectionViewCell {
+    
+    weak var parentCollectionVC : HomeSearchCollectionViewController?
+    
+    var postID: Int?
     
     let radius: CGFloat = 8
     
@@ -122,6 +128,10 @@ class PostCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func cellTapped(){
+        
+    }
+    
     private func pinBackground(_ view: UIView, to stackView: UIStackView){
         view.translatesAutoresizingMaskIntoConstraints = false
         stackView.insertSubview(view, at: 0)
@@ -132,6 +142,7 @@ class PostCell: UICollectionViewCell {
         super.prepareForReuse()
         
     }
+    
     
 }
 
