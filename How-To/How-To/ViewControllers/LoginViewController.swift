@@ -27,11 +27,11 @@ class LoginViewController: UIViewController {
         return view
     }()
     
-    var loginStatus: Bool = false {
-        didSet{
-            switchView()
-        }
-    }
+//    var loginStatus: Bool = false {
+//        didSet{
+//            switchView()
+//        }
+//    }
 
     let signInStackView: UIStackView = {
         let stackView = UIStackView()
@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
         // Do any additional setup after loading the view.
         
@@ -160,7 +161,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
             // Push Home VC
 //        let appDelegate = AppDelegate()
 //        appDelegate.window?.rootViewController = HomeTabBarController()
-            loginStatus = true
+//            loginStatus = true
             
             // Perform operations on signed in user here
             let userID = user.userID                  // For client-side use only!
@@ -178,9 +179,49 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
             print("This is familyName : \(familyName)")
             print("This is email : \(email)")
             
+            // TEST PUT function
+            userController.updateUser(id: 1, username: "TestiOS_Two", auth_id: "919178856834", role: "user", created_at: getStringDate()) { (error) in
+                if error != nil {
+                    fatalError("Could not update user")
+                }
+            }
+            
+            // Make Get based on userID, if 404 response call create user method then log in as new user
+            guard let userIDString = userID?.truncate(characterLimit: 10) else { fatalError() }
+            userController.fetchUser(id: String(_:userIDString)) { (error) in
+//                userController.fetchUser(id: String(1)) { (_) in
+                    print("first line")
+                if error == nil {
+                    guard let firstName = givenName else { fatalError("No given first name found")}
+                    guard let idTokenLong = idToken else { fatalError("No idToken found")}
+                    let idTokenTruncated = String(_: idTokenLong.truncate(characterLimit: 10))
+                    let randomUserName = firstName.truncate(characterLimit: 5) + firstName.generateRandomString(length: 5)
+                    print(randomUserName)
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+                    let timeStamp = dateFormatter.string(from: Date())
+                    print("This is the time: \(timeStamp)")
+                    guard let intID = Int(userIDString), let givenName = givenName, let familyName = familyName else { fatalError("Could not convert id into Int")}
+                    // Creates user and sends a request to server with JSON payload
+                    self.userController.createUser(id: intID, username: (givenName + " " + familyName) , auth_id: idTokenTruncated, role: "user", created_at: timeStamp) { (error) in
+                        if let error = error {
+                            print(error)
+                        }
+                        // Dispatch Queue main async here if needed
+                    }
+                    print("\(intID)")
+                    print("last line")
+                }
+            }
+            
+            
+            // if get returns successful switchView to logged in home page
+            
         } else {
-            self.loginStatus = false
+//            self.loginStatus = false
+            
             print("\(error.localizedDescription)")
+            print("error was not nil")
         }
         
         
@@ -188,15 +229,24 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     func switchView() {
-        if self.loginStatus == true {
+//        if self.loginStatus == true {
             self.navigationController?.navigationBar.isHidden = true
             let homeTabBar = HomeTabBarController()
             navigationController?.pushViewController(homeTabBar, animated: true)
-        }
+//        }
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Make user re-sign in or reload Home Tab Controller
+    }
+    
+    
+    // MARK: Private Function
+    func getStringDate() -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        let timeStamp = dateFormatter.string(from: Date())
+        return timeStamp
     }
 }
 //
@@ -205,3 +255,23 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 //    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //    appDelegate.window?.rootViewController = home
 //}
+
+extension String {
+    func truncate(characterLimit: Int) -> Substring {
+        return prefix(characterLimit)
+    }
+    
+    
+    func generateRandomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0...length-1).map{ _ in letters.randomElement()! })
+    }
+    
+    func generateRandomNumberString(length: Int) -> String {
+        let characters = "0123456789"
+        return String((0...length-1).map{ _ in characters.randomElement()! })
+        
+    }
+}
+
+
