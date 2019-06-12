@@ -25,7 +25,15 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.724061696700-r7ulg2vikuasablc3c3tdfe313g5dd8p</string>
+				<string>com.lambda.ReviewItYourself</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.544053115585-dfn46ra2h3400sdtfn4l5t9qkis3blh9</string>
 			</array>
 		</dict>
 	</array>

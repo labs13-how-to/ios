@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import YoutubePlayer_in_WKWebView
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "DetailCell"
 
 class DetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var howtoController = HowtoController()
     var howtoID: Int?
-    
+    var imgURL: String?
     
     let label : UILabel = {
         let label = UILabel()
@@ -24,12 +25,25 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
     }()
     
+    var videoURLString: String?
+    
+    let headerID = "Header"
+    
+    
 //    convenience init?(collectionViewLayout layout: UICollectionViewLayout, ID: Int) {
 //        self.init(coder: NSCoder())
 //        self.postID = ID
 //    }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.howtoController.fetchHowto(id: howtoID!) {_ in
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+        
+        
+    }
 //    required init?(coder aDecoder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
@@ -39,12 +53,15 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
         
         
+        
+        collectionView.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 400, right: 0)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        self.collectionView!.register(HowtoDetailCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
         // Do any additional setup after loading the view.
     }
     
@@ -54,11 +71,53 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                 self.collectionView.reloadData()
             }
         }
-        view.addSubview(label)
+        collectionView.addSubview(label)
         guard let howTo = self.howtoController.howto else { return }
         label.text = howTo.title
     }
-
+    
+    func setupHeader()-> UIView {
+    
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: collectionView.frame.width, height: 600))
+        containerView.backgroundColor = #colorLiteral(red: 0.638515234, green: 0.6041640639, blue: 0.7091518044, alpha: 1)
+//        containerView.backgroundColor = #colorLiteral(red: 0.9213851094, green: 0.5346282125, blue: 0.7493482828, alpha: 1)
+        
+        
+        let stackView = UIStackView()
+        stackView.frame = CGRect(x: 0, y: containerView.frame.maxY - 300, width: containerView.frame.width, height: 600)
+        
+        stackView.axis = .vertical
+        stackView.alignment = .top
+        stackView.contentMode = .scaleToFill
+        stackView.spacing = 0
+        let title = UILabel()
+        title.text = howtoController.howto?.title
+        print(title.text)
+        
+        let youtubeView = WKYTPlayerView(frame: CGRect(x: 0, y: 0, width: 375, height: 300))
+        if videoURLString != nil {
+//            youtubeView.cueVideo(byURL: videoURLString!, startSeconds: 0, suggestedQuality: .HD720)
+            youtubeView.load(withVideoId: "bVQqHC9ZRm8")
+            stackView.addSubview(youtubeView)
+        } else {
+            let imageView = UIImageView()
+            guard let imageURL = URL(string: imgURL!) else {
+                fatalError("No image for post")
+            }
+            //            SUPPOSED TO LOAD FROM BACKEND
+            imageView.load(url: imageURL)
+            imageView.constrainWidth(constant: collectionView.frame.width)
+            imageView.contentMode = .scaleAspectFit
+            //            imageView.load(url: URL(string: "https://picsum.photos/400/300")!)
+            stackView.addSubview(title)
+            stackView.addSubview(imageView)
+            
+        }
+        containerView.addSubview(stackView)
+//        containerView.setNeedsDisplay()
+        return containerView
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -68,22 +127,42 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         // Pass the selected object to the new view controller.
     }
     */
+    // MARK: - Header
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 600)
+    }
 
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var header: UICollectionReusableView! = nil
+        
+            if kind == UICollectionView.elementKindSectionHeader {
+                header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
+                
+                header.addSubview(setupHeader())
+                
+            
+        }
+         return header
+    }
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 2
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        if section == 0 {
+            guard let steps = howtoController.howto?.steps else { return 2 }
+            return steps.count
+        }
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HowtoDetailCollectionViewCell
     
         // Configure the cell
     

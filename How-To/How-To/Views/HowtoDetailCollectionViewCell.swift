@@ -12,10 +12,12 @@ class HowtoDetailCollectionViewCell: UICollectionViewCell {
     
     var howto: Howto?
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .red
+        var view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        self.backgroundColor = .red
     }
     
     

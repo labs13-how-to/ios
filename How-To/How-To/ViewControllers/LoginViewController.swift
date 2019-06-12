@@ -12,6 +12,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    let userController = UserController()
+    
     let buttonBGView: UIView = {
         
         let view = UIView()
@@ -159,6 +161,23 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 //        let appDelegate = AppDelegate()
 //        appDelegate.window?.rootViewController = HomeTabBarController()
             loginStatus = true
+            
+            // Perform operations on signed in user here
+            let userID = user.userID                  // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+            
+            
+            print("This is userID : \(userID)")
+            print("This is idToken : \(idToken)")
+            print("This is fullName : \(fullName)")
+            print("This is givenName : \(givenName)")
+            print("This is familyName : \(familyName)")
+            print("This is email : \(email)")
+            
         } else {
             self.loginStatus = false
             print("\(error.localizedDescription)")

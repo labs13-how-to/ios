@@ -168,13 +168,13 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 4
+        return 8
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -186,8 +186,8 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             // MARK: TODO FIX IMG URL HTTP BUG
 //            let imgURL = URL(string: fetchedPost.img_url)
 //            cell.imageView.load(url: imgURL!)
-            let imgURL = URL(string:"https://picsum.photos/200/300")
-//            let imgURL = URL(string: fetchedPost.img_url)
+//            let imgURL = URL(string:"https://picsum.photos/200/300")
+            let imgURL = URL(string: fetchedPost.img_url)
             print(fetchedPost.img_url)
             cell.imageView.load(url: imgURL!)
             
@@ -203,11 +203,15 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let postID = howtoController.howtos[indexPath.item].id else {
-                fatalError("PostID returned nil")}
+        let howto = howtoController.howtos[indexPath.item]
+        guard let postID = howto.id else {
+            fatalError("PostID returned nil")
+        }
         let detailVC = DetailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         detailVC.collectionView.backgroundColor = .white
         detailVC.howtoID = postID
+        detailVC.imgURL = howto.img_url
+//        detailVC.videoURLString =
         navigationController?.pushViewController(detailVC, animated: true)
         
     }
