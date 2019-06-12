@@ -9,18 +9,20 @@
 import Foundation
 
 struct User: Codable {
-    let id: Int?
+    let id: Int
     var username: String
-    var password: String
+    var auth_id : String
+//    var password: String
     let role: String
-    let timestamp: Date
+    let created_at: String
     
-    init(id: Int?, username: String, password: String, role: String, timestamp: Date){
+    init(id: Int, auth_id: String, username: String, role: String = "user", created_at: String){
         self.id = id
         self.username = username
-        self.password = password
+        self.auth_id = auth_id
+//        self.password = password
         self.role = role
-        self.timestamp = timestamp
+        self.created_at = created_at
     }
     
 }

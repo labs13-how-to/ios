@@ -13,27 +13,28 @@ class HomeTabBarController: UITabBarController {
         super.viewDidLoad()
         
         setUpViewControllers()
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.hidesBackButton = true
         
     }
     
     func setUpViewControllers() {
         viewControllers = [
             createNavController(viewController: HomeSearchCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "Home House", hasSearch: true),
-            createNavController(viewController: UIViewController(), imageName: "Bullet, List, Text", hasSearch: false),
+            createNavController(viewController: TagViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "Bullet, List, Text", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "Bell, Notifications", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "User,Profile", hasSearch: false)
-//            createLoginNavController(viewController: LoginViewController())
             
         ]
     }
     
-    fileprivate func createLoginNavController(viewController: LoginViewController) -> UIViewController {
-        let navController = UINavigationController(rootViewController: viewController)
-        viewController.view.backgroundColor = .white
-        
-        navController.navigationItem.title = "Login"
-        return navController
-    }
+//    fileprivate func createLoginNavController(viewController: LoginViewController) -> UIViewController {
+//        let navController = UINavigationController(rootViewController: viewController)
+//        viewController.view.backgroundColor = .white
+//        
+//        navController.navigationItem.title = "Login"
+//        return navController
+//    }
     
     fileprivate func createNavController(viewController: UIViewController, imageName: String, hasSearch: Bool) -> UIViewController {
         
@@ -49,8 +50,8 @@ class HomeTabBarController: UITabBarController {
             let settingsButton = UIButton()
             settingsButton.backgroundColor = .green
             
-            viewController.navigationItem.titleView = searchController.searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
-            
+            navController.navigationItem.titleView = searchController.searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
+            navController.isNavigationBarHidden = false
             navController.navigationBar.barTintColor = .white
             searchController.searchBar.placeholder = "How To..."
             

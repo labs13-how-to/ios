@@ -8,7 +8,13 @@
 
 import UIKit
 
+
+
 class PostCell: UICollectionViewCell {
+    
+    weak var parentCollectionVC : HomeSearchCollectionViewController?
+    
+    var postID: Int?
     
     let radius: CGFloat = 8
     
@@ -25,7 +31,7 @@ class PostCell: UICollectionViewCell {
     let textBGView: UIView = {
         
         let view = UIView()
-        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
+        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.90)
         
         // Next 3 lines allow you to choose which corners are rounded on a UIView
         view.clipsToBounds = true
@@ -41,7 +47,7 @@ class PostCell: UICollectionViewCell {
         label.sizeToFit()
         label.numberOfLines = 2
         label.font = .boldSystemFont(ofSize: 17)
-        label.text = "Howto Title"
+        label.text = "Howto Title blah blah blah blah blah hahahahaha"
         
         return label
     }()
@@ -115,10 +121,15 @@ class PostCell: UICollectionViewCell {
         contentView.layer.masksToBounds = true
         layer.cornerRadius = radius
         
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func cellTapped(){
+        
     }
     
     private func pinBackground(_ view: UIView, to stackView: UIStackView){
@@ -131,6 +142,7 @@ class PostCell: UICollectionViewCell {
         super.prepareForReuse()
         
     }
+    
     
 }
 

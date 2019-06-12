@@ -8,21 +8,25 @@
 
 import Foundation
 
-class PostController: Codable {
+class HowtoController: Codable {
     
     let baseURL = URL(string: "https://lambda-how-to.herokuapp.com/")!
     
-    var posts: [Post] = []
-    var post: Post?
+    var howtos: [Howto] = []
+    var howto: Howto?
+    var users: [User] = []
+    var user: User?
     var favorites: [Favorite]?
+    var favorite: Favorite?
     // MARK: TODO
+    
     
     // create post
     // update post by id
     // delete post
     
-    // get all posts
-    func getPosts(completion: @escaping(Error?)-> Void = { _ in }) {
+    // fetch Howtos
+    func fetchHowtos(completion: @escaping(Error?)-> Void = { _ in }) {
         let urlPlus = baseURL.appendingPathComponent("posts")
         
         print("\(urlPlus)")
@@ -41,12 +45,12 @@ class PostController: Codable {
             
             do {
                 let decoder = JSONDecoder()
-                let postsFromServer = try decoder.decode([Post].self, from: data)
+                let howtosFromServer = try decoder.decode([Howto].self, from: data)
 //                let postsArray = Array(postsFromServer.values)
 //                for post in postsFromServer {
 //                    self.posts.append(post)
 //                }
-                self.posts = postsFromServer
+                self.howtos = howtosFromServer
                 completion(nil)
             } catch {
                 NSLog("Error decoding posts from server: \(error.localizedDescription)")
@@ -55,9 +59,9 @@ class PostController: Codable {
             
         }.resume()
     }
-    // get specific post by id
+    // get specific fetch by id
    
-    func getPostByID(id: Int, completion: @escaping(Error?)-> Void = { _ in }) {
+    func fetchHowto(id: Int, completion: @escaping(Error?)-> Void = { _ in }) {
         let idString = String(id)
         let urlPlus = baseURL.appendingPathComponent("posts").appendingPathComponent(idString)
         
@@ -77,11 +81,41 @@ class PostController: Codable {
             
             do {
                 let decoder = JSONDecoder()
-                let singlePost = try decoder.decode([Post].self, from: data)
-                self.post = singlePost[0]
+                let howto = try decoder.decode(Howto.self, from: data)
+                self.howto = howto
                 completion(nil)
             } catch {
-                NSLog("Error decoding single post from server: \(error.localizedDescription)")
+                NSLog("Error decoding single howto from server: \(error.localizedDescription)")
+                return
+            }
+            
+            }.resume()
+    }
+    
+    func getUser(id: Int, completion: @escaping(Error?) -> Void = { _ in }) {
+        let idString = String(id)
+        let urlPlus = baseURL.appendingPathComponent("users").appendingPathComponent(idString)
+        
+        URLSession.shared.dataTask(with: urlPlus) { (data, _, error) in
+            if let error = error {
+                NSLog("Error retrieving user: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No user data returned from server")
+                completion(NSError())
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let singleUser = try decoder.decode(User.self, from: data)
+                self.user = singleUser
+                completion(nil)
+            } catch {
+                NSLog("Error decoding single user from server: \(error.localizedDescription)")
                 return
             }
             
@@ -119,7 +153,7 @@ class PostController: Codable {
             }.resume()
     }
     
-    func deletePost(id: Int, completion: @escaping((Error?) -> Void) = { _ in }) {
+    func deleteHowto(id: Int, completion: @escaping((Error?) -> Void) = { _ in }) {
         let idString = String(id)
         let urlPlus = baseURL.appendingPathComponent("posts").appendingPathComponent(idString)
         
@@ -128,7 +162,7 @@ class PostController: Codable {
         
         URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {
-                NSLog("Error deleting post from server: \(error.localizedDescription)")
+                NSLog("Error deleting Howto from server: \(error.localizedDescription)")
                 completion(error)
                 return
             }
@@ -136,6 +170,24 @@ class PostController: Codable {
             completion(nil)
             }.resume()
     }
+    
+    func deleteUser(id: Int, completion: @escaping(Error?) -> Void = { _ in }) {
+        let idString = String(id)
+        let urlPlus = baseURL.appendingPathComponent("users").appendingPathComponent(idString)
+        
+        var request = URLRequest(url: urlPlus)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                NSLog("Error deleting user from server: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            completion(nil)
+            }.resume()
+    } 
     
     func deleteFavorite(id: Int, completion: @escaping((Error?) -> Void) = { _ in }) {
         let idString = String(id)
