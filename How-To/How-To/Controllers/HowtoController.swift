@@ -12,6 +12,8 @@ class HowtoController: Codable {
     
     let baseURL = URL(string: "https://lambda-how-to.herokuapp.com/")!
     
+    let tagsList = ["Art", "Apparel", "Appliances", "Automotive", "Baby", "Beauty", "Cooking", "Crafts", "Electronics", "Furniture", "Gardening", "Home Improvement", "Outdoors", "Pets", "Toys"]
+    
     var howtos: [Howto] = []
     var howto: Howto?
     var users: [User] = []

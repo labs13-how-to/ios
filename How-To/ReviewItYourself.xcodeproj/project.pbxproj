@@ -27,8 +27,9 @@
 		A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269271022A5B2B2006AAFD2 /* PostComment.swift */; };
 		A269271422A5B97E006AAFD2 /* HowtoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269271322A5B97E006AAFD2 /* HowtoController.swift */; };
 		A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */; };
-		A287516522A49F7700DC3C92 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516422A49F7600DC3C92 /* User.swift */; };
 		A287516822A4E5E900DC3C92 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516722A4E5E900DC3C92 /* Post.swift */; };
+		A2A1606422B1B71500A7AAF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1606322B1B71400A7AAF0 /* User.swift */; };
+		A2A1606622B2779F00A7AAF0 /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1606522B2779F00A7AAF0 /* ProfileCollectionViewController.swift */; };
 		A2A1B9D622A083E500AAA0E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1B9D522A083E500AAA0E6 /* AppDelegate.swift */; };
 		A2A1B9DD22A083E700AAA0E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2A1B9DC22A083E700AAA0E6 /* Assets.xcassets */; };
 		A2A1B9E022A083E700AAA0E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A1B9DE22A083E700AAA0E6 /* LaunchScreen.storyboard */; };
@@ -64,8 +65,9 @@
 		A269271022A5B2B2006AAFD2 /* PostComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComment.swift; sourceTree = "<group>"; };
 		A269271322A5B97E006AAFD2 /* HowtoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowtoController.swift; sourceTree = "<group>"; };
 		A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchCollectionViewController.swift; sourceTree = "<group>"; };
-		A287516422A49F7600DC3C92 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A287516722A4E5E900DC3C92 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		A2A1606322B1B71400A7AAF0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A2A1606522B2779F00A7AAF0 /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		A2A1B9D222A083E500AAA0E6 /* ReviewItYourself.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReviewItYourself.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A1B9D522A083E500AAA0E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A1B9DC22A083E700AAA0E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */,
 				A200EA4222AC85B90053C7BF /* SettingsViewController.swift */,
 				A247CB1A22ADA9BC0099F69C /* TagViewController.swift */,
+				A2A1606522B2779F00A7AAF0 /* ProfileCollectionViewController.swift */,
 				A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */,
 			);
 			path = ViewControllers;
@@ -135,7 +138,7 @@
 		A287516622A49F7B00DC3C92 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A287516422A49F7600DC3C92 /* User.swift */,
+				A2A1606322B1B71400A7AAF0 /* User.swift */,
 				A247CB4B22ADF7C60099F69C /* Howto.swift */,
 				A287516722A4E5E900DC3C92 /* Post.swift */,
 				A269270822A5B0C7006AAFD2 /* PostTag.swift */,
@@ -337,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A1606422B1B71500A7AAF0 /* User.swift in Sources */,
 				A2E3360722A9773F00E7AD7F /* Footer.swift in Sources */,
 				A2E3360322A975FA00E7AD7F /* UIView+Layout.swift in Sources */,
 				A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */,
@@ -346,12 +350,12 @@
 				A2A1B9D622A083E500AAA0E6 /* AppDelegate.swift in Sources */,
 				A269270322A57401006AAFD2 /* Bearer.swift in Sources */,
 				A247CB4C22ADF7C60099F69C /* Howto.swift in Sources */,
+				A2A1606622B2779F00A7AAF0 /* ProfileCollectionViewController.swift in Sources */,
 				A269270B22A5B113006AAFD2 /* PostReview.swift in Sources */,
 				A269270922A5B0C7006AAFD2 /* PostTag.swift in Sources */,
 				A247CB4422ADDBD60099F69C /* UserController.swift in Sources */,
 				A269270522A5956A006AAFD2 /* PostSteps.swift in Sources */,
 				A247CB1B22ADA9BC0099F69C /* TagViewController.swift in Sources */,
-				A287516522A49F7700DC3C92 /* User.swift in Sources */,
 				A269270D22A5B1D9006AAFD2 /* Follower.swift in Sources */,
 				A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */,
 				A269271422A5B97E006AAFD2 /* HowtoController.swift in Sources */,

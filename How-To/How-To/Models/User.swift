@@ -8,10 +8,15 @@
 
 import Foundation
 
+struct UserResponse: Decodable {
+    let user: [User]
+}
+
 struct User: Codable {
     let id: Int
     var username: String
-    var auth_id : String
+    var password: String?
+    var auth_id : String?
 //    var password: String
     let role: String
     let created_at: String

@@ -157,74 +157,70 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         googleSignInButton.isHidden = error == nil
         // A nil error indicates a successful login
         if (error == nil) {
-            // Successful login
-            // Push Home VC
-//        let appDelegate = AppDelegate()
-//        appDelegate.window?.rootViewController = HomeTabBarController()
-//            loginStatus = true
-            
             // Perform operations on signed in user here
-            let userID = user.userID                  // For client-side use only!
+            let googleUserID = user.userID                  // For client-side use only!
             let idToken = user.authentication.idToken // Safe to send to the server
             let fullName = user.profile.name
             let givenName = user.profile.givenName
             let familyName = user.profile.familyName
             let email = user.profile.email
-            
-            
-            print("This is userID : \(userID)")
+
+            // Checks if user has available profile image, if so sets it to userDefaults to be retrieved later when needed
+            let hasImage = user.profile.hasImage
+            if hasImage {
+                let profileImageURL = user.profile.imageURL(withDimension: 400)
+                UserDefaults.standard.set(profileImageURL, forKey: "profileImageURL")
+            }
+            print("This is googleUserID : \(googleUserID)")
             print("This is idToken : \(idToken)")
             print("This is fullName : \(fullName)")
             print("This is givenName : \(givenName)")
             print("This is familyName : \(familyName)")
             print("This is email : \(email)")
-            
-            // TEST PUT function
-            userController.updateUser(id: 1, username: "TestiOS_Two", auth_id: "919178856834", role: "user", created_at: getStringDate()) { (error) in
-                if error != nil {
-                    fatalError("Could not update user")
-                }
-            }
-            
+//            // TEST PUT function
+//            userController.updateUser(id: 1, username: "TestiOS_Two", auth_id: "919178856834", role: "user", created_at: getStringDate()) { (error) in
+//                if error != nil {
+//                    fatalError("Could not update user")
+//                }
+//            }
+
             // Make Get based on userID, if 404 response call create user method then log in as new user
-            guard let userIDString = userID?.truncate(characterLimit: 10) else { fatalError() }
-            userController.fetchUser(id: String(_:userIDString)) { (error) in
-//                userController.fetchUser(id: String(1)) { (_) in
+            let defaults = UserDefaults.standard
+            guard let userIDFromDefaults = defaults.string(forKey: "ID") else {
+                // if no user ID found we need to create a new user
+                let randomPassword = String().generateRandomString(length: 10)
+                let randomNumberString = String().generateRandomNumberString(length: 3)
+                defaults.set(randomPassword, forKey: "password")
+                defaults.set(user.profile.givenName, forKey: "firstName")
+                userController.createUser(username: user.profile.givenName+user.profile.familyName+randomNumberString, password: randomPassword) { (error) in
+                    if error == nil {
+                        DispatchQueue.main.async {
+                            self.switchView()
+                        }
+                        return
+                    }
+                    fatalError("Could not create new user on first google sign-in attempt")
+                }
+                return
+            }
+            userController.fetchUser(id: userIDFromDefaults) { (error) in
                     print("first line")
                 if error == nil {
-                    guard let firstName = givenName else { fatalError("No given first name found")}
-                    guard let idTokenLong = idToken else { fatalError("No idToken found")}
-                    let idTokenTruncated = String(_: idTokenLong.truncate(characterLimit: 10))
-                    let randomUserName = firstName.truncate(characterLimit: 5) + firstName.generateRandomString(length: 5)
-                    print(randomUserName)
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-                    let timeStamp = dateFormatter.string(from: Date())
-                    print("This is the time: \(timeStamp)")
-                    guard let intID = Int(userIDString), let givenName = givenName, let familyName = familyName else { fatalError("Could not convert id into Int")}
-                    // Creates user and sends a request to server with JSON payload
-                    self.userController.createUser(id: intID, username: (givenName + " " + familyName) , auth_id: idTokenTruncated, role: "user", created_at: timeStamp) { (error) in
-                        if let error = error {
-                            print(error)
-                        }
-                        // Dispatch Queue main async here if needed
+                    // if fetch returns successful switchView to logged in home page
+                    DispatchQueue.main.async {
+                        self.switchView()
                     }
-                    print("\(intID)")
-                    print("last line")
+                    return
                 }
+                fatalError("User defaults has a userID set but fetchUser could not retrieve user from server. Check to see if user exist on server at specified ID")
             }
-            
-            
-            // if get returns successful switchView to logged in home page
-            
         } else {
-//            self.loginStatus = false
-            
+
             print("\(error.localizedDescription)")
-            print("error was not nil")
+            print("google sign-in failed")
+
         }
-        
-        
+//        self.switchView()
         googleSignInButton.isHidden = error == nil
     }
     
@@ -240,21 +236,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         // Make user re-sign in or reload Home Tab Controller
     }
     
-    
-    // MARK: Private Function
-    func getStringDate() -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-        let timeStamp = dateFormatter.string(from: Date())
-        return timeStamp
-    }
 }
-//
-//class SwitchRoot {
-//    let home = HomeTabBarController()
-//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//    appDelegate.window?.rootViewController = home
-//}
 
 extension String {
     func truncate(characterLimit: Int) -> Substring {

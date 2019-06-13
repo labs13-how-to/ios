@@ -23,7 +23,7 @@ class HomeTabBarController: UITabBarController {
             createNavController(viewController: HomeSearchCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "Home House", hasSearch: true),
             createNavController(viewController: TagViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "Bullet, List, Text", hasSearch: false),
             createNavController(viewController: UIViewController(), imageName: "Bell, Notifications", hasSearch: false),
-            createNavController(viewController: UIViewController(), imageName: "User,Profile", hasSearch: false)
+            createNavController(viewController: ProfileCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "User,Profile", hasSearch: false)
             
         ]
     }
