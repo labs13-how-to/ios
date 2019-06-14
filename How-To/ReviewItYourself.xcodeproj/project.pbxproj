@@ -10,6 +10,8 @@
 		0F2CE98343AF9E2402D0B070 /* Pods_ReviewItYourself.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D0F3F9DDBC15F32760820A /* Pods_ReviewItYourself.framework */; };
 		A200EA3822AC4B460053C7BF /* ProgressNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */; };
 		A200EA4322AC85B90053C7BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA4222AC85B90053C7BF /* SettingsViewController.swift */; };
+		A2112DC522B3F4790073E9A6 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2112DC422B3F4790073E9A6 /* TagCell.swift */; };
+		A2112DC722B3FD650073E9A6 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */; };
 		A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227C79022A1D19200A4B25D /* HomeTabBarController.swift */; };
 		A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */; };
 		A247CB1B22ADA9BC0099F69C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1A22ADA9BC0099F69C /* TagViewController.swift */; };
@@ -48,6 +50,8 @@
 		A0FE802FFBA871D66F06E382 /* Pods-How-To.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.release.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.release.xcconfig"; sourceTree = "<group>"; };
 		A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressNavigationViewController.swift; sourceTree = "<group>"; };
 		A200EA4222AC85B90053C7BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A2112DC422B3F4790073E9A6 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		A227C79022A1D19200A4B25D /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		A247CB1A22ADA9BC0099F69C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 				A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */,
 				A200EA4222AC85B90053C7BF /* SettingsViewController.swift */,
 				A247CB1A22ADA9BC0099F69C /* TagViewController.swift */,
+				A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */,
 				A2A1606522B2779F00A7AAF0 /* ProfileCollectionViewController.swift */,
 				A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */,
 			);
@@ -192,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B01B5E22A63582006052FA /* PostCell.swift */,
+				A2112DC422B3F4790073E9A6 /* TagCell.swift */,
 				A247CB4922ADF7580099F69C /* HowtoDetailCollectionViewCell.swift */,
 				A2E3360622A9773F00E7AD7F /* Footer.swift */,
 			);
@@ -340,11 +346,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2112DC522B3F4790073E9A6 /* TagCell.swift in Sources */,
 				A2A1606422B1B71500A7AAF0 /* User.swift in Sources */,
 				A2E3360722A9773F00E7AD7F /* Footer.swift in Sources */,
 				A2E3360322A975FA00E7AD7F /* UIView+Layout.swift in Sources */,
 				A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */,
 				A269270722A5B069006AAFD2 /* Tag.swift in Sources */,
+				A2112DC722B3FD650073E9A6 /* ListCollectionViewController.swift in Sources */,
 				A2E3360922AA024000E7AD7F /* LoginViewController.swift in Sources */,
 				A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */,
 				A2A1B9D622A083E500AAA0E6 /* AppDelegate.swift in Sources */,
