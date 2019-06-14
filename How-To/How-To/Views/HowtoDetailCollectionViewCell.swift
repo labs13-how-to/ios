@@ -16,8 +16,8 @@ class HowtoDetailCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        var view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        self.backgroundColor = .red
+        var view = UIView(frame: CGRect(x: 0, y: 0, width: 375, height: 50))
+        self.backgroundColor = #colorLiteral(red: 0.08956647664, green: 0.2180776596, blue: 0.4915035367, alpha: 1)
     }
     
     
