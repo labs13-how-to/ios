@@ -11,17 +11,31 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class ProfileCollectionViewController: UICollectionViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: collectionView.frame.width, height: 600))
+        let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+        let profileImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
+        if let profileImageURL = UserDefaults.standard.value(forKey: "profileImageURL") as? URL {
+            
+            profileImage.load(url: (profileImageURL))
+            stackView.addSubview(profileImage)
+        } else {
+            profileImage.backgroundColor = .lightGray
+        }
+        nameLabel.text = UserDefaults.standard.value(forKey: "firstName") as? String
+        print(nameLabel.text)
+        stackView.addSubview(nameLabel)
+        stackView.axis = .vertical
+        collectionView.addSubview(stackView)
+        collectionView.setNeedsDisplay()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         
-        let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
-        nameLabel.text = UserDefaults.standard.value(forKey: "firstName") as? String
-        print(nameLabel.text)
-        collectionView.addSubview(nameLabel)
-        nameLabel.centerInSuperview()
-        collectionView.setNeedsDisplay()
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

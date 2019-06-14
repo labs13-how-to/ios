@@ -6,6 +6,7 @@
 //  Copyright © 2019 Angel Buenrostro. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 private let reuseIdentifier = "PostCell"
@@ -15,6 +16,16 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     let tabBarTag = 0
     
     var howtoController = HowtoController()
+    var allHowtos: [Howto] = []
+    var filteredHowtos: [Howto]?
+//    {
+//        didSet {
+//            collectionView.reloadData()
+//        }
+//    }
+    var tempArray: [Howto] = []
+    
+    var isSearching = false
     
 //    var didSelectHandler: ((Post) -> ())?
     
@@ -32,12 +43,14 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         guard self.navigationController != nil else { fatalError("Navigation Controller not found")}
         //setupTabBar(parentViewController: self, height: view.frame.height / 15, color: .white)
-        setupSearchBar(parentViewController: self, color: .white, placeHolderText: "How To...")
+//        setupSearchBar(parentViewController: self, color: .white, placeHolderText: "How To...")
         //self.tabBar!.delegate = self
         
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.hidesBackButton = true
         self.navigationController?.isNavigationBarHidden = false
@@ -45,6 +58,14 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.navigationController?.navigationItem.titleView = searchBar
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Settings, Filter"), style: .plain, target: self, action: #selector(openSettings))
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.5493490696, green: 0.5497819781, blue: 0.5494160652, alpha: 1)
+        // SearchBar
+        searchBar.placeholder = "Search..."
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
+        self.navigationItem.titleView = searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
+        guard let navController = self.navigationController else { fatalError() }
+        navController.isNavigationBarHidden = false
         
         collectionView.contentInset = UIEdgeInsets(top:200, left: 0, bottom: 0, right: 0)
 //        collectionView?.prefetchDataSource = self
@@ -56,6 +77,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         
         self.howtoController.fetchHowtos(){_ in
             DispatchQueue.main.async {
+                self.allHowtos = self.howtoController.howtos
                 self.collectionView.reloadData()
             }
         }
@@ -174,33 +196,43 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 8
+        
+        if isSearching {
+            return filteredHowtos!.count
+        } else {
+        
+            if allHowtos.count < 8 {
+                return allHowtos.count
+            } else {
+                return 8
+            }
+        }
     }
-
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PostCell
-        if howtoController.howtos.count > 0 {
-            let fetchedPost = self.howtoController.howtos[indexPath.item]
-            cell.postID = fetchedPost.id
-            cell.titleLabel.text = fetchedPost.title
-            // MARK: TODO FIX IMG URL HTTP BUG
-//            let imgURL = URL(string: fetchedPost.img_url)
-//            cell.imageView.load(url: imgURL!)
-//            let imgURL = URL(string:"https://picsum.photos/200/300")
-            let imgURL = URL(string: fetchedPost.img_url)
-            print(fetchedPost.img_url)
-            cell.imageView.load(url: imgURL!)
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-            let updatedAtStr = fetchedPost.created_at
-            let updatedAt = dateFormatter.date(from: updatedAtStr) // "Jun 5, 2016, 4:56 PM"
-            cell.dateLabel.text = updatedAt?.asString(style: .long)
-            cell.parentCollectionVC = self
-            
+        var fetchedPost: Howto?
+        if isSearching {
+            fetchedPost = self.filteredHowtos![indexPath.item]
+        } else {
+            fetchedPost = self.allHowtos[indexPath.item]
         }
+            if fetchedPost != nil {
+                cell.postID = fetchedPost?.id
+                cell.titleLabel.text = fetchedPost?.title
+                let imgURL = URL(string: fetchedPost!.img_url)
+                print(fetchedPost!.img_url)
+                cell.imageView.load(url: imgURL!)
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+                let updatedAtStr = fetchedPost!.created_at
+                let updatedAt = dateFormatter.date(from: updatedAtStr) // "Jun 5, 2016, 4:56 PM"
+                cell.dateLabel.text = updatedAt?.asString(style: .long)
+                cell.parentCollectionVC = self
+            }
         return cell
-    }
+        }
+    
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let howto = howtoController.howtos[indexPath.item]
@@ -317,13 +349,32 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     
     func setupSearchBar(parentViewController: UICollectionViewController, color: UIColor, placeHolderText: String){
         let searchController = UISearchController(searchResultsController: nil)
-        self.navigationItem.titleView = searchController.searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
-        guard let navController = self.navigationController else { fatalError() }
-        navController.navigationBar.barTintColor = color
-        navController.isNavigationBarHidden = false
-        searchController.searchBar.placeholder = placeHolderText
+        
+        
+        print("searchbar setup")
     }
+    
 
+}
+
+extension HomeSearchCollectionViewController: UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("Text did change")
+        if searchBar.text == nil || searchBar.text == "" {
+            isSearching = false
+            print("false")
+            view.endEditing(true)
+            collectionView.reloadData()
+        } else {
+            isSearching = true
+            print("true")
+            tempArray = allHowtos
+            filteredHowtos = tempArray.filter({$0.title.range(of: searchBar.text!, options: .caseInsensitive) != nil })
+            collectionView.reloadData()
+            collectionView.setNeedsDisplay()
+        }
+    }
+    
 }
 
 
