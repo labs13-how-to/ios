@@ -16,17 +16,23 @@ class TagViewController: UICollectionViewController, UICollectionViewDelegateFlo
     let howtoController = HowtoController()
     var allHowtos: [Howto] = []
     var filteredHowtos: [Howto] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationItem.hidesBackButton = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.hidesBackButton = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if howtoController.howtos.count > 0 {
             self.allHowtos = howtoController.howtos
         }
         
         self.collectionView.backgroundColor = .white
-        self.navigationItem.leftBarButtonItem = nil
-        self.navigationItem.hidesBackButton = true
         // Do any additional setup after loading the view.
         
         collectionView.contentInset = UIEdgeInsets(top:10, left: 0, bottom: 0, right: 0)
@@ -61,6 +67,9 @@ class TagViewController: UICollectionViewController, UICollectionViewDelegateFlo
         return CGSize(width: (collectionView.frame.width) - 36, height: (collectionView.frame.height/16))
     }
     
+    @objc func popView(){
+        self.navigationController?.popViewController(animated: true)
+    }
     
     // MARK: UICollectionViewDataSource
     

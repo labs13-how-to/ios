@@ -161,9 +161,11 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
             let googleUserID = user.userID                  // For client-side use only!
             let idToken = user.authentication.idToken // Safe to send to the server
             let fullName = user.profile.name
+            UserDefaults.standard.set(user.profile.name, forKey: "fullName")
             let givenName = user.profile.givenName
             let familyName = user.profile.familyName
             let email = user.profile.email
+            UserDefaults.standard.set(user.profile.name, forKey: "email")
 
             // Checks if user has available profile image, if so sets it to userDefaults to be retrieved later when needed
             let hasImage = user.profile.hasImage
@@ -190,9 +192,11 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 // if no user ID found we need to create a new user
                 let randomPassword = String().generateRandomString(length: 10)
                 let randomNumberString = String().generateRandomNumberString(length: 3)
+                let randomUserName = user.profile.givenName+user.profile.familyName+randomNumberString
+                defaults.set(randomUserName, forKey: "username")
                 defaults.set(randomPassword, forKey: "password")
                 defaults.set(user.profile.givenName, forKey: "firstName")
-                userController.createUser(username: user.profile.givenName+user.profile.familyName+randomNumberString, password: randomPassword) { (error) in
+                userController.createUser(username: randomUserName, password: randomPassword) { (error) in
                     if error == nil {
                         DispatchQueue.main.async {
                             self.switchView()
