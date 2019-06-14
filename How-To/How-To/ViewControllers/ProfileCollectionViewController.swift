@@ -13,7 +13,13 @@ private let reuseIdentifier = "Cell"
 class ProfileCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
-        let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: collectionView.frame.width, height: 600))
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.hidesBackButton = true
+        self.navigationController?.isNavigationBarHidden = false
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
+        self.navigationItem.titleView = titleLabel
+        titleLabel.text = UserDefaults.standard.value(forKey: "username") as? String
+        let stackView = UIStackView(frame: CGRect(x: 20, y: 100, width: collectionView.frame.width, height: 600))
         let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         let profileImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
         if let profileImageURL = UserDefaults.standard.value(forKey: "profileImageURL") as? URL {
@@ -33,6 +39,8 @@ class ProfileCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         collectionView.backgroundColor = .white
         
         
