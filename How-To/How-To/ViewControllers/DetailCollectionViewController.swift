@@ -20,7 +20,6 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     let label : UILabel = {
         let label = UILabel()
         label.text = "hey"
-        label.centerInSuperview()
         return label
         
     }()
@@ -71,7 +70,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                 self.collectionView.reloadData()
             }
         }
-        collectionView.addSubview(label)
+        view.addSubview(label)
         guard let howTo = self.howtoController.howto else { return }
         label.text = howTo.title
     }
@@ -148,7 +147,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 1
     }
 
 

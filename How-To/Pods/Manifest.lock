@@ -16,12 +16,14 @@ PODS:
   - SDWebImage (5.0.6):
     - SDWebImage/Core (= 5.0.6)
   - SDWebImage/Core (5.0.6)
+  - SnapKit (5.0.0)
   - YoutubePlayer-in-WKWebView (0.3.0)
 
 DEPENDENCIES:
   - GoogleSignIn
   - lottie-ios
   - SDWebImage
+  - SnapKit (~> 5.0.0)
   - YoutubePlayer-in-WKWebView (~> 0.3.0)
 
 SPEC REPOS:
@@ -31,6 +33,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - lottie-ios
     - SDWebImage
+    - SnapKit
     - YoutubePlayer-in-WKWebView
 
 SPEC CHECKSUMS:
@@ -39,8 +42,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   lottie-ios: 9467723922dfff46f6d4e3019c32594a62440b7c
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   YoutubePlayer-in-WKWebView: 17a33b2fa619d357c9ddd763942ce556660facae
 
-PODFILE CHECKSUM: f9493ff56e0acb9d1be40523fcbaa35cec9b63bc
+PODFILE CHECKSUM: 64a451118d57ff0eee84c2ef483c0c1099fcca0b
 
 COCOAPODS: 1.7.1
