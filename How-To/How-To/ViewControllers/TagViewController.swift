@@ -13,6 +13,7 @@ private let reuseIdentifier = "TagCell"
 
 class TagViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    
     let howtoController = HowtoController()
     var allHowtos: [Howto] = []
     var filteredHowtos: [Howto] = []
@@ -103,6 +104,7 @@ class TagViewController: UICollectionViewController, UICollectionViewDelegateFlo
         // filter the howTos
         tempArray = allHowtos
 //        filteredHowtos = tempArray.filter({$0.tags?.filter({$0.name?.z)})
+        self.filteredHowtos = []
         for howTo in allHowtos {
                 for tag in howTo.tags! {
                     print(tag.name! + " " + tagString)

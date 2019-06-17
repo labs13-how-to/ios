@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import SDWebImage
+
+
 
 private let reuseIdentifier = "PostCell"
 
@@ -39,6 +42,12 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         view.backgroundColor = .white
         return view
     }()
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let secondNav = self.tabBarController?.viewControllers![1] as! UINavigationController
+        let secondTab = secondNav.viewControllers[0] as! TagViewController
+        secondTab.allHowtos = self.allHowtos
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         guard self.navigationController != nil else { fatalError("Navigation Controller not found")}
@@ -220,8 +229,10 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
                 cell.postID = fetchedPost?.id
                 cell.titleLabel.text = fetchedPost?.title
                 let imgURL = URL(string: fetchedPost!.img_url)
-                print(fetchedPost!.img_url)
-                cell.imageView.load(url: imgURL!)
+                
+                cell.imageView.sd_setImage(with: imgURL)
+//                print(fetchedPost!.img_url)
+//                cell.imageView.load(url: imgURL!)
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"

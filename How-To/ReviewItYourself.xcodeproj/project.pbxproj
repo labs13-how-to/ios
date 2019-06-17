@@ -13,6 +13,7 @@
 		A2112DC522B3F4790073E9A6 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2112DC422B3F4790073E9A6 /* TagCell.swift */; };
 		A2112DC722B3FD650073E9A6 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */; };
 		A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227C79022A1D19200A4B25D /* HomeTabBarController.swift */; };
+		A23A993322B6FC1C0029194F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A993222B6FC1C0029194F /* ListCell.swift */; };
 		A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */; };
 		A247CB1B22ADA9BC0099F69C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1A22ADA9BC0099F69C /* TagViewController.swift */; };
 		A247CB4422ADDBD60099F69C /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB4322ADDBD60099F69C /* UserController.swift */; };
@@ -53,6 +54,7 @@
 		A2112DC422B3F4790073E9A6 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		A227C79022A1D19200A4B25D /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		A23A993222B6FC1C0029194F /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		A247CB1A22ADA9BC0099F69C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		A247CB4322ADDBD60099F69C /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				A2B01B5E22A63582006052FA /* PostCell.swift */,
 				A2112DC422B3F4790073E9A6 /* TagCell.swift */,
+				A23A993222B6FC1C0029194F /* ListCell.swift */,
 				A247CB4922ADF7580099F69C /* HowtoDetailCollectionViewCell.swift */,
 				A2E3360622A9773F00E7AD7F /* Footer.swift */,
 			);
@@ -349,6 +352,7 @@
 				A2112DC522B3F4790073E9A6 /* TagCell.swift in Sources */,
 				A2A1606422B1B71500A7AAF0 /* User.swift in Sources */,
 				A2E3360722A9773F00E7AD7F /* Footer.swift in Sources */,
+				A23A993322B6FC1C0029194F /* ListCell.swift in Sources */,
 				A2E3360322A975FA00E7AD7F /* UIView+Layout.swift in Sources */,
 				A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */,
 				A269270722A5B069006AAFD2 /* Tag.swift in Sources */,
