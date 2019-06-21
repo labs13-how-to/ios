@@ -228,7 +228,8 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             if fetchedPost != nil {
                 cell.postID = fetchedPost?.id
                 cell.titleLabel.text = fetchedPost?.title
-                let imgURL = URL(string: fetchedPost!.img_url)
+                cell.rating = fetchedPost?.review_avg
+                let imgURL = URL(string: fetchedPost!.img_url!)
                 
                 cell.imageView.sd_setImage(with: imgURL)
 //                print(fetchedPost!.img_url)

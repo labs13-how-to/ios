@@ -35,6 +35,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 //    }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.howtoController.fetchHowto(id: howtoID!) {_ in
             DispatchQueue.main.async {
                 self.collectionView.reloadData()

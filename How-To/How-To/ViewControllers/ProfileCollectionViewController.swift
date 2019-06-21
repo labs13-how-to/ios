@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 private let reuseIdentifier = "Cell"
 
@@ -19,27 +20,48 @@ class ProfileCollectionViewController: UICollectionViewController {
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
         self.navigationItem.titleView = titleLabel
         titleLabel.text = UserDefaults.standard.value(forKey: "username") as? String
-        let stackView = UIStackView(frame: CGRect(x: 20, y: 100, width: collectionView.frame.width, height: 600))
-        let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
-        let profileImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
-        if let profileImageURL = UserDefaults.standard.value(forKey: "profileImageURL") as? URL {
+//        let stackView = UIStackView(frame: CGRect(x: 20, y: 100, width: collectionView.frame.width, height: 600))
+//        let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+//        let profileImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+//        if let profileImageURL = UserDefaults.standard.value(forKey: "profileImageURL") as? URL {
+//
+//            profileImage.load(url: (profileImageURL))
+//            stackView.addSubview(profileImage)
+//        } else {
+//            profileImage.image = #imageLiteral(resourceName: "Succulents")
+//            stackView.addSubview(profileImage)
+//        }
+//        nameLabel.text = UserDefaults.standard.value(forKey: "firstName") as? String
+//        nameLabel.backgroundColor = .red
+//        print(nameLabel.text)
+//        stackView.addSubview(nameLabel)
+//        stackView.axis = .horizontal
+//        stackView.distribution = .fillEqually
+//        collectionView.addSubview(stackView)
+//        collectionView.setNeedsDisplay()
+        
+    }
+    
+    func setupView(){
+        let baseView = UIView()
+        self.view.addSubview(baseView)
+        baseView.backgroundColor = #colorLiteral(red: 0.9213851094, green: 0.5346282125, blue: 0.7493482828, alpha: 1)
+        baseView.snp.makeConstraints { make in
+            make.left.equalTo(20)
+            make.top.equalTo((navigationController?.navigationBar.frame.maxY)! + 50)
+            make.right.equalTo(-20)
+            make.height.equalTo(250)
             
-            profileImage.load(url: (profileImageURL))
-            stackView.addSubview(profileImage)
-        } else {
-            profileImage.backgroundColor = .lightGray
         }
-        nameLabel.text = UserDefaults.standard.value(forKey: "firstName") as? String
-        print(nameLabel.text)
-        stackView.addSubview(nameLabel)
-        stackView.axis = .vertical
-        collectionView.addSubview(stackView)
-        collectionView.setNeedsDisplay()
+        // Need 3 stack views
+        // Picture + Username Stack
+        // Posts + number stack
+        // Stack around both stacks
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupView()
         
         collectionView.backgroundColor = .white
         

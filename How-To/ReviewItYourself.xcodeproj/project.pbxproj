@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0F2CE98343AF9E2402D0B070 /* Pods_ReviewItYourself.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D0F3F9DDBC15F32760820A /* Pods_ReviewItYourself.framework */; };
-		A200EA3822AC4B460053C7BF /* ProgressNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */; };
 		A200EA4322AC85B90053C7BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA4222AC85B90053C7BF /* SettingsViewController.swift */; };
 		A2112DC522B3F4790073E9A6 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2112DC422B3F4790073E9A6 /* TagCell.swift */; };
 		A2112DC722B3FD650073E9A6 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */; };
 		A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227C79022A1D19200A4B25D /* HomeTabBarController.swift */; };
+		A22A3F4522BC1B0900A4C58E /* RIYPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22A3F4422BC1B0900A4C58E /* RIYPost.swift */; };
+		A22A3F4722BC1B5100A4C58E /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22A3F4622BC1B5100A4C58E /* Tags.swift */; };
 		A23A993322B6FC1C0029194F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A993222B6FC1C0029194F /* ListCell.swift */; };
 		A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */; };
 		A247CB1B22ADA9BC0099F69C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A247CB1A22ADA9BC0099F69C /* TagViewController.swift */; };
@@ -49,11 +50,12 @@
 		6D575BD51C854255FAA88C5D /* Pods-How-To.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.debug.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.debug.xcconfig"; sourceTree = "<group>"; };
 		8E465D4BCE7331CBFE05C1E5 /* Pods-ReviewItYourself.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReviewItYourself.release.xcconfig"; path = "Target Support Files/Pods-ReviewItYourself/Pods-ReviewItYourself.release.xcconfig"; sourceTree = "<group>"; };
 		A0FE802FFBA871D66F06E382 /* Pods-How-To.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.release.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.release.xcconfig"; sourceTree = "<group>"; };
-		A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressNavigationViewController.swift; sourceTree = "<group>"; };
 		A200EA4222AC85B90053C7BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A2112DC422B3F4790073E9A6 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		A227C79022A1D19200A4B25D /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		A22A3F4422BC1B0900A4C58E /* RIYPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIYPost.swift; sourceTree = "<group>"; };
+		A22A3F4622BC1B5100A4C58E /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		A23A993222B6FC1C0029194F /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		A247CB1522ACEBC50099F69C /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		A247CB1A22ADA9BC0099F69C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
@@ -137,7 +139,6 @@
 				A247CB1A22ADA9BC0099F69C /* TagViewController.swift */,
 				A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */,
 				A2A1606522B2779F00A7AAF0 /* ProfileCollectionViewController.swift */,
-				A200EA3722AC4B460053C7BF /* ProgressNavigationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -147,6 +148,8 @@
 			children = (
 				A2A1606322B1B71400A7AAF0 /* User.swift */,
 				A247CB4B22ADF7C60099F69C /* Howto.swift */,
+				A22A3F4422BC1B0900A4C58E /* RIYPost.swift */,
+				A22A3F4622BC1B5100A4C58E /* Tags.swift */,
 				A287516722A4E5E900DC3C92 /* Post.swift */,
 				A269270822A5B0C7006AAFD2 /* PostTag.swift */,
 				A269270422A5956A006AAFD2 /* PostSteps.swift */,
@@ -374,10 +377,11 @@
 				A247CB4A22ADF7580099F69C /* HowtoDetailCollectionViewCell.swift in Sources */,
 				A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */,
 				A287516822A4E5E900DC3C92 /* Post.swift in Sources */,
-				A200EA3822AC4B460053C7BF /* ProgressNavigationViewController.swift in Sources */,
 				A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */,
 				A2E3360522A976E700E7AD7F /* UIImageView.swift in Sources */,
 				A2B01B5F22A63582006052FA /* PostCell.swift in Sources */,
+				A22A3F4522BC1B0900A4C58E /* RIYPost.swift in Sources */,
+				A22A3F4722BC1B5100A4C58E /* Tags.swift in Sources */,
 				A200EA4322AC85B90053C7BF /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
