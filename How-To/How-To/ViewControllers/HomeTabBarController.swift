@@ -11,7 +11,6 @@ class HomeTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpViewControllers()
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.hidesBackButton = true

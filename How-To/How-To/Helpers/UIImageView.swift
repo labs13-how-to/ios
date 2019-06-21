@@ -22,3 +22,13 @@ extension UIImageView {
     }
 }
 
+
+
+extension UIImageView {
+    
+    func setRounded() {
+        let radius = frame.width / 2
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = true
+    }
+}

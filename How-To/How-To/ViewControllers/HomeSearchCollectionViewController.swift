@@ -65,8 +65,6 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.navigationController?.isNavigationBarHidden = false
         let searchBar = UISearchBar()
         self.navigationController?.navigationItem.titleView = searchBar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Settings, Filter"), style: .plain, target: self, action: #selector(openSettings))
-        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.5493490696, green: 0.5497819781, blue: 0.5494160652, alpha: 1)
         // SearchBar
         searchBar.placeholder = "Search..."
         searchBar.sizeToFit()
@@ -124,6 +122,10 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         button.layer.shadowOpacity = 1
         button.layer.shadowRadius = 3
         button.layer.masksToBounds = false
+        
+        // Make Text Label
+        
+        // Make Image on Top View
         
         // Adds views to Collection Super View
         collectionView.insertSubview(topView, at: 0)
