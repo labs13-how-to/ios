@@ -65,6 +65,12 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.navigationController?.isNavigationBarHidden = false
         
         // SET NAVIGATION BAR TO LOGO
+        let logoImage = UIImageView()
+        logoImage.frame = CGRect(x: 2, y: 2, width: 125, height: 60)
+        logoImage.image = #imageLiteral(resourceName: "logo")
+        logoImage.contentMode = .scaleAspectFit
+        self.navigationItem.titleView = logoImage
+        self.navigationController?.navigationBar.backgroundColor = .white
         
 //        let searchBar = UISearchBar()
 //        self.navigationController?.navigationItem.titleView = searchBar

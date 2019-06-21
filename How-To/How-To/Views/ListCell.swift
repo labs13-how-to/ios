@@ -53,7 +53,7 @@ class ListCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "7/23/2019"
         label.font = .systemFont(ofSize: 12)
-        label.textColor = #colorLiteral(red: 0.6323309541, green: 0.6328232288, blue: 0.632407248, alpha: 1)
+        label.textColor = UIColor.darkGray
         return label
     }()
     
