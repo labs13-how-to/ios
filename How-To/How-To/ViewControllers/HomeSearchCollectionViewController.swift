@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import SDWebImage
+
+
 
 private let reuseIdentifier = "PostCell"
 
@@ -39,6 +42,12 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         view.backgroundColor = .white
         return view
     }()
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let secondNav = self.tabBarController?.viewControllers![1] as! UINavigationController
+        let secondTab = secondNav.viewControllers[0] as! TagViewController
+        secondTab.allHowtos = self.allHowtos
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         guard self.navigationController != nil else { fatalError("Navigation Controller not found")}
@@ -54,16 +63,23 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.hidesBackButton = true
         self.navigationController?.isNavigationBarHidden = false
-        let searchBar = UISearchBar()
-        self.navigationController?.navigationItem.titleView = searchBar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Settings, Filter"), style: .plain, target: self, action: #selector(openSettings))
-        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.5493490696, green: 0.5497819781, blue: 0.5494160652, alpha: 1)
-        // SearchBar
-        searchBar.placeholder = "Search..."
-        searchBar.sizeToFit()
-        searchBar.delegate = self
-        searchBar.returnKeyType = UIReturnKeyType.done
-        self.navigationItem.titleView = searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
+        
+        // SET NAVIGATION BAR TO LOGO
+        let logoImage = UIImageView()
+        logoImage.frame = CGRect(x: 2, y: 2, width: 125, height: 60)
+        logoImage.image = #imageLiteral(resourceName: "logo")
+        logoImage.contentMode = .scaleAspectFit
+        self.navigationItem.titleView = logoImage
+        self.navigationController?.navigationBar.backgroundColor = .white
+        
+//        let searchBar = UISearchBar()
+//        self.navigationController?.navigationItem.titleView = searchBar
+//        // SearchBar
+//        searchBar.placeholder = "Search..."
+//        searchBar.sizeToFit()
+//        searchBar.delegate = self
+//        searchBar.returnKeyType = UIReturnKeyType.done
+//        self.navigationItem.titleView = searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
         guard let navController = self.navigationController else { fatalError() }
         navController.isNavigationBarHidden = false
         
@@ -116,9 +132,25 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         button.layer.shadowRadius = 3
         button.layer.masksToBounds = false
         
+        // Make Text Label
+        let splashText = UILabel()
+        splashText.text = "Never made an RIY post before? We'll help you learn how."
+        splashText.frame = CGRect(x: 30, y: -160, width: 220, height: 80)
+        splashText.numberOfLines = 0
+        splashText.textColor = .white
+        splashText.font = .systemFont(ofSize: 21)
+        // Make Image on Top View
+        let splashImage = UIImageView()
+        splashImage.image = #imageLiteral(resourceName: "splash")
+        splashImage.frame = CGRect(x: 270, y: -186, width: 100, height: 170)
+        splashImage.contentMode = .scaleAspectFit
+        splashImage.layer.cornerRadius = 8
+        splashImage.clipsToBounds = true
         // Adds views to Collection Super View
         collectionView.insertSubview(topView, at: 0)
         collectionView.insertSubview(button, at: 1)
+        collectionView.insertSubview(splashText, at: 2)
+        collectionView.insertSubview(splashImage, at: 3)
         pinBackground(bgColorView, to: view)
         collectionView.backgroundColor = bgColorView.backgroundColor
         
@@ -153,6 +185,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             button.frame = CGRect(x: view.frame.width - 120, y: 16, width: 110, height: 28)
             button.layer.cornerRadius = 6
             button.backgroundColor = .white
+            // SET FOOTER TEXT
             button.setTitle("See More", for: .normal)
             button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
             button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
@@ -219,9 +252,12 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             if fetchedPost != nil {
                 cell.postID = fetchedPost?.id
                 cell.titleLabel.text = fetchedPost?.title
-                let imgURL = URL(string: fetchedPost!.img_url)
-                print(fetchedPost!.img_url)
-                cell.imageView.load(url: imgURL!)
+                cell.rating = fetchedPost?.review_avg
+                let imgURL = URL(string: fetchedPost!.img_url!)
+                
+                cell.imageView.sd_setImage(with: imgURL)
+//                print(fetchedPost!.img_url)
+//                cell.imageView.load(url: imgURL!)
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"

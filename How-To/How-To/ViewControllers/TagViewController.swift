@@ -13,13 +13,20 @@ private let reuseIdentifier = "TagCell"
 
 class TagViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    
     let howtoController = HowtoController()
     var allHowtos: [Howto] = []
     var filteredHowtos: [Howto] = []
+    var tempArray: [Howto] = []
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "Categories"
         self.navigationItem.hidesBackButton = true
+        if howtoController.howtos.count > 0 {
+            self.allHowtos = howtoController.howtos
+        }
+        print("This is the amount of howtos: \(howtoController.howtos.count)")
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
@@ -28,14 +35,11 @@ class TagViewController: UICollectionViewController, UICollectionViewDelegateFlo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if howtoController.howtos.count > 0 {
-            self.allHowtos = howtoController.howtos
-        }
         
         self.collectionView.backgroundColor = .white
         // Do any additional setup after loading the view.
         
-        collectionView.contentInset = UIEdgeInsets(top:10, left: 0, bottom: 0, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top:12, left: 20, bottom: 20, right: 20)
         
         self.collectionView!.register(TagCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
@@ -53,7 +57,7 @@ class TagViewController: UICollectionViewController, UICollectionViewDelegateFlo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 20
+        return 12
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -93,13 +97,29 @@ class TagViewController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let tag = howtoController.tagsList[indexPath.item]
+        let tagString = howtoController.tagsList[indexPath.item]
         let listVC = ListCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         listVC.collectionView.backgroundColor = .white
         
+        // filter the howTos
+        tempArray = allHowtos
+//        filteredHowtos = tempArray.filter({$0.tags?.filter({$0.name?.z)})
+        self.filteredHowtos = []
+        for howTo in allHowtos {
+                for tag in howTo.tags! {
+                    print(tag.name! + " " + tagString)
+                    if tag.name == tagString {
+                        filteredHowtos.append(howTo)
+                    }
+                }
+        }
+        
+        
         // TODO: Make a switch checking against tag name to get the tag ID
-        listVC.tagID = 0
-        listVC.tagName = tag
+//        listVC.tagID = 0
+        listVC.parentVC = self
+        listVC.tagName = tagString
+        listVC.filteredHowtos = self.filteredHowtos
         //        detailVC.videoURLString =
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationItem.title = "hello"

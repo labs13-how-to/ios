@@ -20,7 +20,6 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     let label : UILabel = {
         let label = UILabel()
         label.text = "hey"
-        label.centerInSuperview()
         return label
         
     }()
@@ -36,6 +35,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 //    }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.howtoController.fetchHowto(id: howtoID!) {_ in
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -53,9 +53,9 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
         
         
-        
-        collectionView.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 400, right: 0)
+//
+//        collectionView.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
+//        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 400, right: 0)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -71,7 +71,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                 self.collectionView.reloadData()
             }
         }
-        collectionView.addSubview(label)
+        view.addSubview(label)
         guard let howTo = self.howtoController.howto else { return }
         label.text = howTo.title
     }
@@ -79,7 +79,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     func setupHeader()-> UIView {
     
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: collectionView.frame.width, height: 600))
-        containerView.backgroundColor = #colorLiteral(red: 0.638515234, green: 0.6041640639, blue: 0.7091518044, alpha: 1)
+        containerView.backgroundColor = .white
 //        containerView.backgroundColor = #colorLiteral(red: 0.9213851094, green: 0.5346282125, blue: 0.7493482828, alpha: 1)
         
         
@@ -108,7 +108,6 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             imageView.load(url: imageURL)
             imageView.constrainWidth(constant: collectionView.frame.width)
             imageView.contentMode = .scaleAspectFit
-            //            imageView.load(url: URL(string: "https://picsum.photos/400/300")!)
             stackView.addSubview(title)
             stackView.addSubview(imageView)
             
@@ -138,7 +137,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             if kind == UICollectionView.elementKindSectionHeader {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
                 
-                header.addSubview(setupHeader())
+//                header.addSubview(setupHeader())
                 
             
         }
@@ -148,7 +147,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 1
     }
 
 

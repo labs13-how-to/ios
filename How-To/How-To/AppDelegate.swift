@@ -28,7 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            navigationController!.navigationBar.isHidden = true
 //            navigationController!.navigationItem.leftBarButtonItem = nil
 //            navigationController!.navigationItem.hidesBackButton = true
-            window.rootViewController = navigationController
+            
+            
+            window.rootViewController = navigationController  
 
             window.backgroundColor = .white
             window.makeKeyAndVisible()

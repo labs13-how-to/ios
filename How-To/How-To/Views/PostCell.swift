@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 
 
 class PostCell: UICollectionViewCell {
@@ -15,7 +15,7 @@ class PostCell: UICollectionViewCell {
     weak var parentCollectionVC : HomeSearchCollectionViewController?
     
     var postID: Int?
-    
+    var rating: Double?
     let radius: CGFloat = 8
     
     let imageView: UIImageView = {
@@ -44,7 +44,6 @@ class PostCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.sizeToFit()
         label.numberOfLines = 2
         label.font = .boldSystemFont(ofSize: 17)
         label.text = "Howto Title blah blah blah blah blah hahahahaha"
@@ -81,17 +80,44 @@ class PostCell: UICollectionViewCell {
         
         
         backgroundView?.addSubview(blurredEffectView)
-    
         
+        let starStack = UIStackView()
+        starStack.alignment = .leading
+        starStack.distribution = .equalCentering
+        var starRating : [UIImageView] = []
         
+        if rating != nil {
+            for _ in 0...Int((rating?.rounded())!) {
+                let fullStar = UIImageView()
+                fullStar.image = #imageLiteral(resourceName: "Solid Star")
+                fullStar.tintColor = #colorLiteral(red: 0.9843137264, green: 0.7084275484, blue: 0.160784319, alpha: 1)
+    //            starRating.append(fullStar)
+                starStack.addArrangedSubview(fullStar)
+            }
+        } else {
+            for _ in 0...4 {
+                let emptyStar = UIImageView()
+                emptyStar.image = #imageLiteral(resourceName: "Solid Star")
+                emptyStar.tintColor = #colorLiteral(red: 0.8787388206, green: 0.8787388206, blue: 0.8787388206, alpha: 1)
+                emptyStar.snp.makeConstraints { (make) in
+                    make.width.equalTo(16)
+                    make.height.equalTo(16)
+                }
+                starStack.addArrangedSubview(emptyStar)
+            }
+        }
+        let starContainer = UIStackView(arrangedSubviews: [starStack, UIStackView()])
+        starContainer.distribution = .equalSpacing
         backgroundView!.layer.cornerRadius = radius
-        let infoStackView = UIStackView(arrangedSubviews: [ dateLabel, ratingLabel ])
+        let infoStackView = UIStackView(arrangedSubviews: [ dateLabel, starContainer ])
         infoStackView.axis = .vertical
-        infoStackView.distribution = .fillEqually
+        infoStackView.contentMode = .bottom
+        infoStackView.spacing = 8
+        infoStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: self.frame.width/2)
         let stackView = UIStackView(arrangedSubviews: [
             titleLabel, infoStackView
             ])
-        stackView.spacing = 0
+        stackView.spacing = 8
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         addSubview(stackView)
@@ -100,9 +126,8 @@ class PostCell: UICollectionViewCell {
         stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        //#colorLiteral(red: 0.5493490696, green: 0.5497819781, blue: 0.5494160652, alpha: 1)
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 2, left: 6, bottom: 6, right: 6)
+        stackView.layoutMargins = UIEdgeInsets(top: 2, left: 6, bottom: 4, right: 6)
         pinBackground(textBGView, to: stackView)
         
         stackView.layer.cornerRadius = radius

@@ -11,7 +11,6 @@ class HomeTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpViewControllers()
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.hidesBackButton = true
@@ -21,7 +20,7 @@ class HomeTabBarController: UITabBarController {
     func setUpViewControllers() {
         viewControllers = [
             createNavController(viewController: HomeSearchCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "Home House", hasSearch: true),
-            createNavController(viewController: TagViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "Bullet, List, Text", hasSearch: false),
+            createNavController(viewController: TagViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "Search", hasSearch: false),
             createNavController(viewController: ProfileCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout()), imageName: "User,Profile", hasSearch: false)
             
         ]
