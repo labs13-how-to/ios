@@ -168,13 +168,17 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         if kind == UICollectionView.elementKindSectionHeader {
             header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
             
+            if indexPath.row == 0 {
+                
                 header.addSubview(UILabel(frame:CGRect(x: 12,y: 0,width: view.frame.width,height: 70)))
-            
+                
                 let lab = header.subviews[0] as! UILabel
                 lab.text = "Trending"
                 lab.font = .boldSystemFont(ofSize: 23)
                 lab.textColor = UIColor(red:1, green:0.52, blue:0.1, alpha:1)
                 lab.textAlignment = .left
+            }
+            
             
             return header
         }
@@ -275,12 +279,16 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         guard let postID = howto.id else {
             fatalError("PostID returned nil")
         }
-        let detailVC = DetailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        detailVC.collectionView.backgroundColor = .white
-        detailVC.howtoID = postID
-        detailVC.imgURL = howto.img_url
-//        detailVC.videoURLString =
-        navigationController?.pushViewController(detailVC, animated: true)
+                
+                let detailVC = DetailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                detailVC.collectionView.backgroundColor = .white
+                detailVC.howtoID = postID
+                detailVC.imgURL = howto.img_url
+                detailVC.rating = howto.review_avg
+                detailVC.reviewCount = howto.review_count!
+                //        detailVC.videoURLString =
+                self.navigationController?.pushViewController(detailVC, animated: true)
+        
         
     }
     
@@ -295,36 +303,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
      }
     
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
-    }
-    */
     
     
     // Hides TabBar when user scrolls down
