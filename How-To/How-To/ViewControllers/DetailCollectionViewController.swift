@@ -41,20 +41,21 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     
     override func viewWillAppear(_ animated: Bool) {
         
-        self.howtoController.fetchHowto(id: howtoID!) {_ in
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-//                self.setupHeader()
-                if self.howtoController.howto == nil {
-                    fatalError()
+        if self.howtoController.howto == nil {
+            self.howtoController.fetchHowto(id: howtoID!) {_ in
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+    //                self.setupHeader()
+                    if self.howtoController.howto == nil {
+                        fatalError()
+                    }
+                    self.howto = self.howtoController.howto
+                    print("view will appear")
+                    print(self.howto?.username)
                 }
-                self.howto = self.howtoController.howto
-                print("view will appear")
-                print(self.howto?.username)
             }
+            
         }
-        
-        
     }
 //    required init?(coder aDecoder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
@@ -75,14 +76,6 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.howtoController.fetchHowto(id: self.howtoID!){_ in
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.setNeedsDisplay()
-            }
-        }
-    }
     
     func setupHeader() -> UIView{
     
@@ -151,7 +144,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                 }
                 starStack.addArrangedSubview(fullStar)
             }
-            for _ in roundedRating...4 {
+            if roundedRating < 5 {
+            for _ in starStack.subviews.count...4 {
                 let emptyStar = UIImageView()
                 emptyStar.image = #imageLiteral(resourceName: "Solid Star")
                 emptyStar.tintColor = #colorLiteral(red: 0.8787388206, green: 0.8787388206, blue: 0.8787388206, alpha: 1)
@@ -161,7 +155,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                 }
                 starStack.addArrangedSubview(emptyStar)
             }
-        } else {
+        }
+        }   else {
             for _ in 0...4 {
                 let emptyStar = UIImageView()
                 emptyStar.image = #imageLiteral(resourceName: "Solid Star")

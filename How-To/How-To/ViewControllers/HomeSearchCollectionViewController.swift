@@ -51,6 +51,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 
     override func viewWillAppear(_ animated: Bool) {
         guard self.navigationController != nil else { fatalError("Navigation Controller not found")}
+        self.howtoController.howto == nil 
         //setupTabBar(parentViewController: self, height: view.frame.height / 15, color: .white)
 //        setupSearchBar(parentViewController: self, color: .white, placeHolderText: "How To...")
         //self.tabBar!.delegate = self
