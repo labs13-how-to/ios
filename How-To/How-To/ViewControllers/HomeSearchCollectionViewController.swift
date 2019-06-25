@@ -287,7 +287,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
                 detailVC.imgURL = howto.img_url
                 detailVC.rating = howto.review_avg
                 detailVC.reviewCount = howto.review_count!
-                //        detailVC.videoURLString =
+                detailVC.videoURLString = howto.vid_url
                 self.navigationController?.pushViewController(detailVC, animated: true)
         
         

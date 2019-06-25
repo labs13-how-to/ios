@@ -60,5 +60,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>amiri-regular.ttf</string>
+		<string>nunito-regular.ttf</string>
+	</array>
 </dict>
 </plist>
