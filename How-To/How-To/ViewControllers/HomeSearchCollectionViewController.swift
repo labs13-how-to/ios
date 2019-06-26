@@ -61,6 +61,8 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         super.viewDidLoad()
         
         
+        
+        
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.hidesBackButton = true
         self.navigationController?.isNavigationBarHidden = false
@@ -115,7 +117,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         // Makes Top Banner
         let topView = UIView()
         topView.frame = CGRect(x:0, y:-200, width:(view.frame.width + 40), height:200)
-        topView.backgroundColor = UIColor(red:1, green:0.67, blue:0.38, alpha:1)
+        topView.backgroundColor = #colorLiteral(red: 0.9994708896, green: 0.8877617717, blue: 0.7884737849, alpha: 1)
         
         // Makes Banner Button
         let button = UIButton(type: .system)
@@ -127,7 +129,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         
-        button.layer.shadowColor = #colorLiteral(red: 0.6212611794, green: 0.3437288105, blue: 0.04521131143, alpha: 1)
+        button.layer.shadowColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
         button.layer.shadowOffset = CGSize(width: 0, height: 3)
         button.layer.shadowOpacity = 1
         button.layer.shadowRadius = 3
@@ -138,11 +140,11 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         splashText.text = "Never made an RIY post before? We'll help you learn how."
         splashText.frame = CGRect(x: 30, y: -160, width: 220, height: 80)
         splashText.numberOfLines = 0
-        splashText.textColor = .white
+        splashText.textColor = #colorLiteral(red: 0.3245337605, green: 0.3248056173, blue: 0.3245758414, alpha: 1)
         splashText.font = .systemFont(ofSize: 21)
         // Make Image on Top View
         let splashImage = UIImageView()
-        splashImage.image = #imageLiteral(resourceName: "splash")
+        splashImage.image = #imageLiteral(resourceName: "CleanShot 2019-06-26 at 03.07.08")
         splashImage.frame = CGRect(x: 270, y: -186, width: 100, height: 170)
         splashImage.contentMode = .scaleAspectFit
         splashImage.layer.cornerRadius = 8
@@ -175,7 +177,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
                 
                 let lab = header.subviews[0] as! UILabel
                 lab.text = "Trending"
-                lab.font = .boldSystemFont(ofSize: 23)
+                lab.font = UIFont(name: "nunito-regular", size: 25)
                 lab.textColor = UIColor(red:1, green:0.52, blue:0.1, alpha:1)
                 lab.textAlignment = .left
             }
@@ -257,7 +259,8 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             if fetchedPost != nil {
                 cell.postID = fetchedPost?.id
                 cell.titleLabel.text = fetchedPost?.title
-                cell.rating = fetchedPost?.review_avg
+                cell.rating = fetchedPost!.review_avg!
+                print("RATING: \(Int(fetchedPost!.review_avg!))")
                 let imgURL = URL(string: fetchedPost!.img_url!)
                 
                 cell.imageView.sd_setImage(with: imgURL)
@@ -270,6 +273,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
                 let updatedAt = dateFormatter.date(from: updatedAtStr) // "Jun 5, 2016, 4:56 PM"
                 cell.dateLabel.text = updatedAt?.asString(style: .long)
                 cell.parentCollectionVC = self
+                cell.howto = fetchedPost
             }
         return cell
         }

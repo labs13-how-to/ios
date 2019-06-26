@@ -83,7 +83,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         let videoHeight = containerView.frame.width*(9/16)
         
         
-        if videoURLString != nil {
+        if videoURLString == nil {
             guard let youtubeURL = videoURLString else { fatalError()}
             let youtubeID = youtubeURL.substring(from: 32)
 //            youtubeView.lo
@@ -103,6 +103,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                         //            SUPPOSED TO LOAD FROM BACKEND
                         imageView.load(url: imageURL)
                         imageView.contentMode = .scaleAspectFill
+                        imageView.clipsToBounds = true
                         containerView.addSubview(imageView)
             imageView.snp.makeConstraints { make in
                 make.width.lessThanOrEqualToSuperview()
@@ -114,8 +115,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
         // POST TITLE
         let title = UILabel()
-        title.font = UIFont(name: "nunito-regular", size: 32)
-        title.numberOfLines = 2
+        title.font = UIFont(name: "nunito-regular", size: 26)
+        title.numberOfLines = 0
         title.text = howtoController.howto?.title
 //        title.text = "How to Make a Summer Dress out of Household Items"
         print(title.text)
@@ -130,7 +131,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         if rating != 0 {
             for _ in 0...roundedRating-1 {
                 let fullStar = UIImageView()
-                fullStar.image = #imageLiteral(resourceName: "Solid Star")
+                fullStar.image = #imageLiteral(resourceName: "ic_star_24px")
                 fullStar.tintColor = #colorLiteral(red: 0.9843137264, green: 0.7084275484, blue: 0.160784319, alpha: 1)
                 fullStar.snp.makeConstraints { (make) in
                     make.width.equalTo(24)
@@ -141,8 +142,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             if roundedRating < 5 {
             for _ in starStack.subviews.count...4 {
                 let emptyStar = UIImageView()
-                emptyStar.image = #imageLiteral(resourceName: "Solid Star")
-                emptyStar.tintColor = #colorLiteral(red: 0.8787388206, green: 0.8787388206, blue: 0.8787388206, alpha: 1)
+                emptyStar.image = #imageLiteral(resourceName: "ic_star_24px")
+                emptyStar.tintColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
                 emptyStar.snp.makeConstraints { (make) in
                     make.width.equalTo(24)
                     make.height.equalTo(24)
@@ -153,8 +154,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         }   else {
             for _ in 0...4 {
                 let emptyStar = UIImageView()
-                emptyStar.image = #imageLiteral(resourceName: "Solid Star")
-                emptyStar.tintColor = #colorLiteral(red: 0.8787388206, green: 0.8787388206, blue: 0.8787388206, alpha: 1)
+                emptyStar.image = #imageLiteral(resourceName: "ic_star_24px")
+                emptyStar.tintColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
                 emptyStar.snp.makeConstraints { (make) in
                     make.width.equalTo(24)
                     make.height.equalTo(24)
@@ -168,24 +169,24 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             unwrappedReviewCount = reviewCount!
         }
         ratingLabel.text = ("∙ " + String(unwrappedReviewCount) + " " + "reviews")
-        ratingLabel.font = UIFont(name: "nunito-regular", size: 20)
-        ratingLabel.textColor = #colorLiteral(red: 0.8787388206, green: 0.8787388206, blue: 0.8787388206, alpha: 1)
+        ratingLabel.font = UIFont(name: "nunito-regular", size: 17)
+        ratingLabel.textColor = #colorLiteral(red: 0.5493490696, green: 0.5497819781, blue: 0.5494160652, alpha: 1)
         let starContainer = UIStackView(arrangedSubviews: [starStack, ratingLabel, UIStackView(), UIStackView()])
-        starContainer.alignment = .bottom
+        starContainer.alignment = .center
         starContainer.spacing = 8
         starContainer.axis = .horizontal
         
         let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 260, height: 34))
         print("authorstack")
         nameLabel.text = howto?.username
-        nameLabel.font = UIFont(name: "nunito-regular", size: 26)
+        nameLabel.font = UIFont(name: "nunito-regular", size: 22)
         
         let introText = UITextView()
-        introText.layer.borderWidth = 1
+        introText.layer.borderWidth = 0
         introText.layer.borderColor = #colorLiteral(red: 0.400000006, green: 0.2199999988, blue: 0.9399999976, alpha: 1)
         introText.text = howtoController.howto?.description
 //        introText.text = "The term do-it-yourself has been associated with consumers since at least 1912 primarily in the domain of home improvement and maintenance activities. in reference to the emergence of a trend of people undertaking home improvement and various other small craft and construction projects as both a creative-recreational and cost-saving activity.The term do-it-yourself has been associated with consumers since at least 1912 primarily in the domain of home improvement and maintenance activities. in reference to the emergence of a trend of people undertaking home improvement and various other small craft and construction projects as both a creative-recreational and cost-saving activity.The term do-it-yourself has been associated with consumers since at least 1912 primarily in the domain of home improvement and maintenance activities. in reference to the emergence of a trend of people undertaking home improvement and various other small craft and construction projects as both a creative-recreational and cost-saving activity.The term do-it-yourself has been associated with consumers since at least 1912 primarily in the domain of home improvement and maintenance activities. in reference to the emergence of a trend of people undertaking home improvement and various other small craft and construction projects as both a creative-recreational and cost-saving activity."
-        introText.font = UIFont(name: "amiri-regular", size: 22)
+        introText.font = UIFont(name: "amiri-regular", size: 18)
         var introLength = ((introText.text.count/35)*75)
         print("The introCount is: \(introText.text.count)")
         print("The introLength is: \(introLength)")
@@ -283,11 +284,13 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 //                make.height.equalTo(480)
 //            }
         }
-        
-       
-        
-       
         stackView.alignment = .leading
+        
+        // TIME, DIFFICULTY, TOOLS, PREREQS
+        
+//        let info
+        
+       
         containerView.setNeedsDisplay()
         return containerView
         
