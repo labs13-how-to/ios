@@ -38,7 +38,7 @@ class PostCell: UICollectionViewCell {
     let textBGView: UIView = {
         
         let view = UIView()
-        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.90)
+        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         
         // Next 3 lines allow you to choose which corners are rounded on a UIView
         view.clipsToBounds = true
@@ -59,20 +59,25 @@ class PostCell: UICollectionViewCell {
         return label
     }()
     
+    let authorLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "nunito-regular", size: 12)
+        label.textColor = #colorLiteral(red: 0.5455184579, green: 0.5459486246, blue: 0.5455850959, alpha: 1)
+        return label
+    }()
+    
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "7/23/2019"
 //        label.font = .systemFont(ofSize: 12)
-        label.font = UIFont(name: "nunito-regular", size: 10)
-        label.textColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
+        label.font = UIFont(name: "nunito-regular", size: 12)
+        label.textColor = #colorLiteral(red: 0.5455184579, green: 0.5459486246, blue: 0.5455850959, alpha: 1)
         return label
     }()
     
     let ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "✪✪✪✪✪ 𐄁133"
-        label.font = UIFont(name: "nunito-regular", size: 12)
-        label.textColor = UIColor(red:0.52, green:0.72, blue:0.55, alpha:1)
+        
         return label
     }()
     
@@ -199,17 +204,24 @@ class PostCell: UICollectionViewCell {
         backgroundView?.addSubview(blurredEffectView)
         
         let starStack = UIStackView()
-        starStack.alignment = .leading
-        starStack.distribution = .equalCentering
+        starStack.alignment = .center
+//        starStack.distribution = .equalCentering
+        starStack.spacing = 0
         var starRating : [UIImageView] = []
         let roundedRating = Int(rating!)
         print(roundedRating)
+        
+        let starSize = 24
         
         if rating != 0 {
             for _ in 0...(roundedRating-1) {
                 let fullStar = UIImageView()
                 fullStar.image = #imageLiteral(resourceName: "ic_star_24px")
                 fullStar.tintColor = #colorLiteral(red: 0.9843137264, green: 0.7084275484, blue: 0.160784319, alpha: 1)
+                fullStar.snp.makeConstraints { (make) in
+                    make.width.equalTo(starSize)
+                    make.height.equalTo(starSize)
+                }
                 //            starRating.append(fullStar)
                 starStack.addArrangedSubview(fullStar)
             }
@@ -218,6 +230,10 @@ class PostCell: UICollectionViewCell {
                     let emptyStar = UIImageView()
                     emptyStar.image = #imageLiteral(resourceName: "ic_star_24px")
                     emptyStar.tintColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
+                    emptyStar.snp.makeConstraints { (make) in
+                        make.width.equalTo(starSize)
+                        make.height.equalTo(starSize)
+                    }
                     starStack.addArrangedSubview(emptyStar)
                 }
             }
@@ -226,27 +242,53 @@ class PostCell: UICollectionViewCell {
                 let emptyStar = UIImageView()
                 emptyStar.image = #imageLiteral(resourceName: "ic_star_24px")
                 emptyStar.tintColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
-//                emptyStar.snp.makeConstraints { (make) in
-//                    make.width.equalTo(16)
-//                    make.height.equalTo(16)
-//                }
+                emptyStar.snp.makeConstraints { (make) in
+                    make.width.equalTo(starSize)
+                    make.height.equalTo(starSize)
+                }
                 starStack.addArrangedSubview(emptyStar)
             }
         }
+        var unwrappedReviewCount = 0
+        if howto?.review_count != nil {
+            unwrappedReviewCount = howto!.review_count!
+        }
+        ratingLabel.text = ("∙" + String(unwrappedReviewCount))
+        ratingLabel.font = UIFont(name: "nunito-regular", size: 16)
+        ratingLabel.textColor = #colorLiteral(red: 0.5455184579, green: 0.5459486246, blue: 0.5455850959, alpha: 1)
+        starStack.addArrangedSubview(ratingLabel)
+        
+        authorLabel.text = howto?.username
+        
+        
         let starContainer = UIStackView(arrangedSubviews: [starStack, UIStackView()])
-        starContainer.distribution = .equalSpacing
+        starContainer.spacing = 0
         backgroundView!.layer.cornerRadius = radius
-        let infoStackView = UIStackView(arrangedSubviews: [ dateLabel, starContainer ])
+        let infoStackView = UIStackView(arrangedSubviews: [ starContainer, authorLabel, dateLabel ])
+        
+        starContainer.snp.makeConstraints { (make) in
+            make.left.equalTo(2)
+        }
+        authorLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(4)
+        }
+        dateLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(4)
+            make.bottom.equalTo(-6)
+            
+        }
+        
         infoStackView.axis = .vertical
         infoStackView.contentMode = .bottom
-        infoStackView.spacing = 8
-        infoStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: self.frame.width/2)
+        infoStackView.spacing = 4
+        infoStackView.layoutMargins = UIEdgeInsets(top: 6, left: 0, bottom: 0, right: self.frame.width/2)
         let stackView = UIStackView(arrangedSubviews: [
             titleLabel, infoStackView
             ])
-        stackView.spacing = 8
+        
+        stackView.spacing = 4
         stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 30).isActive = true
@@ -254,7 +296,7 @@ class PostCell: UICollectionViewCell {
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 2, left: 6, bottom: 4, right: 6)
+        stackView.layoutMargins = UIEdgeInsets(top: 2, left: 5, bottom: 4, right: 5)
         pinBackground(textBGView, to: stackView)
         
         stackView.layer.cornerRadius = radius
@@ -265,7 +307,7 @@ class PostCell: UICollectionViewCell {
         layer.shadowColor = #colorLiteral(red: 0.3498458862, green: 0.3163031638, blue: 0.3288204372, alpha: 1)
         layer.shadowOffset = CGSize(width: 0.25, height: 0.25)
         layer.shadowRadius = 4
-        layer.shadowOpacity = 0.5
+        layer.shadowOpacity = 0.4
         layer.masksToBounds = false
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
         layer.backgroundColor = UIColor.clear.cgColor

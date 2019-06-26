@@ -19,7 +19,8 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     let tabBarTag = 0
     
     var howtoController = HowtoController()
-    var allHowtos: [Howto] = []
+    var allHowtos: [Howto] = [] 
+    var mostPopularHowtos: [Howto] = []
     var filteredHowtos: [Howto]?
 //    {
 //        didSet {
@@ -97,6 +98,11 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.howtoController.fetchHowtos(){_ in
             DispatchQueue.main.async {
                 self.allHowtos = self.howtoController.howtos
+                
+                // sort list of howtos based on rating
+                self.allHowtos.sort(by: { $0.review_count! > $1.review_count! })
+                self.allHowtos.sort( by: { Int($0.review_avg!) > Int($1.review_avg!) })
+                
                 self.collectionView.reloadData()
             }
         }
@@ -131,7 +137,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         
         button.layer.shadowColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
         button.layer.shadowOffset = CGSize(width: 0, height: 3)
-        button.layer.shadowOpacity = 1
+        button.layer.shadowOpacity = 0.5
         button.layer.shadowRadius = 3
         button.layer.masksToBounds = false
         
@@ -149,6 +155,12 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         splashImage.contentMode = .scaleAspectFit
         splashImage.layer.cornerRadius = 8
         splashImage.clipsToBounds = true
+        // RESIZES FOR SMALL SCREENS
+        if view.frame.width < 375 {
+            splashText.font = UIFont(name: "nunito-regular", size: 16)
+            splashText.frame = CGRect(x: 20, y: -160, width: 160, height: 80)
+            splashImage.frame = CGRect(x: 180, y: -186, width: 100, height: 170)
+        }
         // Adds views to Collection Super View
         collectionView.insertSubview(topView, at: 0)
         collectionView.insertSubview(button, at: 1)
@@ -214,15 +226,16 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
     
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.frame.width >= 375 {
-            return (CGSize(width: (collectionView.frame.width/2) - 36, height: (collectionView.frame.height/3)))
+            return (CGSize(width: (collectionView.frame.width/2) - 36, height: (collectionView.frame.height/2.4)))
         }
-        return CGSize(width: (collectionView.frame.width) - 36, height: (collectionView.frame.height/3))
+        return CGSize(width: (collectionView.frame.width) - 36, height: (collectionView.frame.height/1.8))
     }
     
 
@@ -280,7 +293,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let howto = howtoController.howtos[indexPath.item]
+        let howto = allHowtos[indexPath.item]
         guard let postID = howto.id else {
             fatalError("PostID returned nil")
         }

@@ -21,7 +21,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     var rating: Double?
     var reviewCount: Int?
     
-    
+    var youtubeID = "1"
     var videoURLString: String?
     
     let headerID = "Header"
@@ -73,30 +73,53 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     
     func setupHeader() -> UIView{
     
-        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1000))
-        containerView.backgroundColor = .white
+//        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1200))
+        let containerView = UIView()
         
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = #colorLiteral(red: 0.2899999917, green: 0.9499999881, blue: 0.6299999952, alpha: 1)
         
         let youtubeView = WKYTPlayerView()
+        let imageView = UIImageView()
         containerView.addSubview(youtubeView)
         // Calculates height to ensure 16:9 aspect ratio
-        let videoHeight = containerView.frame.width*(9/16)
+        let videoHeight = view.frame.width*(9/16)
         
-        
-        if videoURLString == nil {
+        if videoURLString != nil {
             guard let youtubeURL = videoURLString else { fatalError()}
-            let youtubeID = youtubeURL.substring(from: 32)
-//            youtubeView.lo
-            youtubeView.load(withVideoId: youtubeID)
-            youtubeView.snp.makeConstraints { make in
-                make.top.equalTo(12)
-                make.left.equalTo(20)
-                make.right.equalTo(-20)
-                make.width.lessThanOrEqualToSuperview()
-                make.height.equalTo(videoHeight)
+//            let testURL = "https://www.youtube.com/watch?v=0Jb29c22xu8"
+            var subStringArray = youtubeURL.components(separatedBy: "=")
+            if subStringArray.count > 1 {
+                youtubeID = subStringArray[1]
+                print("youtubeID: \(youtubeID)")
+                //            let youtubeID = "0Jb29c22xu8"  // FOR TESTING
+                youtubeView.load(withVideoId: youtubeID)
+                youtubeView.snp.makeConstraints { make in
+                    make.top.equalTo(12)
+                    make.left.equalTo(20)
+                    make.right.equalTo(-20)
+                    make.width.equalTo(view.frame.width)
+                    make.height.equalTo(videoHeight)
+                }
+
+            } else {
+                guard let imageURL = URL(string: imgURL!) else {
+                    fatalError("No image for post")
+                }
+                //            SUPPOSED TO LOAD FROM BACKEND
+                imageView.load(url: imageURL)
+                imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
+                
+                containerView.addSubview(imageView)
+                imageView.snp.makeConstraints { make in
+                    make.width.equalTo(view.frame.width)
+                    make.height.equalTo(videoHeight + 40)
+                    make.centerX.equalToSuperview()
+                }
             }
         } else {
-                        let imageView = UIImageView()
+        
                         guard let imageURL = URL(string: imgURL!) else {
                             fatalError("No image for post")
                         }
@@ -104,10 +127,12 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                         imageView.load(url: imageURL)
                         imageView.contentMode = .scaleAspectFill
                         imageView.clipsToBounds = true
+            
                         containerView.addSubview(imageView)
             imageView.snp.makeConstraints { make in
-                make.width.lessThanOrEqualToSuperview()
+                make.width.equalTo(view.frame.width)
                 make.height.equalTo(videoHeight + 40)
+                make.centerX.equalToSuperview()
             }
             
         }
@@ -164,13 +189,15 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             }
         }
         let ratingLabel = UILabel()
-        var unwrappedReviewCount = 0
-        if reviewCount != nil {
-            unwrappedReviewCount = reviewCount!
+        ratingLabel.font = UIFont(name: "nunito-regular", size: 18)
+        guard let unwrappedCount = reviewCount else { fatalError() }
+        if unwrappedCount == 1 {
+            ratingLabel.text = ("∙ " + "\(Int(unwrappedCount))" + " Review")
+        } else {
+            ratingLabel.text = ("∙ " + "\(Int(unwrappedCount))" + " Reviews")
         }
-        ratingLabel.text = ("∙ " + String(unwrappedReviewCount) + " " + "reviews")
-        ratingLabel.font = UIFont(name: "nunito-regular", size: 17)
-        ratingLabel.textColor = #colorLiteral(red: 0.5493490696, green: 0.5497819781, blue: 0.5494160652, alpha: 1)
+        
+        
         let starContainer = UIStackView(arrangedSubviews: [starStack, ratingLabel, UIStackView(), UIStackView()])
         starContainer.alignment = .center
         starContainer.spacing = 8
@@ -182,12 +209,22 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         nameLabel.font = UIFont(name: "nunito-regular", size: 22)
         
         let introText = UITextView()
-        introText.layer.borderWidth = 0
-        introText.layer.borderColor = #colorLiteral(red: 0.400000006, green: 0.2199999988, blue: 0.9399999976, alpha: 1)
+        
+        introText.isEditable = false
+        
+        introText.backgroundColor = .white
+        introText.layer.borderWidth = 1
+        introText.layer.borderColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
+        introText.layer.cornerRadius = 20
+        introText.contentInset = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        
+
+        
         introText.text = howtoController.howto?.description
 //        introText.text = "The term do-it-yourself has been associated with consumers since at least 1912 primarily in the domain of home improvement and maintenance activities. in reference to the emergence of a trend of people undertaking home improvement and various other small craft and construction projects as both a creative-recreational and cost-saving activity.The term do-it-yourself has been associated with consumers since at least 1912 primarily in the domain of home improvement and maintenance activities. in reference to the emergence of a trend of people undertaking home improvement and various other small craft and construction projects as both a creative-recreational and cost-saving activity.The term do-it-yourself has been associated with consumers since at least 1912 primarily in the domain of home improvement and maintenance activities. in reference to the emergence of a trend of people undertaking home improvement and various other small craft and construction projects as both a creative-recreational and cost-saving activity.The term do-it-yourself has been associated with consumers since at least 1912 primarily in the domain of home improvement and maintenance activities. in reference to the emergence of a trend of people undertaking home improvement and various other small craft and construction projects as both a creative-recreational and cost-saving activity."
-        introText.font = UIFont(name: "amiri-regular", size: 18)
-        var introLength = ((introText.text.count/35)*75)
+        introText.font = UIFont(name: "amiri-regular", size: 21)
+//        var introLength = ((introText.text.count/35)*75)
+        var introLength = 500
         print("The introCount is: \(introText.text.count)")
         print("The introLength is: \(introLength)")
         let authorStack = UIStackView(arrangedSubviews: [nameLabel, introText])
@@ -198,24 +235,66 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
         // Time title
         let timeHeader = UILabel()
+        styleHeader(header: timeHeader)
         timeHeader.text = "Time"
         // Time
         let timeLabel = UILabel()
+        styleMiscellaneous(label: timeLabel)
+        timeLabel.text = howtoController.howto?.duration
         // Difficulty label
         let difficultyHeader = UILabel()
+        styleHeader(header: difficultyHeader)
         difficultyHeader.text = "Difficulty"
         // Difficulty
         let difficultyLabel = UILabel()
+        styleMiscellaneous(label: difficultyLabel)
+        difficultyLabel.text = howtoController.howto?.difficulty
         // Tools/Supplies label
         let toolsHeader = UILabel()
+        styleHeader(header: toolsHeader)
         toolsHeader.text = "Tools + Supplies"
         // Tools/Supplies stack of labels
-        let toolsTextView = UITextView()
+        let toolsLabel = UILabel()
+        styleMiscellaneous(label: toolsLabel)
+        var suppliesString = ""
+        if howtoController.howto?.supplies != nil {
+            suppliesString = howtoController.howto!.supplies!
+        }
+        var toolsStringArray = suppliesString.components(separatedBy: " _ ")
+        let toolsJoined = toolsStringArray.joined(separator: "\n")
+        toolsLabel.text = toolsJoined
+        toolsLabel.numberOfLines = 0
         // Prereqs Label if available
         let prereqsHeader = UILabel()
+        styleHeader(header: prereqsHeader)
         prereqsHeader.text = "Prerequisites"
         // Prereqs stack of labels
-        let prereqsTextView = UITextView()
+        let prereqsLabel = UILabel()
+        styleMiscellaneous(label: prereqsLabel)
+        prereqsLabel.text = howtoController.howto?.skills
+        prereqsLabel.numberOfLines = 0
+        let miscelleanousStack = UIStackView(arrangedSubviews: [timeHeader, timeLabel, difficultyHeader, difficultyLabel, toolsHeader, toolsLabel, prereqsHeader, prereqsLabel])
+        miscelleanousStack.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: 500)
+        miscelleanousStack.axis = .vertical
+        miscelleanousStack.layer.borderWidth = 1
+        miscelleanousStack.layer.borderColor = #colorLiteral(red: 0.9213851094, green: 0.5346282125, blue: 0.7493482828, alpha: 1)
+        miscelleanousStack.distribution = .equalSpacing
+        miscelleanousStack.spacing = 6
+        
+        let miscellaneousScrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: containerView.frame.width, height: 500))
+        miscellaneousScrollView.layer.borderWidth = 1
+        miscellaneousScrollView.layer.cornerRadius = 20
+        miscellaneousScrollView.layer.borderColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
+        miscellaneousScrollView.backgroundColor = .white
+        miscellaneousScrollView.addSubview(miscelleanousStack)
+        miscellaneousScrollView.contentInset = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
+        
+        miscelleanousStack.topAnchor.constraint(equalTo: miscellaneousScrollView.topAnchor).isActive = true
+        miscelleanousStack.leadingAnchor.constraint(equalTo: miscellaneousScrollView.leadingAnchor).isActive = true
+        miscelleanousStack.trailingAnchor.constraint(equalTo: miscellaneousScrollView.trailingAnchor).isActive = true
+        miscelleanousStack.bottomAnchor.constraint(equalTo: miscellaneousScrollView.bottomAnchor).isActive = true
+
+        miscelleanousStack.widthAnchor.constraint(equalTo: miscellaneousScrollView.widthAnchor, constant: -40).isActive = true
         
 //        let prereqsStack = UIStackView(arrangedSubviews: [UIView])
 //        prereqsStack.axis = .vertical
@@ -228,10 +307,42 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         stackView.alignment = .top
         stackView.spacing = 8
         
+        let bgTextView = UIView()
+        bgTextView.backgroundColor = #colorLiteral(red: 1, green: 0.9295691252, blue: 0.855507791, alpha: 1)
+        
         // VIEW CONSTRAINTS
+        containerView.addSubview(bgTextView)
         containerView.addSubview(stackView)
+        containerView.addSubview(miscellaneousScrollView)
+//        containerView.addSubview(miscelleanousStack)
+        
+        bgTextView.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(introText.snp_topMargin).offset(-20)
+            make.bottom.equalTo(miscellaneousScrollView.snp_bottomMargin).offset(20)
+        }
+        
+        miscellaneousScrollView.snp.makeConstraints { (make) in
+            make.top.equalTo(introText.snp_bottomMargin).offset(26)
+            make.right.equalTo(-20)
+            make.left.equalTo(20)
+            make.height.equalTo(300)
+        }
+        
+        miscelleanousStack.snp.makeConstraints { (make) in
+//            make.top.equalTo(stackView.bounds.maxY + 290)
+//            make.top.equalTo(introText.snp_bottomMargin).offset(26)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+//            make.height.equalTo(500)
+        }
+        
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(videoHeight + 38)
+            if youtubeID.count > 1 {
+                make.top.equalTo(youtubeView.snp_bottomMargin)
+            } else {
+                make.top.equalTo(270)
+            }
             make.left.equalTo(20)
             make.right.equalTo(-20)
             if introLength < 500 && introLength > 100{
@@ -260,9 +371,16 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
         introText.snp.makeConstraints { make in
             
-            make.width.equalToSuperview()
             
-            make.height.equalTo(introLength)
+            make.top.equalTo(nameLabel.snp_bottomMargin)
+            make.left.right.equalToSuperview()
+            
+//            make.width.equalTo(view.frame.width+40)
+//
+//            make.height.equalTo(introLength)
+            
+            
+            
             //            if introText.contentSize.height < 500 {
             //                if introText.contentSize.height > 50 {
             //                    make.height.equalTo(introText.contentSize.height + 250)
@@ -289,8 +407,11 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         // TIME, DIFFICULTY, TOOLS, PREREQS
         
 //        let info
+        containerView.snp.makeConstraints { (make) in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(self.collectionView.subviews[0].frame.maxY)
+        }
         
-       
         containerView.setNeedsDisplay()
         return containerView
         
@@ -307,7 +428,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     // MARK: - Header
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
-            return CGSize(width: view.frame.width, height: 1000)
+            return CGSize(width: view.frame.width, height: 1200)
         }
         return CGSize(width: view.frame.width, height: 0)
     }
@@ -316,12 +437,11 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         var header: UICollectionReusableView! = nil
         var footer : UICollectionReusableView! = nil
         
-        let containerView = UIView(frame: CGRect(x: 0, y: 600, width: view.frame.width, height: 1000))
+        let containerView = UIView(frame: CGRect(x: 0, y: 600, width: view.frame.width, height: 1200))
         containerView.backgroundColor = #colorLiteral(red: 0.638515234, green: 0.6041640639, blue: 0.7091518044, alpha: 1)
         
             if kind == UICollectionView.elementKindSectionHeader {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
-                header.backgroundColor = #colorLiteral(red: 0.9213851094, green: 0.5346282125, blue: 0.7493482828, alpha: 1)
                 
                 header.addSubview(setupHeader())
                 
@@ -356,6 +476,10 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             return UIEdgeInsets(top: 12, left: 24, bottom: 0, right: 24)
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 200, height: 200)
     }
     
     
@@ -419,6 +543,15 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     
     }
     */
+    
+    func styleHeader(header: UILabel){
+        header.font = UIFont(name: "nunito-regular", size: 25)
+        header.textColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
+    }
+    func styleMiscellaneous(label: UILabel){
+        label.font = UIFont(name: "nunito-regular", size: 18)
+        label.textColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
+    }
 
 }
 
