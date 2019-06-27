@@ -96,6 +96,11 @@ class StepCell: UICollectionViewCell {
                 make.width.equalToSuperview()
             }
         }
+        if step?.img_url == nil {
+            imageView.snp.makeConstraints { (make) in
+                make.width.height.equalTo(0)
+            }
+        }
         textView.contentInset = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         textView.isEditable = false
         textView.layer.borderWidth = 1

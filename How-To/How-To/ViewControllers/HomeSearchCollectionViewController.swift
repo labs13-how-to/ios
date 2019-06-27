@@ -29,7 +29,13 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
     var tempArray: [Howto] = []
     
-    var isSearching = false
+    var isSearching = false {
+        didSet {
+            if isSearching == false {
+                filteredHowtos = allHowtos
+            }
+        }
+    }
     
     var didSelectHandler: ((Post) -> ())?
     
@@ -104,11 +110,11 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.howtoController.fetchHowtos(){_ in
             DispatchQueue.main.async {
                 self.allHowtos = self.howtoController.howtos
-                
                 // sort list of howtos based on rating
                 self.allHowtos.sort(by: { $0.review_count! > $1.review_count! })
                 self.allHowtos.sort( by: { Int($0.review_avg!) > Int($1.review_avg!) })
                 
+                self.filteredHowtos = self.allHowtos
                 self.collectionView.reloadData()
             }
         }
@@ -299,7 +305,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let howto = allHowtos[indexPath.item]
+        let howto = filteredHowtos![indexPath.item]
         guard let postID = howto.id else {
             fatalError("PostID returned nil")
         }
