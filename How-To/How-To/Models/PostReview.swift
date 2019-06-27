@@ -16,13 +16,15 @@ struct PostReview: Codable {
     let post_id: Int
     var rating: Double
     var review: String
+    var username: String?
     
-    init(id: Int?, user_id: Int?, auth_id: String?, post_id: Int, rating: Double, review: String) {
+    init(id: Int?, user_id: Int?, auth_id: String?, post_id: Int, rating: Double, review: String, username: String?) {
         self.id = id
         self.user_id = user_id
         self.auth_id = auth_id
         self.post_id = post_id
         self.rating = rating
         self.review = review
+        self.username = username
     }
 }

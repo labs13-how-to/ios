@@ -21,12 +21,20 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     var rating: Double?
     var reviewCount: Int?
     
+    var screenWidth = 0
     var youtubeID = "1"
     var videoURLString: String?
     
     let headerID = "Header"
     let footerID = "Footer"
-    
+    var reviews : [PostReview]? {
+        didSet{
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                print("\(self.reviews!.count)")
+            }
+        }
+    }
     
 //    convenience init?(collectionViewLayout layout: UICollectionViewLayout, ID: Int) {
 //        self.init(coder: NSCoder())
@@ -34,6 +42,9 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 //    }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        
         
         if self.howtoController.howto == nil {
             self.howtoController.fetchHowto(id: howtoID!) {_ in
@@ -46,7 +57,14 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                     self.howto = self.howtoController.howto
                     print("view will appear")
                     print(self.howto?.username)
+                    guard let id = self.howto?.id else { fatalError() }
+    
+                    self.howtoController.fetchReviews(id: (self.howto?.id!)!) {_ in
+                        self.reviews = self.howtoController.reviews
+                    }
+                    
                 }
+                
             }
             
         }
@@ -57,6 +75,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        screenWidth = Int(view.frame.width)
 //
 //        collectionView.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
 //        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 400, right: 0)
@@ -451,6 +471,10 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             if kind == UICollectionView.elementKindSectionFooter {
                 footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.footerID, for: indexPath) as! ReviewFooter
                     footer.backgroundColor = .white
+                if  howtoController.reviews != nil {
+                    footer.reviews = self.reviews!
+                    
+                }
                     footer.howto = self.howto
                     footer.addSubview(setupFooterBars())
 //                footer.backgroundColor = #colorLiteral(red: 0.6899999976, green: 0.9599999785, blue: 0.400000006, alpha: 1)
@@ -466,9 +490,13 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
          return header
     }
     func setupFooterBars() -> UIView {
-        let barsContainer = UIView()
+        let barsContainer = UIView(frame: CGRect(x: 50, y: 0, width: screenWidth, height: 500))
         
         let barsStack = UIStackView()
+        
+        
+        
+        
         let reviewBG = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
         reviewBG.backgroundColor = #colorLiteral(red: 0.9993286729, green: 0.7073625326, blue: 0.4233144522, alpha: 1)
         let reviewLabel = UILabel(frame: CGRect(x: 14, y: 0, width: view.frame.width - 28, height: 50))
@@ -478,10 +506,46 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         reviewBG.addSubview(reviewLabel)
         barsContainer.addSubview(reviewBG)
         
-        barsContainer.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
+        barsContainer.backgroundColor = .white
         barsContainer.snp.makeConstraints { (make) in
             make.width.equalTo(view.frame.width)
             make.height.equalTo(250)
+        }
+        
+        let verticalBarStack = UIStackView(frame: CGRect(x: 0, y: reviewLabel.frame.height, width: view.frame.width, height: view.frame.height))
+        verticalBarStack.axis = .vertical
+        barsContainer.addSubview(verticalBarStack)
+        verticalBarStack.fillSuperview()
+        verticalBarStack.distribution = .equalSpacing
+        
+        var yValue = 0
+        var starValue = 5
+        
+        for _ in 0...4 {
+            let starNumberLabel = UILabel(frame: CGRect(x: 0, y: yValue, width: 50, height: 30))
+            starNumberLabel.backgroundColor = .white
+            starNumberLabel.text = String(starValue) + " stars"
+            starNumberLabel.font = UIFont(name: "nunito-regular", size: 12)
+            let barView = UIView(frame: CGRect(x: Int(starNumberLabel.frame.width), y: yValue, width: screenWidth-80, height: 30))
+            barView.backgroundColor = #colorLiteral(red: 0.9212495685, green: 0.9219488502, blue: 0.9213578105, alpha: 1)
+            barView.layer.cornerRadius = 10
+            let reviewCountLabel = UILabel(frame: CGRect(x: Int(barView.frame.width + starNumberLabel.frame.width), y: yValue, width: 50, height: 30))
+//            reviewCountLabel.text = "1"
+            reviewCountLabel.backgroundColor = .white
+            let starBarStack = UIStackView()
+            verticalBarStack.addSubview(starBarStack)
+            starBarStack.snp.makeConstraints { (make) in
+                make.width.equalToSuperview()
+                make.height.equalTo(40)
+                make.topMargin.equalTo(reviewBG.snp_bottomMargin).offset(20)
+                make.leftMargin.equalTo(8)
+            }
+            starBarStack.addSubview(starNumberLabel)
+            starBarStack.addSubview(barView)
+            starBarStack.addSubview(reviewCountLabel)
+            
+            yValue += 35
+            starValue -= 1
         }
         
         return barsContainer

@@ -14,6 +14,7 @@ class PostCell: UICollectionViewCell {
     
     weak var parentCollectionVC : HomeSearchCollectionViewController?
     
+    var reviews: [PostReview]?
     var howto: Howto? {
         
         didSet{
