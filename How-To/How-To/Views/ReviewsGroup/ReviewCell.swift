@@ -42,6 +42,7 @@ class ReviewCell: UICollectionViewCell {
         
         let nameLabel = UILabel()
         nameLabel.text = howto?.username
+        nameLabel.font = UIFont(name: "nunito-regular", size: 24)
         //        let starStack = UIStackView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50))
         
         ////
@@ -101,8 +102,8 @@ class ReviewCell: UICollectionViewCell {
         cellStack.axis = .vertical        
         textView.contentInset = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         textView.isEditable = false
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = #colorLiteral(red: 0.9993286729, green: 0.7073625326, blue: 0.4233144522, alpha: 1)
+//        textView.layer.borderWidth = 1
+//        textView.layer.borderColor = #colorLiteral(red: 0.9993286729, green: 0.7073625326, blue: 0.4233144522, alpha: 1)
         textView.layer.cornerRadius = 10
         textView.font = UIFont(name: "amiri-regular", size: 19)
         

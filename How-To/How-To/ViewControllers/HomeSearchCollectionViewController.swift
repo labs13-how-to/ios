@@ -22,16 +22,16 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     var allHowtos: [Howto] = [] 
     var mostPopularHowtos: [Howto] = []
     var filteredHowtos: [Howto]?
-//    {
-//        didSet {
-//            collectionView.reloadData()
-//        }
-//    }
+    {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     var tempArray: [Howto] = []
     
     var isSearching = false
     
-//    var didSelectHandler: ((Post) -> ())?
+    var didSelectHandler: ((Post) -> ())?
     
     
     let headerID = "Header"
@@ -53,9 +53,9 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         guard self.navigationController != nil else { fatalError("Navigation Controller not found")}
         self.howtoController.howto == nil 
-        //setupTabBar(parentViewController: self, height: view.frame.height / 15, color: .white)
+//        setupTabBar(parentViewController: self, height: view.frame.height / 15, color: .white)
 //        setupSearchBar(parentViewController: self, color: .white, placeHolderText: "How To...")
-        //self.tabBar!.delegate = self
+//        self.tabBar!.delegate = self
         
     }
     override func viewDidLoad() {
@@ -68,22 +68,28 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.navigationItem.hidesBackButton = true
         self.navigationController?.isNavigationBarHidden = false
         
+        
         // SET NAVIGATION BAR TO LOGO
         let logoImage = UIImageView()
         logoImage.frame = CGRect(x: 2, y: 2, width: 125, height: 60)
         logoImage.image = #imageLiteral(resourceName: "logo")
         logoImage.contentMode = .scaleAspectFit
-        self.navigationItem.titleView = logoImage
+//        self.navigationItem.titleView = logoImage
         self.navigationController?.navigationBar.backgroundColor = .white
         
-//        let searchBar = UISearchBar()
+        let searchBar = UISearchBar()
 //        self.navigationController?.navigationItem.titleView = searchBar
-//        // SearchBar
-//        searchBar.placeholder = "Search..."
-//        searchBar.sizeToFit()
-//        searchBar.delegate = self
-//        searchBar.returnKeyType = UIReturnKeyType.done
-//        self.navigationItem.titleView = searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
+        // SearchBar
+        searchBar.placeholder = "Search..."
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
+        // Navigation StackView
+        let navStack = UIStackView(arrangedSubviews: [logoImage,searchBar])
+        searchBar.snp.makeConstraints { (make) in
+            make.width.equalTo(view.frame.width * (0.7))
+        }
+        self.navigationItem.titleView = navStack // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
         guard let navController = self.navigationController else { fatalError() }
         navController.isNavigationBarHidden = false
         
@@ -199,18 +205,18 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         }
         if kind == UICollectionView.elementKindSectionFooter {
             footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.footerID, for: indexPath)
-            
-            let button = UIButton()
-            button.frame = CGRect(x: view.frame.width - 120, y: 16, width: 110, height: 28)
-            button.layer.cornerRadius = 6
-            button.backgroundColor = .white
-            // SET FOOTER TEXT
-            button.setTitle("See More", for: .normal)
-            button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
-            button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
-            button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-            
-            footer.insertSubview(button, at: 0)
+//
+//            let button = UIButton()
+//            button.frame = CGRect(x: view.frame.width - 120, y: 16, width: 110, height: 28)
+//            button.layer.cornerRadius = 6
+//            button.backgroundColor = .white
+//            // SET FOOTER TEXT
+//            button.setTitle("See More", for: .normal)
+//            button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
+//            button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
+//            button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+//
+//            footer.insertSubview(button, at: 0)
             
             return footer
         }
@@ -257,7 +263,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             if allHowtos.count < 8 {
                 return allHowtos.count
             } else {
-                return 8
+                return 10
             }
         }
     }
