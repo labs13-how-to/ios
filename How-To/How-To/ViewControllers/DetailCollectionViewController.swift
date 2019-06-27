@@ -66,7 +66,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         // Register cell classes
         self.collectionView!.register(HowtoDetailCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID)
-        self.collectionView.register(Footer.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerID)
+        self.collectionView.register(ReviewFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerID)
         // Do any additional setup after loading the view.
     }
     
@@ -76,8 +76,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 //        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1200))
         let containerView = UIView()
         
-        containerView.layer.borderWidth = 0
-        containerView.layer.borderColor = #colorLiteral(red: 0.2899999917, green: 0.9499999881, blue: 0.6299999952, alpha: 1)
+//        containerView.layer.borderWidth = 0
+//        containerView.layer.borderColor = #colorLiteral(red: 0.2899999917, green: 0.9499999881, blue: 0.6299999952, alpha: 1)
         
         let youtubeView = WKYTPlayerView()
         let imageView = UIImageView()
@@ -214,8 +214,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
         introText.backgroundColor = .white
         introText.layer.borderWidth = 1
-        introText.layer.borderColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
-        introText.layer.cornerRadius = 20
+        introText.layer.borderColor = #colorLiteral(red: 0.9993286729, green: 0.7073625326, blue: 0.4233144522, alpha: 1)
+        introText.layer.cornerRadius = 10
         introText.contentInset = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         
 
@@ -283,8 +283,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
         let miscellaneousScrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: containerView.frame.width, height: 500))
         miscellaneousScrollView.layer.borderWidth = 1
-        miscellaneousScrollView.layer.cornerRadius = 20
-        miscellaneousScrollView.layer.borderColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
+        miscellaneousScrollView.layer.cornerRadius = 10
+        miscellaneousScrollView.layer.borderColor = #colorLiteral(red: 0.9993286729, green: 0.7073625326, blue: 0.4233144522, alpha: 1)
         miscellaneousScrollView.backgroundColor = .white
         miscellaneousScrollView.addSubview(miscelleanousStack)
         miscellaneousScrollView.contentInset = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
@@ -435,7 +435,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var header: UICollectionReusableView! = nil
-        var footer : UICollectionReusableView! = nil
+        var footer : ReviewFooter! = nil
         
         let containerView = UIView(frame: CGRect(x: 0, y: 600, width: view.frame.width, height: 1200))
         containerView.backgroundColor = #colorLiteral(red: 0.638515234, green: 0.6041640639, blue: 0.7091518044, alpha: 1)
@@ -449,21 +449,96 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         }
         
             if kind == UICollectionView.elementKindSectionFooter {
-                footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.footerID, for: indexPath)
-                
-                footer.backgroundColor = #colorLiteral(red: 0.6899999976, green: 0.9599999785, blue: 0.400000006, alpha: 1)
-               
+                footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.footerID, for: indexPath) as! ReviewFooter
+                    footer.backgroundColor = .white
+                    footer.howto = self.howto
+                    footer.addSubview(setupFooterBars())
+//                footer.backgroundColor = #colorLiteral(red: 0.6899999976, green: 0.9599999785, blue: 0.400000006, alpha: 1)
+//                let stackView = UIStackView(arrangedSubviews: [setupFooterBars(), setupFooterReviews()])
+//                stackView.axis = .vertical
+//
+//                footer.addSubview(stackView)
+//                stackView.fillSuperview()
                 
                 return footer
             }
         
          return header
     }
+    func setupFooterBars() -> UIView {
+        let barsContainer = UIView()
+        
+        let barsStack = UIStackView()
+        let reviewBG = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
+        reviewBG.backgroundColor = #colorLiteral(red: 0.9993286729, green: 0.7073625326, blue: 0.4233144522, alpha: 1)
+        let reviewLabel = UILabel(frame: CGRect(x: 14, y: 0, width: view.frame.width - 28, height: 50))
+        reviewLabel.text = "Reviews"
+        reviewLabel.font = UIFont(name: "nunito-bold", size: 28)
+        reviewLabel.textColor = .white
+        reviewBG.addSubview(reviewLabel)
+        barsContainer.addSubview(reviewBG)
+        
+        barsContainer.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
+        barsContainer.snp.makeConstraints { (make) in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(250)
+        }
+        
+        return barsContainer
+    }
+    
+    func setupFooterReviews()-> UIView{
+        let containerView = UIView()
+        
+        containerView.backgroundColor = .red
+        // Add Stripe Header
+        
+        // Add Bars for ratings
+        
+        // Add Review Button STRETCH
+        
+        // Add Reviews Cells
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        containerView.snp.makeConstraints { (make) in
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(400)
+        }
+        
+        let horizontalReviewController = ReviewsHorizontalController(collectionViewLayout: UICollectionViewFlowLayout())
+        horizontalReviewController.howto = self.howto
+        containerView.addSubview(horizontalReviewController.view)
+        horizontalReviewController.view.fillSuperview()
+        horizontalReviewController.view.backgroundColor = .blue
+        return containerView
+        
+    }
+    
+    
     // MARK: - Footer
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         if section == 0 {
             
-            return CGSize(width: view.frame.width, height: 300)
+            if howto?.reviews?.count == 0 {
+                return CGSize(width: view.frame.width, height: 250)
+            }
+            
+            return CGSize(width: view.frame.width, height: 600)
+            
         }
         return CGSize(width: 0, height: 0)
     }
@@ -479,6 +554,10 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if howto?.steps?.count == 0 {
+            return CGSize(width: 0, height: 0)
+        }
+        
         return CGSize(width: view.frame.width, height: 500)
     }
     

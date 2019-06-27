@@ -64,6 +64,7 @@
 	<array>
 		<string>amiri-regular.ttf</string>
 		<string>nunito-regular.ttf</string>
+		<string>nunito-bold.ttf</string>
 	</array>
 </dict>
 </plist>

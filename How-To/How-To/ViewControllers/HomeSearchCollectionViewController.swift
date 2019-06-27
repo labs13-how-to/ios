@@ -130,7 +130,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         button.frame = CGRect(x: 30, y: -60, width: 110, height: 28)
         button.layer.cornerRadius = 6
         button.backgroundColor = .white
-        button.setTitle("Learn How", for: .normal)
+        button.setTitle("Welcome!", for: .normal)
         button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
@@ -143,7 +143,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         
         // Make Text Label
         let splashText = UILabel()
-        splashText.text = "Never made an RIY post before? We'll help you learn how."
+        splashText.text = "Learn to do anything and everything you can imagine, here on RIY"
         splashText.frame = CGRect(x: 30, y: -160, width: 220, height: 80)
         splashText.numberOfLines = 0
         splashText.textColor = #colorLiteral(red: 0.3245337605, green: 0.3248056173, blue: 0.3245758414, alpha: 1)
