@@ -10,6 +10,8 @@ import UIKit
 
 class Footer: UICollectionReusableView {
     
+    var howto: Int?
+    
     //    var footerLabel: UILabel{
     //        let label = UILabel()
     //        label.sizeToFit()

@@ -12,8 +12,19 @@ class UserController: Codable {
     
     let baseURL = URL(string: "https://lambda-how-to.herokuapp.com/")!
     
+    
+    var allUsers: [User]?
+    
+    
 //    static let shared = UserController()
     var currentUser: User?
+    
+    func getAllUsers(completion: @escaping(Error?) -> Void) {
+        
+        
+        
+        
+    }
     
     func createUser(username: String, password: String, completion: @escaping(Error?) -> Void) {
         let sessionConfig = URLSessionConfiguration.default

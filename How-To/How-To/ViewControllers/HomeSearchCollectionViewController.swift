@@ -19,18 +19,25 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     let tabBarTag = 0
     
     var howtoController = HowtoController()
-    var allHowtos: [Howto] = []
+    var allHowtos: [Howto] = [] 
+    var mostPopularHowtos: [Howto] = []
     var filteredHowtos: [Howto]?
-//    {
-//        didSet {
-//            collectionView.reloadData()
-//        }
-//    }
+    {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     var tempArray: [Howto] = []
     
-    var isSearching = false
+    var isSearching = false {
+        didSet {
+            if isSearching == false {
+                filteredHowtos = allHowtos
+            }
+        }
+    }
     
-//    var didSelectHandler: ((Post) -> ())?
+    var didSelectHandler: ((Post) -> ())?
     
     
     let headerID = "Header"
@@ -51,35 +58,44 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
 
     override func viewWillAppear(_ animated: Bool) {
         guard self.navigationController != nil else { fatalError("Navigation Controller not found")}
-        //setupTabBar(parentViewController: self, height: view.frame.height / 15, color: .white)
+        self.howtoController.howto == nil 
+//        setupTabBar(parentViewController: self, height: view.frame.height / 15, color: .white)
 //        setupSearchBar(parentViewController: self, color: .white, placeHolderText: "How To...")
-        //self.tabBar!.delegate = self
+//        self.tabBar!.delegate = self
         
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        
+        
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.hidesBackButton = true
         self.navigationController?.isNavigationBarHidden = false
+        
         
         // SET NAVIGATION BAR TO LOGO
         let logoImage = UIImageView()
         logoImage.frame = CGRect(x: 2, y: 2, width: 125, height: 60)
         logoImage.image = #imageLiteral(resourceName: "logo")
         logoImage.contentMode = .scaleAspectFit
-        self.navigationItem.titleView = logoImage
+//        self.navigationItem.titleView = logoImage
         self.navigationController?.navigationBar.backgroundColor = .white
         
-//        let searchBar = UISearchBar()
+        let searchBar = UISearchBar()
 //        self.navigationController?.navigationItem.titleView = searchBar
-//        // SearchBar
-//        searchBar.placeholder = "Search..."
-//        searchBar.sizeToFit()
-//        searchBar.delegate = self
-//        searchBar.returnKeyType = UIReturnKeyType.done
-//        self.navigationItem.titleView = searchBar // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
+        // SearchBar
+        searchBar.placeholder = "Search..."
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
+        // Navigation StackView
+        let navStack = UIStackView(arrangedSubviews: [logoImage,searchBar])
+        searchBar.snp.makeConstraints { (make) in
+            make.width.equalTo(view.frame.width * (0.7))
+        }
+        self.navigationItem.titleView = navStack // sets searchbar as the titleView of navigation bar to remove unneeded space at the top of the safe area
         guard let navController = self.navigationController else { fatalError() }
         navController.isNavigationBarHidden = false
         
@@ -94,6 +110,11 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.howtoController.fetchHowtos(){_ in
             DispatchQueue.main.async {
                 self.allHowtos = self.howtoController.howtos
+                // sort list of howtos based on rating
+                self.allHowtos.sort(by: { $0.review_count! > $1.review_count! })
+                self.allHowtos.sort( by: { Int($0.review_avg!) > Int($1.review_avg!) })
+                
+                self.filteredHowtos = self.allHowtos
                 self.collectionView.reloadData()
             }
         }
@@ -114,38 +135,44 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         // Makes Top Banner
         let topView = UIView()
         topView.frame = CGRect(x:0, y:-200, width:(view.frame.width + 40), height:200)
-        topView.backgroundColor = UIColor(red:1, green:0.67, blue:0.38, alpha:1)
+        topView.backgroundColor = #colorLiteral(red: 0.9994708896, green: 0.8877617717, blue: 0.7884737849, alpha: 1)
         
         // Makes Banner Button
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 30, y: -60, width: 110, height: 28)
         button.layer.cornerRadius = 6
         button.backgroundColor = .white
-        button.setTitle("Learn How", for: .normal)
+        button.setTitle("Welcome!", for: .normal)
         button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
         button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         
-        button.layer.shadowColor = #colorLiteral(red: 0.6212611794, green: 0.3437288105, blue: 0.04521131143, alpha: 1)
+        button.layer.shadowColor = #colorLiteral(red: 0.9993600249, green: 0.5205107927, blue: 0.1008351222, alpha: 1)
         button.layer.shadowOffset = CGSize(width: 0, height: 3)
-        button.layer.shadowOpacity = 1
+        button.layer.shadowOpacity = 0.5
         button.layer.shadowRadius = 3
         button.layer.masksToBounds = false
         
         // Make Text Label
         let splashText = UILabel()
-        splashText.text = "Never made an RIY post before? We'll help you learn how."
+        splashText.text = "Learn to do anything and everything you can imagine, here on RIY"
         splashText.frame = CGRect(x: 30, y: -160, width: 220, height: 80)
         splashText.numberOfLines = 0
-        splashText.textColor = .white
+        splashText.textColor = #colorLiteral(red: 0.3245337605, green: 0.3248056173, blue: 0.3245758414, alpha: 1)
         splashText.font = .systemFont(ofSize: 21)
         // Make Image on Top View
         let splashImage = UIImageView()
-        splashImage.image = #imageLiteral(resourceName: "splash")
+        splashImage.image = #imageLiteral(resourceName: "CleanShot 2019-06-26 at 03.07.08")
         splashImage.frame = CGRect(x: 270, y: -186, width: 100, height: 170)
         splashImage.contentMode = .scaleAspectFit
         splashImage.layer.cornerRadius = 8
         splashImage.clipsToBounds = true
+        // RESIZES FOR SMALL SCREENS
+        if view.frame.width < 375 {
+            splashText.font = UIFont(name: "nunito-regular", size: 16)
+            splashText.frame = CGRect(x: 20, y: -160, width: 160, height: 80)
+            splashImage.frame = CGRect(x: 180, y: -186, width: 100, height: 170)
+        }
         // Adds views to Collection Super View
         collectionView.insertSubview(topView, at: 0)
         collectionView.insertSubview(button, at: 1)
@@ -168,30 +195,34 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         if kind == UICollectionView.elementKindSectionHeader {
             header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.headerID, for: indexPath)
             
+            if indexPath.row == 0 {
+                
                 header.addSubview(UILabel(frame:CGRect(x: 12,y: 0,width: view.frame.width,height: 70)))
-            
+                
                 let lab = header.subviews[0] as! UILabel
                 lab.text = "Trending"
-                lab.font = .boldSystemFont(ofSize: 23)
+                lab.font = UIFont(name: "nunito-regular", size: 25)
                 lab.textColor = UIColor(red:1, green:0.52, blue:0.1, alpha:1)
                 lab.textAlignment = .left
+            }
+            
             
             return header
         }
         if kind == UICollectionView.elementKindSectionFooter {
             footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.footerID, for: indexPath)
-            
-            let button = UIButton()
-            button.frame = CGRect(x: view.frame.width - 120, y: 16, width: 110, height: 28)
-            button.layer.cornerRadius = 6
-            button.backgroundColor = .white
-            // SET FOOTER TEXT
-            button.setTitle("See More", for: .normal)
-            button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
-            button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
-            button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-            
-            footer.insertSubview(button, at: 0)
+//
+//            let button = UIButton()
+//            button.frame = CGRect(x: view.frame.width - 120, y: 16, width: 110, height: 28)
+//            button.layer.cornerRadius = 6
+//            button.backgroundColor = .white
+//            // SET FOOTER TEXT
+//            button.setTitle("See More", for: .normal)
+//            button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
+//            button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
+//            button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+//
+//            footer.insertSubview(button, at: 0)
             
             return footer
         }
@@ -207,6 +238,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     }
     
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
@@ -215,7 +247,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         if collectionView.frame.width >= 375 {
             return (CGSize(width: (collectionView.frame.width/2) - 36, height: (collectionView.frame.height/3)))
         }
-        return CGSize(width: (collectionView.frame.width) - 36, height: (collectionView.frame.height/3))
+        return CGSize(width: (collectionView.frame.width) - 36, height: (collectionView.frame.height/2))
     }
     
 
@@ -237,7 +269,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             if allHowtos.count < 8 {
                 return allHowtos.count
             } else {
-                return 8
+                return 10
             }
         }
     }
@@ -252,7 +284,8 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             if fetchedPost != nil {
                 cell.postID = fetchedPost?.id
                 cell.titleLabel.text = fetchedPost?.title
-                cell.rating = fetchedPost?.review_avg
+                cell.rating = fetchedPost!.review_avg!
+                print("RATING: \(Int(fetchedPost!.review_avg!))")
                 let imgURL = URL(string: fetchedPost!.img_url!)
                 
                 cell.imageView.sd_setImage(with: imgURL)
@@ -265,22 +298,27 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
                 let updatedAt = dateFormatter.date(from: updatedAtStr) // "Jun 5, 2016, 4:56 PM"
                 cell.dateLabel.text = updatedAt?.asString(style: .long)
                 cell.parentCollectionVC = self
+                cell.howto = fetchedPost
             }
         return cell
         }
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let howto = howtoController.howtos[indexPath.item]
+        let howto = filteredHowtos![indexPath.item]
         guard let postID = howto.id else {
             fatalError("PostID returned nil")
         }
-        let detailVC = DetailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        detailVC.collectionView.backgroundColor = .white
-        detailVC.howtoID = postID
-        detailVC.imgURL = howto.img_url
-//        detailVC.videoURLString =
-        navigationController?.pushViewController(detailVC, animated: true)
+                
+                let detailVC = DetailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                detailVC.collectionView.backgroundColor = .white
+                detailVC.howtoID = postID
+                detailVC.imgURL = howto.img_url
+                detailVC.rating = howto.review_avg
+                detailVC.reviewCount = howto.review_count!
+                detailVC.videoURLString = howto.vid_url
+                self.navigationController?.pushViewController(detailVC, animated: true)
+        
         
     }
     
@@ -295,36 +333,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
      }
     
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
-    }
-    */
     
     
     // Hides TabBar when user scrolls down
