@@ -44,6 +44,8 @@
 		A2E3360522A976E700E7AD7F /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E3360422A976E700E7AD7F /* UIImageView.swift */; };
 		A2E3360722A9773F00E7AD7F /* Footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E3360622A9773F00E7AD7F /* Footer.swift */; };
 		A2E3360922AA024000E7AD7F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E3360822AA024000E7AD7F /* LoginViewController.swift */; };
+		A2E79F1422C3EE6D00F9B434 /* StepsHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E79F1322C3EE6D00F9B434 /* StepsHorizontalController.swift */; };
+		A2E79F1622C4912A00F9B434 /* StepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E79F1522C4912A00F9B434 /* StepCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		A2E3360422A976E700E7AD7F /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		A2E3360622A9773F00E7AD7F /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
 		A2E3360822AA024000E7AD7F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A2E79F1322C3EE6D00F9B434 /* StepsHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsHorizontalController.swift; sourceTree = "<group>"; };
+		A2E79F1522C4912A00F9B434 /* StepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,16 @@
 				A241F59822C25D5B00F26A27 /* amiri-regular.ttf */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A25C7FCB22C3DAFA00BA4EC0 /* StepsReviewsGroup */ = {
+			isa = PBXGroup;
+			children = (
+				A247CB4922ADF7580099F69C /* HowtoDetailCollectionViewCell.swift */,
+				A2E79F1322C3EE6D00F9B434 /* StepsHorizontalController.swift */,
+				A2E79F1522C4912A00F9B434 /* StepCell.swift */,
+			);
+			path = StepsReviewsGroup;
 			sourceTree = "<group>";
 		};
 		A269271222A5B915006AAFD2 /* Controllers */ = {
@@ -215,10 +229,10 @@
 		A2B01B5B22A63504006052FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A25C7FCB22C3DAFA00BA4EC0 /* StepsReviewsGroup */,
 				A2B01B5E22A63582006052FA /* PostCell.swift */,
 				A2112DC422B3F4790073E9A6 /* TagCell.swift */,
 				A23A993222B6FC1C0029194F /* ListCell.swift */,
-				A247CB4922ADF7580099F69C /* HowtoDetailCollectionViewCell.swift */,
 				A2E3360622A9773F00E7AD7F /* Footer.swift */,
 			);
 			path = Views;
@@ -377,6 +391,7 @@
 				A269270722A5B069006AAFD2 /* Tag.swift in Sources */,
 				A2112DC722B3FD650073E9A6 /* ListCollectionViewController.swift in Sources */,
 				A2E3360922AA024000E7AD7F /* LoginViewController.swift in Sources */,
+				A2E79F1622C4912A00F9B434 /* StepCell.swift in Sources */,
 				A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */,
 				A2A1B9D622A083E500AAA0E6 /* AppDelegate.swift in Sources */,
 				A269270322A57401006AAFD2 /* Bearer.swift in Sources */,
@@ -391,6 +406,7 @@
 				A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */,
 				A269271422A5B97E006AAFD2 /* HowtoController.swift in Sources */,
 				A247CB4A22ADF7580099F69C /* HowtoDetailCollectionViewCell.swift in Sources */,
+				A2E79F1422C3EE6D00F9B434 /* StepsHorizontalController.swift in Sources */,
 				A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */,
 				A287516822A4E5E900DC3C92 /* Post.swift in Sources */,
 				A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */,

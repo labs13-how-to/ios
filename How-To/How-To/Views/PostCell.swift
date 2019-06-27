@@ -211,7 +211,7 @@ class PostCell: UICollectionViewCell {
         let roundedRating = Int(rating!)
         print(roundedRating)
         
-        let starSize = 24
+        let starSize = 20
         
         if rating != 0 {
             for _ in 0...(roundedRating-1) {
@@ -254,7 +254,7 @@ class PostCell: UICollectionViewCell {
             unwrappedReviewCount = howto!.review_count!
         }
         ratingLabel.text = ("∙" + String(unwrappedReviewCount))
-        ratingLabel.font = UIFont(name: "nunito-regular", size: 16)
+        ratingLabel.font = UIFont(name: "nunito-regular", size: 14)
         ratingLabel.textColor = #colorLiteral(red: 0.5455184579, green: 0.5459486246, blue: 0.5455850959, alpha: 1)
         starStack.addArrangedSubview(ratingLabel)
         

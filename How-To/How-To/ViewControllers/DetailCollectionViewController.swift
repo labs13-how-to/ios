@@ -76,7 +76,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 //        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1200))
         let containerView = UIView()
         
-        containerView.layer.borderWidth = 1
+        containerView.layer.borderWidth = 0
         containerView.layer.borderColor = #colorLiteral(red: 0.2899999917, green: 0.9499999881, blue: 0.6299999952, alpha: 1)
         
         let youtubeView = WKYTPlayerView()
@@ -308,7 +308,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         stackView.spacing = 8
         
         let bgTextView = UIView()
-        bgTextView.backgroundColor = #colorLiteral(red: 1, green: 0.9295691252, blue: 0.855507791, alpha: 1)
+        bgTextView.backgroundColor = .white
         
         // VIEW CONSTRAINTS
         containerView.addSubview(bgTextView)
@@ -479,7 +479,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: view.frame.width, height: 500)
     }
     
     
@@ -487,7 +487,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 1
     }
     
 
@@ -495,19 +495,21 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         if section == 0 {
-            guard let steps = howtoController.howto?.steps else { return 2 }
-            return steps.count
+//            guard let steps = howtoController.howto?.steps else { return 2 }
+//            return steps.count
+            return 1
         }
         if section == 1 {
-            guard let reviewCount = howtoController.howto?.review_count else { return 1 }
-            return reviewCount
+//            guard let reviewCount = howtoController.howto?.review_count else { return 1 }
+//            return reviewCount
+            return 1
         }
         return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HowtoDetailCollectionViewCell
-    
+        cell.howto = self.howto
         // Configure the cell
     
         return cell

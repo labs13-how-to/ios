@@ -233,9 +233,9 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.frame.width >= 375 {
-            return (CGSize(width: (collectionView.frame.width/2) - 36, height: (collectionView.frame.height/2.4)))
+            return (CGSize(width: (collectionView.frame.width/2) - 36, height: (collectionView.frame.height/3)))
         }
-        return CGSize(width: (collectionView.frame.width) - 36, height: (collectionView.frame.height/1.8))
+        return CGSize(width: (collectionView.frame.width) - 36, height: (collectionView.frame.height/2))
     }
     
 
