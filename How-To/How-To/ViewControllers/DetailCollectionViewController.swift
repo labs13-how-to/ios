@@ -55,11 +55,9 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                         fatalError()
                     }
                     self.howto = self.howtoController.howto
-                    print("view will appear")
-                    print(self.howto?.username)
                     guard let id = self.howto?.id else { fatalError() }
     
-                    self.howtoController.fetchReviews(id: (self.howto?.id!)!) {_ in
+                    self.howtoController.fetchReviews(id: (id)) {_ in
                         self.reviews = self.howtoController.reviews
                     }
                     
@@ -76,12 +74,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         screenWidth = Int(view.frame.width)
-//
-//        collectionView.backgroundColor = #colorLiteral(red: 0.5765730143, green: 0.8659184575, blue: 0.9998990893, alpha: 1)
-//        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 400, right: 0)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
         self.collectionView!.register(HowtoDetailCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -520,13 +514,21 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         
         var yValue = 0
         var starValue = 5
+        var fiveStarPercentage = 0
+        if self.reviews!.count > 0 {
+            let count = self.reviews!.count
+            let fiveStarCount = self.reviews?.filter({$0.rating == 5})
+            fiveStarPercentage = fiveStarCount!.count/count
+        }
         
         for _ in 0...4 {
             let starNumberLabel = UILabel(frame: CGRect(x: 0, y: yValue, width: 50, height: 30))
             starNumberLabel.backgroundColor = .white
-            starNumberLabel.text = String(starValue) + " stars"
-            starNumberLabel.font = UIFont(name: "nunito-regular", size: 12)
-            let barView = UIView(frame: CGRect(x: Int(starNumberLabel.frame.width), y: yValue, width: screenWidth-80, height: 30))
+            starNumberLabel.text = String(starValue) + " Stars"
+            starNumberLabel.font = UIFont(name: "nunito-regular", size: 15)
+            let barView = RatingBar(frame: CGRect(x: Int(starNumberLabel.frame.width), y: yValue, width: screenWidth-80, height: 30))
+            barView.width = screenWidth-80
+            barView.percentage = CGFloat(fiveStarPercentage)
             barView.backgroundColor = #colorLiteral(red: 0.9212495685, green: 0.9219488502, blue: 0.9213578105, alpha: 1)
             barView.layer.cornerRadius = 10
             let reviewCountLabel = UILabel(frame: CGRect(x: Int(barView.frame.width + starNumberLabel.frame.width), y: yValue, width: 50, height: 30))
@@ -538,12 +540,13 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                 make.width.equalToSuperview()
                 make.height.equalTo(40)
                 make.topMargin.equalTo(reviewBG.snp_bottomMargin).offset(20)
-                make.leftMargin.equalTo(8)
+                make.leftMargin.equalTo(16)
             }
             starBarStack.addSubview(starNumberLabel)
             starBarStack.addSubview(barView)
             starBarStack.addSubview(reviewCountLabel)
             
+            fiveStarPercentage = 0
             yValue += 35
             starValue -= 1
         }

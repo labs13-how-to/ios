@@ -13,8 +13,6 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-//    private var appCoordinator: AppCoordinator?
-//    var userController: UserController?
     var navigationController: UINavigationController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -25,9 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let window = window {
             let loginVC = LoginViewController()
             navigationController = UINavigationController(rootViewController: loginVC)
-//            navigationController!.navigationBar.isHidden = true
-//            navigationController!.navigationItem.leftBarButtonItem = nil
-//            navigationController!.navigationItem.hidesBackButton = true
             
             
             window.rootViewController = navigationController  
@@ -36,13 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.makeKeyAndVisible()
         }
         
-//        
-////        window?.rootViewController = HomeTabBarController()
-//        window = UIWindow(frame: UIScreen.main.bounds)
-////        window?.rootViewController = HomeTabBarController()  // Makes TabBar Controller 1st in nav hierarchy
-////        window?.rootViewController = ProgressNavigationViewController() // Makes ProgressNav 1st in nav hierarchy
-//        window?.rootViewController = MasterNavigationController()
-//        window?.makeKeyAndVisible()
         
         return true
     }

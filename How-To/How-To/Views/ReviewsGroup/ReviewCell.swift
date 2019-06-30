@@ -115,6 +115,7 @@ class ReviewCell: UICollectionViewCell {
         
         nameLabel.snp.makeConstraints { (make) in
             make.height.equalTo(50)
+            
         }
         
         

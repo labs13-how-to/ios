@@ -94,7 +94,7 @@ class ProfileCollectionViewController: UICollectionViewController {
         textStack.axis = .vertical
         let blurb = UILabel()
         blurb.numberOfLines = 0
-        blurb.text = "blah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blah"
+        blurb.text = "I like woodworking and electronic RIYs. Here to learn as much as I can!"
         let postsNumber = UILabel()
         postsNumber.text = "Posts ᐧ 0"
         postsNumber.font = .systemFont(ofSize: 20)
