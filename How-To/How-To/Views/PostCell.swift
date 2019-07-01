@@ -14,6 +14,7 @@ class PostCell: UICollectionViewCell {
     
     weak var parentCollectionVC : HomeSearchCollectionViewController?
     
+    var reviews: [PostReview]?
     var howto: Howto? {
         
         didSet{
@@ -26,6 +27,7 @@ class PostCell: UICollectionViewCell {
     let radius: CGFloat = 8
     
     let imageView: UIImageView = {
+        
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.8590026498, green: 0.9080110788, blue: 0.9488238692, alpha: 1)
         imageView.image = UIImage(named: "Succulents")

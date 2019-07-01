@@ -13,7 +13,7 @@ class HowtoController: Codable {
     let baseURL = URL(string: "https://lambda-how-to.herokuapp.com/")!
     
     let tagsList = ["Art", "Apparel", "Appliances", "Automotive", "Baby", "Beauty", "Cooking", "Crafts", "Electronics", "Furniture", "Gardening", "Home Improvement", "Outdoors", "Pets", "Toys"]
-    
+    var reviews: [PostReview] = []
     var howtos: [Howto] = []
     var howto: Howto?
     var users: [User] = []
@@ -62,6 +62,37 @@ class HowtoController: Codable {
         }.resume()
     }
     // get specific fetch by id
+    
+    func fetchReviews(id: Int, completion: @escaping(Error?)-> Void = { _ in }) {
+        let idString = String(id)
+        let urlPlus = baseURL.appendingPathComponent("posts").appendingPathComponent(idString).appendingPathComponent("reviews")
+        
+        print("\(urlPlus)")
+        URLSession.shared.dataTask(with: urlPlus) { (data, _, error) in
+            if let error = error {
+                NSLog("Error retrieving reviews: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No reviews data returned from server")
+                completion(NSError())
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let reviewsArray = try decoder.decode([PostReview].self, from: data)
+                self.reviews = reviewsArray
+                completion(nil)
+            } catch {
+                NSLog("Error decoding reviews from server: \(error.localizedDescription)")
+                return
+            }
+            
+            }.resume()
+    }
    
     func fetchHowto(id: Int, completion: @escaping(Error?)-> Void = { _ in }) {
         let idString = String(id)

@@ -18,6 +18,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
     
     let tabBarTag = 0
     
+    var reviews: [PostReview]?
     var howtoController = HowtoController()
     var allHowtos: [Howto] = [] 
     var mostPopularHowtos: [Howto] = []
@@ -282,6 +283,8 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
             fetchedPost = self.allHowtos[indexPath.item]
         }
             if fetchedPost != nil {
+                
+                
                 cell.postID = fetchedPost?.id
                 cell.titleLabel.text = fetchedPost?.title
                 cell.rating = fetchedPost!.review_avg!

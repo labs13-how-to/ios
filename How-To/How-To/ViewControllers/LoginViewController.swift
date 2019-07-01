@@ -13,7 +13,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     let userController = UserController()
-    
+    var screenwidth = 0
     let buttonBGView: UIView = {
         
         let view = UIView()
@@ -26,12 +26,6 @@ class LoginViewController: UIViewController {
         
         return view
     }()
-    
-//    var loginStatus: Bool = false {
-//        didSet{
-//            switchView()
-//        }
-//    }
 
     let signInStackView: UIStackView = {
         let stackView = UIStackView()
@@ -43,7 +37,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        screenwidth = Int(view.frame.width)
         setupView()
         // Do any additional setup after loading the view.
         
@@ -59,12 +53,6 @@ class LoginViewController: UIViewController {
         // Will notify GIDSignInDelegate of results via sign(_:didSignInFor:withError:)
         GIDSignIn.sharedInstance()?.signInSilently()
         
-//        let height = CGFloat(100)
-//        let tabBar = UITabBar(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY - height, width: view.frame.width, height: height))
-//        let vc = UIViewController()
-//        let tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "Favorite"), selectedImage: #imageLiteral(resourceName: "Favorite"))
-//        tabBar.setItems([tabBarItem], animated: true)
-//        self.view.addSubview(tabBar)
         
     }
     
@@ -110,6 +98,13 @@ class LoginViewController: UIViewController {
         cardBGView.clipsToBounds = true
         
         view.addSubview(cardBGView)
+        
+        let logo = UIImageView(frame: CGRect(x: (screenwidth/2) - 80, y: -12, width: 100, height: 80))
+        logo.image = #imageLiteral(resourceName: "logo")
+        logo.contentMode = .scaleAspectFit
+
+        cardBGView.addSubview(logo)
+
         cardBGView.addSubview(signInStackView)
         signInStackView.backgroundColor = .black
         signInStackView.axis = .vertical
@@ -135,18 +130,6 @@ class LoginViewController: UIViewController {
     @objc private func onGoogleSignInButtonTap() {
         GIDSignIn.sharedInstance()?.signIn()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-
 }
 
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
@@ -158,13 +141,13 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         // A nil error indicates a successful login
         if (error == nil) {
             // Perform operations on signed in user here
-            let googleUserID = user.userID                  // For client-side use only!
-            let idToken = user.authentication.idToken // Safe to send to the server
-            let fullName = user.profile.name
-            UserDefaults.standard.set(user.profile.name, forKey: "fullName")
-            let givenName = user.profile.givenName
-            let familyName = user.profile.familyName
-            let email = user.profile.email
+//            let googleUserID = user.userID                  // For client-side use only!
+//            let idToken = user.authentication.idToken // Safe to send to the server
+//            let fullName = user.profile.name
+//            UserDefaults.standard.set(user.profile.name, forKey: "fullName")
+//            let givenName = user.profile.givenName
+//            let familyName = user.profile.familyName
+//            let email = user.profile.email
             UserDefaults.standard.set(user.profile.name, forKey: "email")
 
             // Checks if user has available profile image, if so sets it to userDefaults to be retrieved later when needed
@@ -173,12 +156,12 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 let profileImageURL = user.profile.imageURL(withDimension: 400)
                 UserDefaults.standard.set(profileImageURL, forKey: "profileImageURL")
             }
-            print("This is googleUserID : \(googleUserID)")
-            print("This is idToken : \(idToken)")
-            print("This is fullName : \(fullName)")
-            print("This is givenName : \(givenName)")
-            print("This is familyName : \(familyName)")
-            print("This is email : \(email)")
+//            print("This is googleUserID : \(googleUserID)")
+//            print("This is idToken : \(idToken)")
+//            print("This is fullName : \(fullName)")
+//            print("This is givenName : \(givenName)")
+//            print("This is familyName : \(familyName)")
+//            print("This is email : \(email)")
 //            // TEST PUT function
 //            userController.updateUser(id: 1, username: "TestiOS_Two", auth_id: "919178856834", role: "user", created_at: getStringDate()) { (error) in
 //                if error != nil {
@@ -229,11 +212,9 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     func switchView() {
-//        if self.loginStatus == true {
             self.navigationController?.navigationBar.isHidden = true
             let homeTabBar = HomeTabBarController()
             navigationController?.pushViewController(homeTabBar, animated: true)
-//        }
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
@@ -242,22 +223,5 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     
 }
 
-extension String {
-    func truncate(characterLimit: Int) -> Substring {
-        return prefix(characterLimit)
-    }
-    
-    
-    func generateRandomString(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        return String((0...length-1).map{ _ in letters.randomElement()! })
-    }
-    
-    func generateRandomNumberString(length: Int) -> String {
-        let characters = "0123456789"
-        return String((0...length-1).map{ _ in characters.randomElement()! })
-        
-    }
-}
 
 

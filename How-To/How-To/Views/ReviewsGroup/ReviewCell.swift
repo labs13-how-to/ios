@@ -11,11 +11,12 @@ import SnapKit
 
 class ReviewCell: UICollectionViewCell {
     
-    var howto: Howto? {
-        didSet{
-            setupView()
-        }
-    }
+    var howto: Howto?
+//    {
+////        didSet{
+////            setupView()
+////        }
+//    }
     
     var review: PostReview? {
         didSet{
@@ -41,7 +42,7 @@ class ReviewCell: UICollectionViewCell {
         guard let unwrappedReview = review else { fatalError() }
         
         let nameLabel = UILabel()
-        nameLabel.text = howto?.username
+        nameLabel.text = review?.username
         nameLabel.font = UIFont(name: "nunito-regular", size: 24)
         //        let starStack = UIStackView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50))
         
@@ -114,6 +115,7 @@ class ReviewCell: UICollectionViewCell {
         
         nameLabel.snp.makeConstraints { (make) in
             make.height.equalTo(50)
+            
         }
         
         

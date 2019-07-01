@@ -12,7 +12,12 @@ class ReviewsHorizontalController: UICollectionViewController, UICollectionViewD
     
     let cellID = "ReviewCell"
     
-    
+    var reviews: [PostReview] = []{
+        didSet{
+            reviewsCount = reviews.count
+            collectionView.reloadData()
+        }
+    }
     var howto: Howto? {
         didSet{
             reviewsCount = (howto?.reviews?.count)!
@@ -76,7 +81,7 @@ class ReviewsHorizontalController: UICollectionViewController, UICollectionViewD
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ReviewCell
-        guard let reviews = howto?.reviews else { return cell }
+        let reviews = self.reviews 
         cell.review = reviews[indexPath.item]
         cell.howto = self.howto
         return cell

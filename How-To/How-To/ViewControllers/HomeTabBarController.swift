@@ -26,13 +26,6 @@ class HomeTabBarController: UITabBarController {
         ]
     }
     
-//    fileprivate func createLoginNavController(viewController: LoginViewController) -> UIViewController {
-//        let navController = UINavigationController(rootViewController: viewController)
-//        viewController.view.backgroundColor = .white
-//        
-//        navController.navigationItem.title = "Login"
-//        return navController
-//    }
     
     fileprivate func createNavController(viewController: UIViewController, imageName: String, hasSearch: Bool) -> UIViewController {
         
