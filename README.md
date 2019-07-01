@@ -27,11 +27,9 @@
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-🚫 more info on using badges [here](https://github.com/badges/shields)
-
 ## Project Overview
 
-1️⃣ You can find the deployed project at [To be added after passing Apple Store Review](🚫copy and paste URL here).
+1️⃣ You can find the deployed project at [To be added after passing Apple Store Review](URL).
 
 1️⃣ [Trello Board](https://trello.com/b/vZ0hvT9Q/labs-13-how-to)
 
