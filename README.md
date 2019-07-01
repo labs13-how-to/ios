@@ -2,7 +2,7 @@
 
 # How-To iOS 
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+1️⃣ You can find the application on the iOS store: link will be added here soon.
 
 ## 4️⃣ Contributors
 
@@ -14,9 +14,6 @@
 |                 [ <img src="https://github.com/favicon.ico" width="15"> ]
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) 
 
-🚫 Optional examples of using badges with links for your tech stack, make sure to change these to fit your project
-
-[![Swift Version][swift-image]][swift-url]
 [![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)](https://img.shields.io/cocoapods/v/LFAlertController.svg)  
@@ -27,7 +24,7 @@
 
 ## Project Overview
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+1️⃣ You can find the deployed project at [To be added after passing Apple Store Review](🚫copy and paste URL here).
 
 1️⃣ [Trello Board](https://trello.com/b/vZ0hvT9Q/labs-13-how-to)
 
@@ -35,30 +32,25 @@
 
 1️⃣ [UX Design files](https://projects.invisionapp.com/share/P4S6N4XWEC7#/screens/365137488) 
 
-🚫 One to two paragraph statement about your product and what it does.
-
-How-To is a web and iOS application that serves as a central hub for diy instructions on a myriad of topics. Users can create, search and follow their favorite diy-ers and projects. No longer do they need to search various video sites, blogs, etc to find what they're looking for, it's all in one place on How-To.
+Review It Yourself is a web and iOS application that serves as a central hub for diy instructions on a myriad of topics. Users can create, search and follow their favorite diy-ers and projects. No longer do they need to search various video sites, blogs, etc to find what they're looking for, it's all in one place on How-To.
 
 ![](header.png)
 
 ### Features
 
--    Feature 1
--    Feature 2
+-    Profile Creation through Google Sign-In
+-    Read all RIY post information
 
 ### Authentication API here
 
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Google sign-in was implemented as the authentication API for this application. Users are prompted to use their google accounts when first opening the app then on subsequent visits the app reads saved login information and automatically logs in the user into their account and directs them to the home tab bar screen.
 
 
 ## Requirements
 
-🚫 These are examples, make sure this matches your project's requirements
 
--   iOS 8.0+
--   Xcode 10.1
+-   iOS 12.2
+-   Xcode 10
 -   Cocoa Pods
 
 ## Contributing
@@ -108,7 +100,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/labs13-how-to/backend) for details on the backend of our project.
 
 
 [swift-image]: https://img.shields.io/badge/swift-3.0-orange.svg
