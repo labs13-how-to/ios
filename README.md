@@ -8,13 +8,12 @@
 
 
 
-
-| [Angel Buenrostro](https://github.com/angelbuenrostro) 
+ [Angel Buenrostro](https://github.com/angelbuenrostro) |
 
 | [<img src="https://avatars3.githubusercontent.com/u/4079981?s=460&v=4" width = "200" />](https://github.com/angelbuenrostro)  
 
 
-| [ <img src="https://github.com/favicon.ico" width="15"> ]
+| [ <img src="https://github.com/favicon.ico" width="15"> ](https://github.com/angelbuenrostro)
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/angel-buenrostro-258820127) 
 
 <br> 
