@@ -4,15 +4,24 @@
 
 1️⃣ You can find the application on the iOS store: link will be added here soon.
 
-## 4️⃣ Contributors
+## 2️⃣ Contributors
 
 🚫Add contributor info below, make sure add images and edit the social links for each member. Add or delete these place-holders as needed
 
 |                                       [Angel Buenrostro](https://github.com/angelbuenrostro) 
 
-|                      [<img src="https://avatars3.githubusercontent.com/u/4079981?s=460&v=4" width = "200" />](https://github.com/angelbuenrostro)                       
+|                      [<img src="https://avatars3.githubusercontent.com/u/4079981?s=460&v=4" width = "200" />](https://github.com/angelbuenrostro)    
+
+[Meera Anderson](https://github.com/meera-andersen)  [<img src="https://avatars1.githubusercontent.com/u/38503526?s=460&v=4" width = "200" />](https://github.com/meera-andersen)                       |
+|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mrsteveson)                 |             [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/meera-andersen)             |
+|[ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/meera-andersen-6a57a0178) |
+
+<br> 
+
 |                 [ <img src="https://github.com/favicon.ico" width="15"> ]
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/angel-buenrostro-258820127) 
+
+
 
 [![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
