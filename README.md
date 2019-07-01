@@ -8,7 +8,7 @@
 
 | [Angel Buenrostro](https://github.com/angelbuenrostro) 
 
-| [<img src="https://avatars3.githubusercontent.com/u/4079981?s=460&v=4" width = "200" />](https://github.com/angelbuenrostro)    
+| [<img src="https://avatars3.githubusercontent.com/u/4079981?s=460&v=4" width = "200" />](https://github.com/angelbuenrostro)    [<img src="https://avatars1.githubusercontent.com/u/38503526?s=460&v=4" width = "200" />](https://github.com/meera-andersen)
 
 [Meera Anderson](https://github.com/meera-andersen)
 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/meera-andersen) 
