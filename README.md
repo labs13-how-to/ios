@@ -49,7 +49,7 @@ Review It Yourself is a web and iOS application that serves as a central hub for
 
 ### Authentication API here
 
-Google sign-in was implemented as the authentication API for this application. Users are prompted to use their google accounts when first opening the app then on subsequent visits the app reads saved login information and automatically logs in the user into their account and directs them to the home tab bar screen.
+Google sign-in was implemented as the authentication API for this application. Users are prompted to use their google accounts when first opening the app then on subsequent visits the app reads saved login information and automatically logs the user into their account and directs them to the home tab bar screen.
 
 
 ## Requirements
