@@ -10,9 +10,9 @@
 
 |                                       [Angel Buenrostro](https://github.com/angelbuenrostro) 
 
-|                      [<img src="https://avatars3.githubusercontent.com/u/4079981?s=460&v=4" width = "200" />](https://github.com/)                       
+|                      [<img src="https://avatars3.githubusercontent.com/u/4079981?s=460&v=4" width = "200" />](https://github.com/angelbuenrostro)                       
 |                 [ <img src="https://github.com/favicon.ico" width="15"> ]
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) 
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/angel-buenrostro-258820127) 
 
 [![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
@@ -34,7 +34,6 @@
 
 Review It Yourself is a web and iOS application that serves as a central hub for diy instructions on a myriad of topics. Users can create, search and follow their favorite diy-ers and projects. No longer do they need to search various video sites, blogs, etc to find what they're looking for, it's all in one place on How-To.
 
-![](header.png)
 
 ### Features
 
