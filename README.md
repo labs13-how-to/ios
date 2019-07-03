@@ -1,6 +1,6 @@
 
 
-# How-To iOS 
+# Review It Yourself iOS 
 
 ## 1️⃣ You can find the application on the iOS store: link will be added here soon.
 
