@@ -4,6 +4,8 @@
 
 ## 1️⃣ You can find the application on the iOS store: link will be added here soon.
 
+![](riyDemo.gif)
+
 ## 1️⃣ Contributor
 
 
