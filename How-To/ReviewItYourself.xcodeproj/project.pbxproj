@@ -9,11 +9,10 @@
 /* Begin PBXBuildFile section */
 		0F2CE98343AF9E2402D0B070 /* Pods_ReviewItYourself.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D0F3F9DDBC15F32760820A /* Pods_ReviewItYourself.framework */; };
 		A200EA4322AC85B90053C7BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200EA4222AC85B90053C7BF /* SettingsViewController.swift */; };
+		A204FB2A22D03F1E004501D0 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A204FB2922D03F1E004501D0 /* Comment.swift */; };
 		A2112DC522B3F4790073E9A6 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2112DC422B3F4790073E9A6 /* TagCell.swift */; };
 		A2112DC722B3FD650073E9A6 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */; };
 		A227C79122A1D19200A4B25D /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227C79022A1D19200A4B25D /* HomeTabBarController.swift */; };
-		A22A3F4522BC1B0900A4C58E /* RIYPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22A3F4422BC1B0900A4C58E /* RIYPost.swift */; };
-		A22A3F4722BC1B5100A4C58E /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22A3F4622BC1B5100A4C58E /* Tags.swift */; };
 		A23A993322B6FC1C0029194F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A993222B6FC1C0029194F /* ListCell.swift */; };
 		A241F59922C25D5B00F26A27 /* amiri-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A241F59822C25D5B00F26A27 /* amiri-regular.ttf */; };
 		A241F59B22C25DF100F26A27 /* nunito-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A241F59A22C25DF100F26A27 /* nunito-regular.ttf */; };
@@ -28,12 +27,9 @@
 		A2556A2822C4E985003B3B47 /* nunito-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A2556A2722C4E984003B3B47 /* nunito-bold.ttf */; };
 		A268F55922B0D3B6006B32AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A268F55822B0D3B6006B32AD /* GoogleService-Info.plist */; };
 		A269270522A5956A006AAFD2 /* PostSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270422A5956A006AAFD2 /* PostSteps.swift */; };
-		A269270722A5B069006AAFD2 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270622A5B069006AAFD2 /* Tag.swift */; };
 		A269270922A5B0C7006AAFD2 /* PostTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270822A5B0C7006AAFD2 /* PostTag.swift */; };
 		A269270B22A5B113006AAFD2 /* PostReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270A22A5B113006AAFD2 /* PostReview.swift */; };
-		A269270D22A5B1D9006AAFD2 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270C22A5B1D9006AAFD2 /* Follower.swift */; };
 		A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269270E22A5B248006AAFD2 /* Favorite.swift */; };
-		A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269271022A5B2B2006AAFD2 /* PostComment.swift */; };
 		A269271422A5B97E006AAFD2 /* HowtoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269271322A5B97E006AAFD2 /* HowtoController.swift */; };
 		A26B325722C9439D00D63268 /* String+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26B325622C9439D00D63268 /* String+Helper.swift */; };
 		A287516322A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */; };
@@ -60,11 +56,10 @@
 		8E465D4BCE7331CBFE05C1E5 /* Pods-ReviewItYourself.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReviewItYourself.release.xcconfig"; path = "Target Support Files/Pods-ReviewItYourself/Pods-ReviewItYourself.release.xcconfig"; sourceTree = "<group>"; };
 		A0FE802FFBA871D66F06E382 /* Pods-How-To.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-How-To.release.xcconfig"; path = "Target Support Files/Pods-How-To/Pods-How-To.release.xcconfig"; sourceTree = "<group>"; };
 		A200EA4222AC85B90053C7BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A204FB2922D03F1E004501D0 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		A2112DC422B3F4790073E9A6 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		A2112DC622B3FD650073E9A6 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		A227C79022A1D19200A4B25D /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
-		A22A3F4422BC1B0900A4C58E /* RIYPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIYPost.swift; sourceTree = "<group>"; };
-		A22A3F4622BC1B5100A4C58E /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		A23A993222B6FC1C0029194F /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		A241F59822C25D5B00F26A27 /* amiri-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "amiri-regular.ttf"; sourceTree = "<group>"; };
 		A241F59A22C25DF100F26A27 /* nunito-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nunito-regular.ttf"; sourceTree = "<group>"; };
@@ -79,12 +74,9 @@
 		A2556A2722C4E984003B3B47 /* nunito-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "nunito-bold.ttf"; sourceTree = "<group>"; };
 		A268F55822B0D3B6006B32AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A269270422A5956A006AAFD2 /* PostSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSteps.swift; sourceTree = "<group>"; };
-		A269270622A5B069006AAFD2 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		A269270822A5B0C7006AAFD2 /* PostTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTag.swift; sourceTree = "<group>"; };
 		A269270A22A5B113006AAFD2 /* PostReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReview.swift; sourceTree = "<group>"; };
-		A269270C22A5B1D9006AAFD2 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		A269270E22A5B248006AAFD2 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
-		A269271022A5B2B2006AAFD2 /* PostComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComment.swift; sourceTree = "<group>"; };
 		A269271322A5B97E006AAFD2 /* HowtoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowtoController.swift; sourceTree = "<group>"; };
 		A26B325622C9439D00D63268 /* String+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helper.swift"; sourceTree = "<group>"; };
 		A287516222A48BDD00DC3C92 /* HomeSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchCollectionViewController.swift; sourceTree = "<group>"; };
@@ -197,16 +189,12 @@
 			children = (
 				A2A1606322B1B71400A7AAF0 /* User.swift */,
 				A247CB4B22ADF7C60099F69C /* Howto.swift */,
-				A22A3F4422BC1B0900A4C58E /* RIYPost.swift */,
-				A22A3F4622BC1B5100A4C58E /* Tags.swift */,
 				A287516722A4E5E900DC3C92 /* Post.swift */,
 				A269270822A5B0C7006AAFD2 /* PostTag.swift */,
 				A269270422A5956A006AAFD2 /* PostSteps.swift */,
-				A269270622A5B069006AAFD2 /* Tag.swift */,
 				A269270A22A5B113006AAFD2 /* PostReview.swift */,
-				A269270C22A5B1D9006AAFD2 /* Follower.swift */,
+				A204FB2922D03F1E004501D0 /* Comment.swift */,
 				A269270E22A5B248006AAFD2 /* Favorite.swift */,
-				A269271022A5B2B2006AAFD2 /* PostComment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -411,9 +399,7 @@
 				A2E3360722A9773F00E7AD7F /* Footer.swift in Sources */,
 				A23A993322B6FC1C0029194F /* ListCell.swift in Sources */,
 				A2E3360322A975FA00E7AD7F /* UIView+Layout.swift in Sources */,
-				A269271122A5B2B2006AAFD2 /* PostComment.swift in Sources */,
 				A2556A2422C4CF43003B3B47 /* ReviewCell.swift in Sources */,
-				A269270722A5B069006AAFD2 /* Tag.swift in Sources */,
 				A2112DC722B3FD650073E9A6 /* ListCollectionViewController.swift in Sources */,
 				A2E3360922AA024000E7AD7F /* LoginViewController.swift in Sources */,
 				A2E79F1622C4912A00F9B434 /* StepCell.swift in Sources */,
@@ -429,7 +415,6 @@
 				A269270522A5956A006AAFD2 /* PostSteps.swift in Sources */,
 				A247CB1B22ADA9BC0099F69C /* TagViewController.swift in Sources */,
 				A2556A2622C4D86B003B3B47 /* ReviewFooter.swift in Sources */,
-				A269270D22A5B1D9006AAFD2 /* Follower.swift in Sources */,
 				A269270F22A5B248006AAFD2 /* Favorite.swift in Sources */,
 				A26B325722C9439D00D63268 /* String+Helper.swift in Sources */,
 				A269271422A5B97E006AAFD2 /* HowtoController.swift in Sources */,
@@ -440,8 +425,7 @@
 				A247CB1622ACEBC50099F69C /* DetailCollectionViewController.swift in Sources */,
 				A2E3360522A976E700E7AD7F /* UIImageView.swift in Sources */,
 				A2B01B5F22A63582006052FA /* PostCell.swift in Sources */,
-				A22A3F4522BC1B0900A4C58E /* RIYPost.swift in Sources */,
-				A22A3F4722BC1B5100A4C58E /* Tags.swift in Sources */,
+				A204FB2A22D03F1E004501D0 /* Comment.swift in Sources */,
 				A200EA4322AC85B90053C7BF /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

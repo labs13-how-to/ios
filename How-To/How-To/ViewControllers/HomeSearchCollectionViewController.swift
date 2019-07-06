@@ -57,14 +57,6 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         secondTab.allHowtos = self.allHowtos
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        guard self.navigationController != nil else { fatalError("Navigation Controller not found")}
-        self.howtoController.howto == nil 
-//        setupTabBar(parentViewController: self, height: view.frame.height / 15, color: .white)
-//        setupSearchBar(parentViewController: self, color: .white, placeHolderText: "How To...")
-//        self.tabBar!.delegate = self
-        
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -85,8 +77,6 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         self.navigationController?.navigationBar.backgroundColor = .white
         
         let searchBar = UISearchBar()
-//        self.navigationController?.navigationItem.titleView = searchBar
-        // SearchBar
         searchBar.placeholder = "Search..."
         searchBar.sizeToFit()
         searchBar.delegate = self
@@ -101,12 +91,6 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         navController.isNavigationBarHidden = false
         
         collectionView.contentInset = UIEdgeInsets(top:200, left: 0, bottom: 0, right: 0)
-//        collectionView?.prefetchDataSource = self
-//        fetchPosts()
-//        DispatchQueue.main.async {
-//            self.postController.getPosts()
-//            self.collectionView.reloadData()
-//        }
         
         self.howtoController.fetchHowtos(){_ in
             DispatchQueue.main.async {
@@ -212,18 +196,6 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         }
         if kind == UICollectionView.elementKindSectionFooter {
             footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.footerID, for: indexPath)
-//
-//            let button = UIButton()
-//            button.frame = CGRect(x: view.frame.width - 120, y: 16, width: 110, height: 28)
-//            button.layer.cornerRadius = 6
-//            button.backgroundColor = .white
-//            // SET FOOTER TEXT
-//            button.setTitle("See More", for: .normal)
-//            button.setTitleColor(UIColor(red:1, green:0.52, blue:0.1, alpha:1), for: .normal)
-//            button.titleEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
-//            button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-//
-//            footer.insertSubview(button, at: 0)
             
             return footer
         }
@@ -288,12 +260,9 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
                 cell.postID = fetchedPost?.id
                 cell.titleLabel.text = fetchedPost?.title
                 cell.rating = fetchedPost!.review_avg!
-                print("RATING: \(Int(fetchedPost!.review_avg!))")
                 let imgURL = URL(string: fetchedPost!.img_url!)
                 
                 cell.imageView.sd_setImage(with: imgURL)
-//                print(fetchedPost!.img_url)
-//                cell.imageView.load(url: imgURL!)
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
