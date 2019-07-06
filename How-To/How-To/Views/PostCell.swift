@@ -218,7 +218,7 @@ class PostCell: UICollectionViewCell {
         if rating != 0 {
             for _ in 0...(roundedRating-1) {
                 let fullStar = UIImageView()
-                fullStar.image = #imageLiteral(resourceName: "ic_star_24px")
+                fullStar.image = #imageLiteral(resourceName: "Solid Star")
                 fullStar.tintColor = #colorLiteral(red: 0.9843137264, green: 0.7084275484, blue: 0.160784319, alpha: 1)
                 fullStar.snp.makeConstraints { (make) in
                     make.width.equalTo(starSize)

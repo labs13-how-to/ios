@@ -170,7 +170,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         if rating != 0 {
             for _ in 0...roundedRating-1 {
                 let fullStar = UIImageView()
-                fullStar.image = #imageLiteral(resourceName: "ic_star_24px")
+                fullStar.image = #imageLiteral(resourceName: "Solid Star")
                 fullStar.tintColor = #colorLiteral(red: 0.9843137264, green: 0.7084275484, blue: 0.160784319, alpha: 1)
                 fullStar.snp.makeConstraints { (make) in
                     make.width.equalTo(24)
@@ -521,35 +521,35 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             fiveStarPercentage = fiveStarCount!.count/count
         }
         
-        for _ in 0...4 {
-            let starNumberLabel = UILabel(frame: CGRect(x: 0, y: yValue, width: 50, height: 30))
-            starNumberLabel.backgroundColor = .white
-            starNumberLabel.text = String(starValue) + " Stars"
-            starNumberLabel.font = UIFont(name: "nunito-regular", size: 15)
-            let barView = RatingBar(frame: CGRect(x: Int(starNumberLabel.frame.width), y: yValue, width: screenWidth-80, height: 30))
-            barView.width = screenWidth-80
-            barView.percentage = CGFloat(fiveStarPercentage)
-            barView.backgroundColor = #colorLiteral(red: 0.9212495685, green: 0.9219488502, blue: 0.9213578105, alpha: 1)
-            barView.layer.cornerRadius = 10
-            let reviewCountLabel = UILabel(frame: CGRect(x: Int(barView.frame.width + starNumberLabel.frame.width), y: yValue, width: 50, height: 30))
-//            reviewCountLabel.text = "1"
-            reviewCountLabel.backgroundColor = .white
-            let starBarStack = UIStackView()
-            verticalBarStack.addSubview(starBarStack)
-            starBarStack.snp.makeConstraints { (make) in
-                make.width.equalToSuperview()
-                make.height.equalTo(40)
-                make.topMargin.equalTo(reviewBG.snp_bottomMargin).offset(20)
-                make.leftMargin.equalTo(16)
-            }
-            starBarStack.addSubview(starNumberLabel)
-            starBarStack.addSubview(barView)
-            starBarStack.addSubview(reviewCountLabel)
-            
-            fiveStarPercentage = 0
-            yValue += 35
-            starValue -= 1
-        }
+//        for _ in 0...4 {
+//            let starNumberLabel = UILabel(frame: CGRect(x: 0, y: yValue, width: 50, height: 30))
+//            starNumberLabel.backgroundColor = .white
+//            starNumberLabel.text = String(starValue) + " Stars"
+//            starNumberLabel.font = UIFont(name: "nunito-regular", size: 15)
+//            let barView = RatingBar(frame: CGRect(x: Int(starNumberLabel.frame.width), y: yValue, width: screenWidth-80, height: 30))
+//            barView.width = screenWidth-80
+//            barView.percentage = CGFloat(fiveStarPercentage)
+//            barView.backgroundColor = #colorLiteral(red: 0.9212495685, green: 0.9219488502, blue: 0.9213578105, alpha: 1)
+//            barView.layer.cornerRadius = 10
+//            let reviewCountLabel = UILabel(frame: CGRect(x: Int(barView.frame.width + starNumberLabel.frame.width), y: yValue, width: 50, height: 30))
+////            reviewCountLabel.text = "1"
+//            reviewCountLabel.backgroundColor = .white
+//            let starBarStack = UIStackView()
+//            verticalBarStack.addSubview(starBarStack)
+//            starBarStack.snp.makeConstraints { (make) in
+//                make.width.equalToSuperview()
+//                make.height.equalTo(40)
+//                make.topMargin.equalTo(reviewBG.snp_bottomMargin).offset(20)
+//                make.leftMargin.equalTo(16)
+//            }
+//            starBarStack.addSubview(starNumberLabel)
+//            starBarStack.addSubview(barView)
+//            starBarStack.addSubview(reviewCountLabel)
+//            
+//            fiveStarPercentage = 0
+//            yValue += 35
+//            starValue -= 1
+//        }
         
         return barsContainer
     }

@@ -147,7 +147,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         splashText.font = .systemFont(ofSize: 21)
         // Make Image on Top View
         let splashImage = UIImageView()
-        splashImage.image = #imageLiteral(resourceName: "CleanShot 2019-06-26 at 03.07.08")
+        splashImage.image = #imageLiteral(resourceName: "splash")
         splashImage.frame = CGRect(x: 270, y: -186, width: 100, height: 170)
         splashImage.contentMode = .scaleAspectFit
         splashImage.layer.cornerRadius = 8
