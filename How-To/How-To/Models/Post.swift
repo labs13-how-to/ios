@@ -10,12 +10,6 @@ import Foundation
 
 struct Post: Codable {
     
-//    enum CodingKeys: String, CodingKey {
-//        case imgURL = "img_url"
-//        case creator = "created_by"
-//        case timeStamp = "created_at"
-//    }
-    
     var id: Int?
     var title: String
     var img_url: String
