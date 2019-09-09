@@ -469,7 +469,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                     footer.howto = self.howto
                     footer.addSubview(setupFooterBars())
                     footer.backgroundColor = #colorLiteral(red: 0.6899999976, green: 0.9599999785, blue: 0.400000006, alpha: 1)
-                let stackView = UIStackView(arrangedSubviews: [setupFooterBars(), setupFooterReviews()])
+//                let stackView = UIStackView(arrangedSubviews: [setupFooterBars(), setupFooterReviews()])
 //                stackView.axis = .vertical
 //
 //                footer.addSubview(stackView)
@@ -502,6 +502,17 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
             make.width.equalTo(view.frame.width)
             make.height.equalTo(250)
         }
+        
+        barsContainer.addSubview(barsStack)
+        barsStack.frame = CGRect(x: 0, y: 50, width: view.frame.width, height: 200)
+        
+        let barBG = UIView()
+        barBG.backgroundColor = .purple
+        barsStack.addSubview(barBG)
+        barBG.fillSuperview()
+        let ratingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 30)
+        let testBar = RatingBar(frame: ratingFrame, percentage: 0.5)
+        barsStack.addSubview(testBar)
         
         let verticalBarStack = UIStackView(frame: CGRect(x: 0, y: reviewLabel.frame.height, width: view.frame.width, height: view.frame.height))
         verticalBarStack.axis = .vertical
