@@ -218,7 +218,7 @@ class PostCell: UICollectionViewCell {
         if rating != 0 {
             for _ in 0...(roundedRating-1) {
                 let fullStar = UIImageView()
-                fullStar.image = #imageLiteral(resourceName: "Solid Star")
+                fullStar.image = #imageLiteral(resourceName: "Star")
                 fullStar.tintColor = #colorLiteral(red: 0.9843137264, green: 0.7084275484, blue: 0.160784319, alpha: 1)
                 fullStar.snp.makeConstraints { (make) in
                     make.width.equalTo(starSize)
@@ -230,7 +230,7 @@ class PostCell: UICollectionViewCell {
             if starStack.subviews.count < 5 {
                 for _ in starStack.subviews.count...4 {
                     let emptyStar = UIImageView()
-                    emptyStar.image = #imageLiteral(resourceName: "ic_star_24px")
+                    emptyStar.image = #imageLiteral(resourceName: "Star")
                     emptyStar.tintColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
                     emptyStar.snp.makeConstraints { (make) in
                         make.width.equalTo(starSize)
@@ -242,7 +242,7 @@ class PostCell: UICollectionViewCell {
         } else {
             for _ in 0...4 {
                 let emptyStar = UIImageView()
-                emptyStar.image = #imageLiteral(resourceName: "ic_star_24px")
+                emptyStar.image = #imageLiteral(resourceName: "Star")
                 emptyStar.tintColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
                 emptyStar.snp.makeConstraints { (make) in
                     make.width.equalTo(starSize)

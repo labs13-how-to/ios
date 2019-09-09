@@ -10,6 +10,11 @@ import UIKit
 
 class RatingBar: UIView {
     
+    
+    override func draw(_ rect: CGRect) {
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

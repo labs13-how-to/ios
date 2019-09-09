@@ -120,6 +120,7 @@ class TagViewController: UICollectionViewController, UICollectionViewDelegateFlo
         listVC.parentVC = self
         listVC.tagName = tagString
         listVC.filteredHowtos = self.filteredHowtos
+        listVC.view.backgroundColor = .red
         //        detailVC.videoURLString =
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationItem.title = "hello"

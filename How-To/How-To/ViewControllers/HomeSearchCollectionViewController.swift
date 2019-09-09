@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SDWebImage
+import Hero
 
 
 
@@ -283,6 +284,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         }
                 
                 let detailVC = DetailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                detailVC.hero.isEnabled = true
                 detailVC.collectionView.backgroundColor = .white
                 detailVC.howtoID = postID
                 detailVC.imgURL = howto.img_url
@@ -351,18 +353,7 @@ class HomeSearchCollectionViewController: UICollectionViewController, UICollecti
         view.pin(to: superView)
     }
     
-    // Helper which setsUp initial TabBar frame
-//    func setupTabBar(parentViewController: UICollectionViewController, height: CGFloat, color: UIColor ){
-//        let tabBar = UITabBar(frame: CGRect(x: 0, y: view.frame.maxY - height, width: view.frame.width, height: height))
-//        tabBar.backgroundColor = color
-//        parentViewController.view.addSubview(tabBar)
-//        self.tabBar = tabBar
-//        let homeTab = UITabBarItem(title: "", image: #imageLiteral(resourceName: "Home House"), tag: 0)
-//        let tagsTab = UITabBarItem(title:"", image: #imageLiteral(resourceName: "Bullet, List, Text"), tag: 1)
-//        let notificationsTab = UITabBarItem(title: "", image: #imageLiteral(resourceName: "Bell, Notifications"), tag: 2)
-//        let profileTab = UITabBarItem(title: "", image: #imageLiteral(resourceName: "User,Profile"), tag: 3)
-//        tabBar.setItems([homeTab, tagsTab, notificationsTab, profileTab], animated: true)
-//    }
+
     
     func setupSearchBar(parentViewController: UICollectionViewController, color: UIColor, placeHolderText: String){
         let searchController = UISearchController(searchResultsController: nil)

@@ -170,22 +170,20 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         if rating != 0 {
             for _ in 0...roundedRating-1 {
                 let fullStar = UIImageView()
-                fullStar.image = #imageLiteral(resourceName: "Solid Star")
+                fullStar.image = #imageLiteral(resourceName: "Star")
                 fullStar.tintColor = #colorLiteral(red: 0.9843137264, green: 0.7084275484, blue: 0.160784319, alpha: 1)
                 fullStar.snp.makeConstraints { (make) in
-                    make.width.equalTo(24)
-                    make.height.equalTo(24)
+                    make.height.width.equalTo(24)
                 }
                 starStack.addArrangedSubview(fullStar)
             }
             if roundedRating < 5 {
             for _ in starStack.subviews.count...4 {
                 let emptyStar = UIImageView()
-                emptyStar.image = #imageLiteral(resourceName: "ic_star_24px")
+                emptyStar.image = #imageLiteral(resourceName: "Star")
                 emptyStar.tintColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
                 emptyStar.snp.makeConstraints { (make) in
-                    make.width.equalTo(24)
-                    make.height.equalTo(24)
+                    make.height.width.equalTo(24)
                 }
                 starStack.addArrangedSubview(emptyStar)
             }
@@ -193,11 +191,10 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         }   else {
             for _ in 0...4 {
                 let emptyStar = UIImageView()
-                emptyStar.image = #imageLiteral(resourceName: "ic_star_24px")
+                emptyStar.image = #imageLiteral(resourceName: "Star")
                 emptyStar.tintColor = #colorLiteral(red: 0.3330089152, green: 0.333286792, blue: 0.3330519199, alpha: 1)
                 emptyStar.snp.makeConstraints { (make) in
-                    make.width.equalTo(24)
-                    make.height.equalTo(24)
+                    make.height.width.equalTo(24)
                 }
                 starStack.addArrangedSubview(emptyStar)
             }
@@ -471,8 +468,8 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
                 }
                     footer.howto = self.howto
                     footer.addSubview(setupFooterBars())
-//                footer.backgroundColor = #colorLiteral(red: 0.6899999976, green: 0.9599999785, blue: 0.400000006, alpha: 1)
-//                let stackView = UIStackView(arrangedSubviews: [setupFooterBars(), setupFooterReviews()])
+                    footer.backgroundColor = #colorLiteral(red: 0.6899999976, green: 0.9599999785, blue: 0.400000006, alpha: 1)
+                let stackView = UIStackView(arrangedSubviews: [setupFooterBars(), setupFooterReviews()])
 //                stackView.axis = .vertical
 //
 //                footer.addSubview(stackView)

@@ -10,4 +10,5 @@ pod 'SDWebImage'
 pod 'GoogleSignIn'
 pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
 pod 'SnapKit', '~> 5.0.0'
+pod 'Hero'
 end
