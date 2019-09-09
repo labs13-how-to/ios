@@ -510,7 +510,7 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         barBG.backgroundColor = .purple
         barsStack.addSubview(barBG)
         barBG.fillSuperview()
-        let ratingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 30)
+        let ratingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 35)
         let testBar = RatingBar(frame: ratingFrame, percentage: 0.5)
         barsStack.addSubview(testBar)
         
